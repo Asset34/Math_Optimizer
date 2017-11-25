@@ -8,6 +8,7 @@ namespace MathOptimizer
 {
     class Program
     {
+        StringBuilder a;
         static void Main(string[] args)
         {
         }
