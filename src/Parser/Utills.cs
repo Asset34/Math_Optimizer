@@ -8,6 +8,9 @@ using MathOptimizer.Parser.Predicates;
 
 namespace MathOptimizer.Parser
 {
+    //
+    // Summary:
+    //     General utillity class
     static class Utills
     {
         // Position utills
