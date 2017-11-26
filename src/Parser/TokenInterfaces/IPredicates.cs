@@ -8,6 +8,6 @@ namespace MathOptimizer.Parser.Predicates
 {
     public interface ICharCheckPredicate
     {
-        bool Execute(char c);
+        bool Execute(char ch);
     }
 }

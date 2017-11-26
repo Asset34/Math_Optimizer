@@ -11,6 +11,8 @@ namespace MathOptimizer.Parser
     //     Represents a position in specific text data
     class Position
     {
+        string s;
+
         public Position(string data, int index)
         {
             this.data = data;
@@ -19,6 +21,11 @@ namespace MathOptimizer.Parser
         public Position(string data)
             : this(data, 0)
         {
+        }
+        public Position(Position pos)
+        {
+            this.data = pos.data;
+            this.index = pos.index;
         }
         public static Position operator++(Position pos)
         {
@@ -29,6 +36,12 @@ namespace MathOptimizer.Parser
         {
             pos.index--;
             return pos;
+        }
+        public static string MakeString(Position begin, Position end)
+        {
+            string result = begin.data;
+
+            return result.Substring(begin.index, end.index - begin.index);
         }
 
         public char Current

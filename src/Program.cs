@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MathOptimizer.Parser;
+using MathOptimizer.Parser.Predicates;
+
 namespace MathOptimizer
 {
     class Program
