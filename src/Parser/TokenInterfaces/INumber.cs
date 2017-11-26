@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathOptimizer
+namespace MathOptimizer.Parser
 {
-    class Program
+    public interface INumber
     {
-        static void Main(string[] args)
-        {
-        }
+        double Number { get; }
     }
 }

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathOptimizer
+namespace MathOptimizer.Parser.Predicates
 {
-    class Program
+    public interface ICharCheckPredicate
     {
-        static void Main(string[] args)
-        {
-        }
+        bool Execute(char c);
     }
 }
