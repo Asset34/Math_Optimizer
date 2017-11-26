@@ -20,27 +20,27 @@ namespace MathOptimizer.Parser.TokenFactories
             return Utills.Check(pos, letterPr) ||
                    Utills.Check(pos, underscorePr);
         }
-        public static IVariableToken TakeToken(Position start)
+        public static IVariableToken TakeToken(Position pos)
         {
-            if (Check(start))
+            if (Check(pos))
             {
-                Position end = start;
+                Position start = new Position(pos);
 
-                while (Check(end))
+                while (Check(pos))
                 {
-                    end = Utills.MoveWhile(end, digitPr);
-                    end = Utills.MoveWhile(end, underscorePr);
-                    end = Utills.MoveWhile(end, letterPr);
+                    Utills.MoveWhile(pos, digitPr);
+                    Utills.MoveWhile(pos, underscorePr);
+                    Utills.MoveWhile(pos, letterPr);
                 }
 
-                return new VariableToken(Position.MakeString(start, end));
+                return new VariableToken(Position.MakeString(start, pos));
             }
             else
             {
                 Exception ex = new Exception("Cannot take the token");
 
                 ex.Source = "VariableFactory";
-                ex.Data.Add("Position", start.Number);
+                ex.Data.Add("Position", pos.Number);
 
                 throw ex;
             }

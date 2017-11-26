@@ -19,26 +19,26 @@ namespace MathOptimizer.Parser.TokenFactories
         {
             return Utills.Check(pos, digitPr);
         }
-        public static INumberToken TakeToken(Position start)
+        public static INumberToken TakeToken(Position pos)
         {
-            if (Check(start))
+            if (Check(pos))
             {
-                Position end = start;
+                Position start = new Position(pos);
 
                 // Main part of the number
-                end = Utills.MoveWhile(end, digitPr);
+                Utills.MoveWhile(pos, digitPr);
                 // Fraction part of the number
-                end = Utills.MoveWhile(end, numSeparatorPr);
-                end = Utills.MoveWhile(end, digitPr);
+                Utills.MoveWhile(pos, numSeparatorPr);
+                Utills.MoveWhile(pos, digitPr);
 
-                return new NumberToken(Position.MakeString(start, end));
+                return new NumberToken(Position.MakeString(start, pos));
             }
             else
             {
                 Exception ex = new Exception("Cannot take the token");
 
                 ex.Source = "NumberFactory";
-                ex.Data.Add("Position", start.Number);
+                ex.Data.Add("Position", pos.Number);
 
                 throw ex;
             }

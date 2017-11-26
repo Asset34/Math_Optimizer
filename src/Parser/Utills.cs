@@ -18,16 +18,14 @@ namespace MathOptimizer.Parser
         {
             return pr.Execute(pos.Current);
         }
-        public static Position MoveWhile(Position start, ICharCheckPredicate pr)
+        public static Position MoveWhile(Position pos, ICharCheckPredicate pr)
         {
-            Position end = new Position(start);
-
-            while (!end.IsEnd && Check(end, pr))
+            while (!pos.IsEnd && Check(pos, pr))
             {
-                end++;
+                pos++;
             }
 
-            return end;
+            return pos;
         } 
 
         // Symbol utills

@@ -19,23 +19,22 @@ namespace MathOptimizer.Parser.TokenFactories
         {
             return Utills.Check(pos, rbracketPr);
         }
-        public static IRBracketToken TakeToken(Position start)
+        public static IRBracketToken TakeToken(Position pos)
         {
-            if (Check(start))
+            if (Check(pos))
             {
-                Position end = start + 1;
+                Position start = new Position(pos);
 
-                string strToken = Position.MakeString(start, end);
-                int priority = 0;
+                pos++;
 
-                return new RBracketToken(strToken, priority);
+                return new RBracketToken(Position.MakeString(start, pos), 0);
             }
             else
             {
                 Exception ex = new Exception("Cannot take the token");
 
                 ex.Source = "LBracketFactory";
-                ex.Data.Add("Position", start.Number);
+                ex.Data.Add("Position", pos.Number);
 
                 throw ex;
             }

@@ -28,13 +28,15 @@ namespace MathOptimizer.Parser.TokenFactories
         {
             return Utills.Check(pos, operatorPr);
         }
-        public static IOperatorToken TakeToken(Position start)
+        public static IOperatorToken TakeToken(Position pos)
         {
-            if (Check(start))
+            if (Check(pos))
             {
-                Position end = start + 1;
+                Position start = new Position(pos);
 
-                string strToken = Position.MakeString(start, end);
+                pos++;
+
+                string strToken = Position.MakeString(start, pos);
                 int priority = operatorsTable[char.Parse(strToken)];
 
                 return new OperatorToken(strToken, priority);
@@ -44,7 +46,7 @@ namespace MathOptimizer.Parser.TokenFactories
                 Exception ex = new Exception("Cannot take the token");
 
                 ex.Source = "OperatorFactory";
-                ex.Data.Add("Position", start.Number);
+                ex.Data.Add("Position", pos.Number);
 
                 throw ex;
             }    
