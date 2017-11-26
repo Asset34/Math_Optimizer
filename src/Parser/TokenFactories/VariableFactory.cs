@@ -15,10 +15,19 @@ namespace MathOptimizer.Parser.TokenFactories
     //     Represents a factory of a variable tokens
     class VariableFactory
     {
+        static VariableFactory()
+        {
+            // Build a predicate for start of the variable
+            beginVariablePr.Predicates.Add(new Underscore());
+            beginVariablePr.Predicates.Add(new Letter());
+
+            // Build a predicate for other part of the variable
+            variablePr.Predicates.Add(beginVariablePr);
+            variablePr.Predicates.Add(new Digit());
+        }
         public static bool Check(Position pos)
         {
-            return Utills.Check(pos, letterPr) ||
-                   Utills.Check(pos, underscorePr);
+            return Utills.Check(pos, beginVariablePr);
         }
         public static IVariableToken TakeToken(Position pos)
         {
@@ -26,12 +35,7 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 Position start = new Position(pos);
 
-                while (Check(pos))
-                {
-                    Utills.MoveWhile(pos, digitPr);
-                    Utills.MoveWhile(pos, underscorePr);
-                    Utills.MoveWhile(pos, letterPr);
-                }
+                Utills.MoveWhile(pos, variablePr);
 
                 return new VariableToken(Position.MakeString(start, pos));
             }
@@ -66,9 +70,8 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly Digit digitPr = new Digit();
-        private static readonly Underscore underscorePr = new Underscore();
-        private static readonly Letter letterPr = new Letter();
+        private static DisjunctionPredicate beginVariablePr = new DisjunctionPredicate();
+        private static DisjunctionPredicate variablePr = new DisjunctionPredicate();
 
         private VariableFactory() {}
     }

@@ -32,4 +32,27 @@ namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
             return ch == '_';
         }
     }
+
+    public class DisjunctionPredicate : ICharCheckPredicate
+    {
+        public bool Execute(char ch)
+        {
+            foreach (ICharCheckPredicate pr in Predicates)
+            {
+                if (pr.Execute(ch))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public List<ICharCheckPredicate> Predicates
+        {
+            get { return predicates; }
+        }
+
+        private List<ICharCheckPredicate> predicates = new List<ICharCheckPredicate>();
+    }
 }

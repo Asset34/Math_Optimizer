@@ -15,10 +15,19 @@ namespace MathOptimizer.Parser.TokenFactories
     //     Represents a factory of a function name tokens
     class FunctionNameFactory
     {
+        static FunctionNameFactory()
+        {
+            // Build a predicate for start of the function name
+            beginFunctionNamePr.Predicates.Add(new Underscore());
+            beginFunctionNamePr.Predicates.Add(new Letter());
+
+            // Build a predicate for other part of the function name
+            functionNamePr.Predicates.Add(beginFunctionNamePr);
+            functionNamePr.Predicates.Add(new Digit());
+        }
         public static bool Check(Position pos)
         {
-            return Utills.Check(pos, letterPr) ||
-                   Utills.Check(pos, underscorePr);
+            return Utills.Check(pos, beginFunctionNamePr);
         }
         public static IFunctionNameToken TakeToken(Position pos)
         {
@@ -26,12 +35,7 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 Position start = new Position(pos);
 
-                while (Check(pos))
-                {
-                    Utills.MoveWhile(pos, digitPr);
-                    Utills.MoveWhile(pos, underscorePr);
-                    Utills.MoveWhile(pos, letterPr);
-                }
+                Utills.MoveWhile(pos, functionNamePr);
                 
                 return new FunctionNameToken(Position.MakeString(start, pos));
             }
@@ -69,6 +73,9 @@ namespace MathOptimizer.Parser.TokenFactories
         private static readonly Digit digitPr = new Digit();
         private static readonly Underscore underscorePr = new Underscore();
         private static readonly Letter letterPr = new Letter();
+
+        private static DisjunctionPredicate beginFunctionNamePr = new DisjunctionPredicate();
+        private static DisjunctionPredicate functionNamePr = new DisjunctionPredicate();
 
         private FunctionNameFactory() { }
     }
