@@ -31,13 +31,9 @@ namespace MathOptimizer.Parser
                 {
                     tokens.Add(NumberFactory.TakeToken(pos));
                 }
-                else if(VariableFactory.Check(pos))
+                else if(IdentifierFactory.Check(pos))
                 {
-                    tokens.Add(VariableFactory.TakeToken(pos));
-                }
-                else if (FunctionNameFactory.Check(pos))
-                {
-                    tokens.Add(FunctionNameFactory.TakeToken(pos));
+                    tokens.Add(IdentifierFactory.TakeToken(pos));
                 }
                 else if (OperatorFactory.Check(pos))
                 {

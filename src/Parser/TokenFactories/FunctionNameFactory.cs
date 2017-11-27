@@ -77,6 +77,14 @@ namespace MathOptimizer.Parser.TokenFactories
         private static DisjunctionPredicate beginFunctionNamePr = new DisjunctionPredicate();
         private static DisjunctionPredicate functionNamePr = new DisjunctionPredicate();
 
-        private FunctionNameFactory() { }
+        private FunctionNameFactory() {}
+
+        /* Function names table */
+        private static string[] functionNamesTable = new string[]
+        {
+            "sin" , "cos", "tg",
+            "ctg" , "exp", "ln",
+            "sqrt"
+        };
     }
 }
