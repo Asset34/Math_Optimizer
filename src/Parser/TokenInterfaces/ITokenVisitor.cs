@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathOptimizer.Parser.Tokens;
+using MathOptimizer.Parser.Interfaces.Tokens;
 
-namespace MathOptimizer.Parser
+namespace MathOptimizer.Parser.Interfaces
 {
     public interface ITokenVisitor
     {

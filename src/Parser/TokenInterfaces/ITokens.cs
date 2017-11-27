@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathOptimizer.Parser.Tokens
+namespace MathOptimizer.Parser.Interfaces.Tokens
 {
     public interface IToken
     {

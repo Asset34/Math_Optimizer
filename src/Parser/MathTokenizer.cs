@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathOptimizer.Parser.Tokens;
+using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.TokenFactories;
 
 namespace MathOptimizer.Parser
