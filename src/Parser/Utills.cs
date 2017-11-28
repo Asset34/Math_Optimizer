@@ -13,7 +13,6 @@ namespace MathOptimizer.Parser
     //     General utillity class
     static class Utills
     {
-        // Position utills
         public static bool Check(Position pos, ICharPredicate pr)
         {
             return pr.Execute(pos.Current);
@@ -27,7 +26,5 @@ namespace MathOptimizer.Parser
 
             return pos;
         } 
-
-        // Symbol utills
     }
 }

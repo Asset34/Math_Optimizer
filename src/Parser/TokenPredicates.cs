@@ -9,7 +9,7 @@ using MathOptimizer.Parser.Interfaces.Predicates;
 
 namespace MathOptimizer.Parser.TokenPredicates
 {
-    class EmptyTokenCheckPredicate<TToken> : EmptyTokenVisitor, ITokenPredicate
+    class TokenPredicate<TToken> : EmptyTokenVisitor, ITokenPredicate
     {
         public bool Execute(IToken t)
         {
