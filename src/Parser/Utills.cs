@@ -14,11 +14,11 @@ namespace MathOptimizer.Parser
     static class Utills
     {
         // Position utills
-        public static bool Check(Position pos, ICharCheckPredicate pr)
+        public static bool Check(Position pos, ICharPredicate pr)
         {
             return pr.Execute(pos.Current);
         }
-        public static Position MoveWhile(Position pos, ICharCheckPredicate pr)
+        public static Position MoveWhile(Position pos, ICharPredicate pr)
         {
             while (!pos.IsEnd && Check(pos, pr))
             {
