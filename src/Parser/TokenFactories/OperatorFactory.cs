@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
+using MathOptimizer.Parser.TokenFactories.CharPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -84,7 +84,7 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Local predicate classes */
-        public class Operator : ICharCheckPredicate
+        public class Operator : ICharPredicate
         {
             public bool Execute(char ch)
             {

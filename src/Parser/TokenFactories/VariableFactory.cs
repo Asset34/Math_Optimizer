@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
+using MathOptimizer.Parser.TokenFactories.CharPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -71,8 +71,8 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static DisjunctionPredicate beginVariablePr = new DisjunctionPredicate();
-        private static DisjunctionPredicate variablePr = new DisjunctionPredicate();
+        private static DisjunctionCharPredicate beginVariablePr = new DisjunctionCharPredicate();
+        private static DisjunctionCharPredicate variablePr = new DisjunctionCharPredicate();
 
         private VariableFactory() {}
     }

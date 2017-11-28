@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
+using MathOptimizer.Parser.TokenFactories.CharPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -75,8 +75,8 @@ namespace MathOptimizer.Parser.TokenFactories
         private static readonly Underscore underscorePr = new Underscore();
         private static readonly Letter letterPr = new Letter();
 
-        private static DisjunctionPredicate beginFunctionNamePr = new DisjunctionPredicate();
-        private static DisjunctionPredicate functionNamePr = new DisjunctionPredicate();
+        private static DisjunctionCharPredicate beginFunctionNamePr = new DisjunctionCharPredicate();
+        private static DisjunctionCharPredicate functionNamePr = new DisjunctionCharPredicate();
 
         private FunctionNameFactory() {}
 

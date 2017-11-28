@@ -9,23 +9,23 @@ using MathOptimizer.Parser.Interfaces.Predicates;
 //
 // Summary:
 //     Contains the general predicate classes for token factories
-namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
+namespace MathOptimizer.Parser.TokenFactories.CharPredicates
 {
-    public class Digit : ICharCheckPredicate
+    public class Digit : ICharPredicate
     {
         public bool Execute(char ch)
         {
             return Char.IsDigit(ch);
         }
     }
-    public class Letter : ICharCheckPredicate
+    public class Letter : ICharPredicate
     {
         public bool Execute(char ch)
         {
             return Char.IsLetter(ch);
         }
     }
-    public class Underscore : ICharCheckPredicate
+    public class Underscore : ICharPredicate
     {
         public bool Execute(char ch)
         {
@@ -33,11 +33,11 @@ namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
         }
     }
 
-    public class DisjunctionPredicate : ICharCheckPredicate
+    public class DisjunctionCharPredicate : ICharPredicate
     {
         public bool Execute(char ch)
         {
-            foreach (ICharCheckPredicate pr in Predicates)
+            foreach (ICharPredicate pr in Predicates)
             {
                 if (pr.Execute(ch))
                 {
@@ -48,11 +48,11 @@ namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
             return false;
         }
 
-        public List<ICharCheckPredicate> Predicates
+        public List<ICharPredicate> Predicates
         {
             get { return predicates; }
         }
 
-        private List<ICharCheckPredicate> predicates = new List<ICharCheckPredicate>();
+        private List<ICharPredicate> predicates = new List<ICharPredicate>();
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
+using MathOptimizer.Parser.TokenFactories.CharPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
