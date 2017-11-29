@@ -1,38 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 using MathOptimizer.Parser.MathHandlers.TokenPredicates;
 
-namespace MathOptimizer.Parser
+namespace MathOptimizer.Parser.MathHandlers
 {
-    class MathParser : ITokenVisitor
+    class MathRPNConverter : ITokenVisitor
     {
-        public static string Parser(List<IToken> tokens)
+        public static List<IToken> Convert(List<IToken> tokens)
         {
+            /* Handle tokens */
             foreach (IToken t in tokens)
             {
-                t.Accept(mathParser);
+                t.Accept(mathRPNConverter);
             }
 
             /* Pop the rest of the operators in stack */
-            mathParser.PopRemainOperators();
-            
-            /* TEMP RESULT */
+            mathRPNConverter.PopRemainOperators();
 
-            StringBuilder parsedExp = new StringBuilder();
-
-            foreach (IToken t in resultTokens)
-            {
-                parsedExp.Append(t + " ");
-            }
-
-            return parsedExp.ToString();
+            return mathRPNConverter.resultTokens;
         }
 
         public void Visit(INumberToken t)
@@ -133,14 +123,13 @@ namespace MathOptimizer.Parser
         }
 
         /* Used predicates */
-        private readonly FunctionNameTokenPredicate functionNamePr = new FunctionNameTokenPredicate();
-        private readonly LBracketrTokenPredicate lBracketPr = new LBracketrTokenPredicate();
-        private readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
+        private static readonly FunctionNameTokenPredicate functionNamePr = new FunctionNameTokenPredicate();
+        private static readonly LBracketrTokenPredicate lBracketPr = new LBracketrTokenPredicate();
+        private static readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
 
-
-        private static readonly MathParser mathParser = new MathParser();
+        private static readonly MathRPNConverter mathRPNConverter = new MathRPNConverter();
 
         private Stack<IToken> operators = new Stack<IToken>();
-        private static List<IToken> resultTokens = new List<IToken>();
+        private List<IToken> resultTokens = new List<IToken>();
     }
 }
