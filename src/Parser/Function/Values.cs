@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathOptimizer.Parser.Function.Tree;
+using MathOptimizer.Parser.Func.Tree;
 
-namespace MathOptimizer.Parser.Function
+namespace MathOptimizer.Parser.Func
 {
     class Values
     {
