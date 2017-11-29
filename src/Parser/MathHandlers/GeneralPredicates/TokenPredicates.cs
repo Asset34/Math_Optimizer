@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 
@@ -67,26 +68,46 @@ namespace MathOptimizer.Parser.TokenPredicates
         }
     }
 
-    class DisjunctionTokenPredicate : ITokenPredicate
+    class ComparePriorityTokenPredicate : EmptyTokenVisitor, ITokenComparePredicate
     {
-        public bool Execute(IToken t)
+        public bool Execute(IToken t1, IToken t2)
         {
-            foreach (ITokenPredicate pr in Predicates)
+            int priority1, priority2;
+
+            t1.Accept(this);
+            priority1 = value;
+
+            t2.Accept(this);
+            priority2 = value;
+
+            if (priority1 <= priority2)
             {
-                if (pr.Execute(t))
-                {
-                    return true;
-                }
+                return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
-        public List<ITokenPredicate> Predicates
+        public override void Visit(IOperatorToken t)
         {
-            get { return predicates; }
+            SetPriority(t);
+        }
+        public override void Visit(ILBracketToken t)
+        {
+            SetPriority(t);
+        }
+        public override void Visit(IRBracketToken t)
+        {
+            SetPriority(t);
         }
 
-        private List<ITokenPredicate> predicates = new List<ITokenPredicate>();
+        private void SetPriority(IPriority t)
+        {
+            value = t.Priority;
+        }
+
+        private int value;
     }
 }

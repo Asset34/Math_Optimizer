@@ -158,7 +158,7 @@ namespace MathOptimizer.Parser
             }
         }
 
-        private static MathGrammarScanner grammarScanner = new MathGrammarScanner();
+        private static readonly MathGrammarScanner grammarScanner = new MathGrammarScanner();
 
         private void throwException(IToken lastToken)
         {

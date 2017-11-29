@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.CharPredicates;
+using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -60,15 +60,6 @@ namespace MathOptimizer.Parser.TokenFactories
             public int Priority { get; }
 
             private readonly string value;
-        }
-
-        /* Local predicate classes */
-        public class RBracket : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return ch == ')';
-            }
         }
 
         /* Used predicates */

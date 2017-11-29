@@ -11,10 +11,10 @@ namespace MathOptimizer.Parser.Interfaces.Tokens
         void Accept(ITokenVisitor visitor);
         string ToString();
     }
-
+   
     public interface IVariableToken     : IToken                       { }
-    public interface IFunctionNameToken : IToken                       { }
     public interface IErrorToken        : IToken                       { }
+    public interface IFunctionNameToken : IToken                       { }
     public interface INumberToken       : IToken, INumber              { }
     public interface ILBracketToken     : IToken, IPriority            { }
     public interface IRBracketToken     : IToken, IPriority            { }

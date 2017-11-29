@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.TokenFactories.CharPredicates;
+using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -38,7 +38,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 Utills.MoveWhile(pos, functionNamePr);
                 
-                return new FunctionNameToken(Position.MakeString(start, pos));
+                return new FunctionNameToken(Position.MakeString(start, pos), 0);
             }
             else
             {
@@ -54,9 +54,10 @@ namespace MathOptimizer.Parser.TokenFactories
         /* Produced token */
         private class FunctionNameToken : IFunctionNameToken
         {
-            public FunctionNameToken(string str)
+            public FunctionNameToken(string str, int priority)
             {
                 this.value = str;
+                Priority = priority;
             }
             public void Accept(ITokenVisitor visitor)
             {
@@ -66,6 +67,8 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 return value;
             }
+
+            public int Priority { get; }
 
             private readonly string value;
         }
