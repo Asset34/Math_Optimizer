@@ -8,7 +8,8 @@ namespace MathOptimizer.Parser.MathHandlers
 {
     //
     // Summary:
-    //     Represents a math expressions tokenizer
+    //     Represents a part of the Parser which implement tokenization
+    //     of the input math expression
     class MathTokenizer
     {
         public static List<IToken> Tokenize(string exp)

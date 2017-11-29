@@ -10,13 +10,14 @@ namespace MathOptimizer.Parser.MathHandlers
 {
     //
     // Summary:
-    //     Represents a scanner of math expressions formal grammar
-    //
+    //     Represents a part of the Parser which implement grammar analysis
+    //     of the input math expression
+    // 
     // Formal Grammar:
     //     <MathExp>  ::= <Operator> <Operand> { <Operator> <Operand> }*
     //     <Operand>  ::= <Variable> | <Constant > | <Number> | <Function> | '(' <MathExp> ')'
     //     <Function> ::= <FunctionName> '(' <MathExp> ')'
-    class MathGrammarScanner : ITokenVisitor
+    class MathGrammarScanner : EmptyTokenVisitor
     {
         public static void Scann(List<IToken> tokens)
         {
@@ -79,7 +80,7 @@ namespace MathOptimizer.Parser.MathHandlers
             edgesCurrent = edgesMathExp;
         }
 
-        public void Visit(IVariableToken t)
+        public override void Visit(IVariableToken t)
         {
             if (edgesCurrent.Execute(t))
             {
@@ -90,7 +91,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-        public void Visit(IFunctionNameToken t)
+        public override void Visit(IFunctionNameToken t)
         {
             if (edgesCurrent.Execute(t))
             {
@@ -101,11 +102,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-        public void Visit(IErrorToken t)
-        {
-            /* TODO */
-        }
-        public void Visit(INumberToken t)
+        public override void Visit(INumberToken t)
         {
             if (edgesCurrent.Execute(t))
             {
@@ -116,7 +113,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-        public void Visit(ILBracketToken t)
+        public override void Visit(ILBracketToken t)
         {
             if (edgesCurrent.Execute(t))
             {
@@ -127,7 +124,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-        public void Visit(IRBracketToken t)
+        public override void Visit(IRBracketToken t)
         {
             if (edgesCurrent.Execute(t))
             {
@@ -138,7 +135,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-        public void Visit(IOperatorToken t)
+        public override void Visit(IOperatorToken t)
         {
             if (edgesCurrent.Execute(t))
             {

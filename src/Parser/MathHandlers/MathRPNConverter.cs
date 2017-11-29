@@ -9,10 +9,16 @@ using MathOptimizer.Parser.MathHandlers.TokenPredicates;
 
 namespace MathOptimizer.Parser.MathHandlers
 {
-    class MathRPNConverter : ITokenVisitor
+    //
+    // Summary:
+    //     Represents a part of the Parser which implement convertation
+    //     of the input list of tokens to RPN(Reverse Polish notation)
+    class MathRPNConverter : EmptyTokenVisitor
     {
         public static List<IToken> Convert(List<IToken> tokens)
         {
+            mathRPNConverter = new MathRPNConverter();
+
             /* Handle tokens */
             foreach (IToken t in tokens)
             {
@@ -25,23 +31,23 @@ namespace MathOptimizer.Parser.MathHandlers
             return mathRPNConverter.resultTokens;
         }
 
-        public void Visit(INumberToken t)
+        public override void Visit(INumberToken t)
         {
             resultTokens.Add(t);
         }
-        public void Visit(IVariableToken t)
+        public override void Visit(IVariableToken t)
         {
             resultTokens.Add(t);
         }
-        public void Visit(IFunctionNameToken t)
+        public override void Visit(IFunctionNameToken t)
         {
             operators.Push(t);
         }
-        public void Visit(ILBracketToken t)
+        public override void Visit(ILBracketToken t)
         {
             operators.Push(t);
         }
-        public void Visit(IRBracketToken t)
+        public override void Visit(IRBracketToken t)
         {
             // Get operators of subexpression
             List<IToken> subExpOperators = Utills.MoveUntill(operators, lBracketPr);
@@ -56,18 +62,13 @@ namespace MathOptimizer.Parser.MathHandlers
                 resultTokens.Add(operators.Pop());
             }
         }
-        public void Visit(IOperatorToken t)
+        public override void Visit(IOperatorToken t)
         {
             // Get operators with lower or equal priority
             List<IToken> lowOperators = Utills.MoveWhile(t, operators, comparePriorityPr);
             resultTokens.AddRange(lowOperators);
 
             operators.Push(t);
-        }
-
-        public void Visit(IErrorToken t)
-        {
-            /* TODO */
         }
 
         private void PopRemainOperators()
@@ -127,7 +128,7 @@ namespace MathOptimizer.Parser.MathHandlers
         private static readonly LBracketrTokenPredicate lBracketPr = new LBracketrTokenPredicate();
         private static readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
 
-        private static readonly MathRPNConverter mathRPNConverter = new MathRPNConverter();
+        private static MathRPNConverter mathRPNConverter;
 
         private Stack<IToken> operators = new Stack<IToken>();
         private List<IToken> resultTokens = new List<IToken>();
