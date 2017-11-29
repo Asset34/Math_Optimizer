@@ -9,7 +9,10 @@ using MathOptimizer.Parser.Interfaces.Predicates;
 
 namespace MathOptimizer.Parser.TokenPredicates
 {
-    class TokenPredicate<TToken> : EmptyTokenVisitor, ITokenPredicate
+    //
+    // Summary:
+    //     Represents a base class for the following predicates
+    class FalseTokenPredicate : EmptyTokenVisitor, ITokenPredicate
     {
         public bool Execute(IToken t)
         {
@@ -18,12 +21,50 @@ namespace MathOptimizer.Parser.TokenPredicates
             return result;
         }
 
-        public void Visit(TToken t)
+        protected bool result;
+    }
+
+    class NumberTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(INumberToken t)
         {
             result = true;
         }
-
-        private bool result;
+    }
+    class VariableTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IVariableToken t)
+        {
+            result = true;
+        }
+    }
+    class OperatorTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IOperatorToken t)
+        {
+            result = true;
+        }
+    }
+    class FunctionNameTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IFunctionNameToken t)
+        {
+            result = true;
+        }
+    }
+    class LBracketrTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(ILBracketToken t)
+        {
+            result = true;
+        }
+    }
+    class RBracketTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IRBracketToken t)
+        {
+            result = true;
+        }
     }
 
     class DisjunctionTokenPredicate : ITokenPredicate

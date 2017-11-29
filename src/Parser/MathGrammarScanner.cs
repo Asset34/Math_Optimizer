@@ -11,19 +11,35 @@ using MathOptimizer.Parser.Interfaces.Predicates;
 
 namespace MathOptimizer.Parser
 {
-    class MathSyntaxScanner : ITokenVisitor
+    //
+    // Summary:
+    //     Represents a scanner of math expressions formal grammar
+    //
+    // Formal Grammar:
+    //     <MathExp>  ::= <Operator> <Operand> { <Operator> <Operand> }*
+    //     <Operand>  ::= <Variable> | <Constant > | <Number> | <Function> | '(' <MathExp> ')'
+    //     <Function> ::= <FunctionName> '(' <MathExp> ')'
+    class MathGrammarScanner : ITokenVisitor
     {
-        public MathSyntaxScanner()
+        public static void Scann(List<IToken> tokens)
+        {
+            foreach (IToken t in tokens)
+            {
+                t.Accept(grammarScanner);
+            }
+        }
+
+        public MathGrammarScanner()
         {
             /* Build Finite-state machine */
 
             // Terminal symbols
-            ITokenPredicate variable     = new TokenPredicate<IVariableToken>    ();
-            ITokenPredicate number       = new TokenPredicate<INumberToken>      ();
-            ITokenPredicate op           = new TokenPredicate<IOperatorToken>    ();
-            ITokenPredicate functionName = new TokenPredicate<IFunctionNameToken>();
-            ITokenPredicate lBracket     = new TokenPredicate<ILBracketToken>    ();
-            ITokenPredicate rBracket     = new TokenPredicate<IRBracketToken>    ();
+            ITokenPredicate variable = new VariableTokenPredicate();
+            ITokenPredicate number = new NumberTokenPredicate();
+            ITokenPredicate op = new OperatorTokenPredicate();
+            ITokenPredicate functionName = new FunctionNameTokenPredicate();
+            ITokenPredicate lBracket = new LBracketrTokenPredicate();
+            ITokenPredicate rBracket = new RBracketTokenPredicate();
 
             DisjunctionTokenPredicate disjunctionPr = new DisjunctionTokenPredicate();
 
@@ -65,13 +81,6 @@ namespace MathOptimizer.Parser
             /* Set start edges */
             edgesCurrent = edgesMathExp;
         }
-        public void Scann(List<IToken> tokens)
-        {
-            foreach (IToken t in tokens)
-            {
-                t.Accept(this);
-            }
-        }
 
         public void Visit(IVariableToken t)
         {
@@ -81,12 +90,7 @@ namespace MathOptimizer.Parser
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t);
-
-                throw ex;
+                throwException(t);
             }
         }
         public void Visit(IFunctionNameToken t)
@@ -97,12 +101,7 @@ namespace MathOptimizer.Parser
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t.ToString());
-
-                throw ex;
+                throwException(t);
             }
         }
         public void Visit(IErrorToken t)
@@ -117,12 +116,7 @@ namespace MathOptimizer.Parser
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t);
-
-                throw ex;
+                throwException(t);
             }
         }
         public void Visit(ILBracketToken t)
@@ -133,12 +127,7 @@ namespace MathOptimizer.Parser
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t);
-
-                throw ex;
+                throwException(t);
             }
         }
         public void Visit(IRBracketToken t)
@@ -149,12 +138,7 @@ namespace MathOptimizer.Parser
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t);
-
-                throw ex;
+                throwException(t);
             }
         }
         public void Visit(IOperatorToken t)
@@ -168,10 +152,22 @@ namespace MathOptimizer.Parser
                 Exception ex = new Exception("Invalid expression");
 
                 ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t);
+                ex.Data.Add("Last token", t.ToString());
 
                 throw ex;
             }
+        }
+
+        private static MathGrammarScanner grammarScanner = new MathGrammarScanner();
+
+        private void throwException(IToken lastToken)
+        {
+            Exception ex = new Exception("Invalid expression");
+
+            ex.Source = "MathSyntaxScanner";
+            ex.Data.Add("Token", lastToken.ToString());
+
+            throw ex;
         }
 
         /* Edges */
