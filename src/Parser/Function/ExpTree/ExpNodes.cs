@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathOptimizer.Parser.Function
+namespace MathOptimizer.Parser.Function.Tree
 {
     /* Binary operations */
-    class PlusExp : ExpTree
+    class PlusExp : ExpNode
     {
-        public PlusExp(ExpTree operand1, ExpTree operand2)
+        public PlusExp(ExpNode operand1, ExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
@@ -19,12 +19,12 @@ namespace MathOptimizer.Parser.Function
             return operand1.Evaluate(values) + operand2.Evaluate(values);
         }
 
-        private ExpTree operand1;
-        private ExpTree operand2;
+        private ExpNode operand1;
+        private ExpNode operand2;
     }
-    class MinusExp : ExpTree
+    class MinusExp : ExpNode
     {
-        public MinusExp(ExpTree operand1, ExpTree operand2)
+        public MinusExp(ExpNode operand1, ExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
@@ -34,12 +34,12 @@ namespace MathOptimizer.Parser.Function
             return operand1.Evaluate(values) - operand2.Evaluate(values);
         }
 
-        private ExpTree operand1;
-        private ExpTree operand2;
+        private ExpNode operand1;
+        private ExpNode operand2;
     }
-    class MultyExp : ExpTree
+    class MultyExp : ExpNode
     {
-        public MultyExp(ExpTree operand1, ExpTree operand2)
+        public MultyExp(ExpNode operand1, ExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
@@ -49,12 +49,12 @@ namespace MathOptimizer.Parser.Function
             return operand1.Evaluate(values) * operand2.Evaluate(values);
         }
 
-        private ExpTree operand1;
-        private ExpTree operand2;
+        private ExpNode operand1;
+        private ExpNode operand2;
     }
-    class DivisionExp : ExpTree
+    class DivisionExp : ExpNode
     {
-        public DivisionExp(ExpTree operand1, ExpTree operand2)
+        public DivisionExp(ExpNode operand1, ExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
@@ -64,12 +64,12 @@ namespace MathOptimizer.Parser.Function
             return operand1.Evaluate(values) / operand2.Evaluate(values);
         }
 
-        private ExpTree operand1;
-        private ExpTree operand2;
+        private ExpNode operand1;
+        private ExpNode operand2;
     }
-    class PowerExp : ExpTree
+    class PowerExp : ExpNode
     {
-        public PowerExp(ExpTree operand1, ExpTree operand2)
+        public PowerExp(ExpNode operand1, ExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
@@ -79,14 +79,14 @@ namespace MathOptimizer.Parser.Function
             return Math.Pow(operand1.Evaluate(values), operand2.Evaluate(values));
         }
 
-        private ExpTree operand1;
-        private ExpTree operand2;
+        private ExpNode operand1;
+        private ExpNode operand2;
     }
 
     /* Unary operations */
-    class SinExp : ExpTree
+    class SinExp : ExpNode
     {
-        public SinExp(ExpTree operand)
+        public SinExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -95,11 +95,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Sin(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class CosExp : ExpTree
+    class CosExp : ExpNode
     {
-        public CosExp(ExpTree operand)
+        public CosExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -108,11 +108,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Cos(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class TgExp : ExpTree
+    class TgExp : ExpNode
     {
-        public TgExp(ExpTree operand)
+        public TgExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -121,11 +121,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Tan(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class CtgExp : ExpTree
+    class CtgExp : ExpNode
     {
-        public CtgExp(ExpTree operand)
+        public CtgExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -134,11 +134,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Atan(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class SqrtExp : ExpTree
+    class SqrtExp : ExpNode
     {
-        public SqrtExp(ExpTree operand)
+        public SqrtExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -147,11 +147,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Sqrt(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class ExponentExp : ExpTree
+    class ExponentExp : ExpNode
     {
-        public ExponentExp(ExpTree operand)
+        public ExponentExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -160,11 +160,11 @@ namespace MathOptimizer.Parser.Function
             return Math.Exp(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
-    class LnExp : ExpTree
+    class LnExp : ExpNode
     {
-        public LnExp(ExpTree operand)
+        public LnExp(ExpNode operand)
         {
             this.operand = operand;
         }
@@ -173,6 +173,6 @@ namespace MathOptimizer.Parser.Function
             return Math.Log(operand.Evaluate(values));
         }
 
-        private ExpTree operand;
+        private ExpNode operand;
     }
 }

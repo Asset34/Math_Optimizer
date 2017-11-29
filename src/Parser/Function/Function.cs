@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MathOptimizer.Parser.Function.Tree;
+
 namespace MathOptimizer.Parser.Function
 {
-    abstract class ExpTree
+    class Function
     {
-        public abstract double Evaluate(Values values);
     }
 }

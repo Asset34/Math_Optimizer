@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathOptimizer.Parser.Function
+namespace MathOptimizer.Parser.Function.Tree
 {
-    class VariableExp : ExpTree
+    class VariableExp : ExpNode
     {
         public VariableExp(string name)
         {
@@ -19,7 +19,7 @@ namespace MathOptimizer.Parser.Function
 
         public string Name { get; }
     }
-    class NumberExp : ExpTree
+    class NumberExp : ExpNode
     {
         public NumberExp(double number)
         {
