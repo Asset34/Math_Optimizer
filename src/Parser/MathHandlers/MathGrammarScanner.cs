@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathOptimizer.Parser.Interfaces;
-using MathOptimizer.Parser.TokenPredicates;
+using MathOptimizer.Parser.MathHandlers.TokenPredicates;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 

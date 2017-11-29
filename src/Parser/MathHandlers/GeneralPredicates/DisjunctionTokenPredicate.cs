@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 
-namespace MathOptimizer.Parser.TokenPredicates
+namespace MathOptimizer.Parser.MathHandlers.TokenPredicates
 {
     class DisjunctionTokenPredicate : ITokenPredicate
     {
