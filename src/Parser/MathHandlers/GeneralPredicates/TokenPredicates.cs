@@ -67,47 +67,4 @@ namespace MathOptimizer.Parser.TokenPredicates
             result = true;
         }
     }
-
-    class ComparePriorityTokenPredicate : EmptyTokenVisitor, ITokenComparePredicate
-    {
-        public bool Execute(IToken t1, IToken t2)
-        {
-            int priority1, priority2;
-
-            t1.Accept(this);
-            priority1 = value;
-
-            t2.Accept(this);
-            priority2 = value;
-
-            if (priority1 <= priority2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public override void Visit(IOperatorToken t)
-        {
-            SetPriority(t);
-        }
-        public override void Visit(ILBracketToken t)
-        {
-            SetPriority(t);
-        }
-        public override void Visit(IRBracketToken t)
-        {
-            SetPriority(t);
-        }
-
-        private void SetPriority(IPriority t)
-        {
-            value = t.Priority;
-        }
-
-        private int value;
-    }
 }
