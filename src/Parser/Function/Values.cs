@@ -14,9 +14,9 @@ namespace MathOptimizer.Parser.Func
         {
             return variables[name];
         }
-        public void Assign(VariableExp variable, double value)
+        public void Assign(string name, double value)
         {
-            variables.Add(variable.Name, value);
+            variables.Add(name, value);
         }
 
         private Dictionary<string, double> variables = new Dictionary<string, double>();

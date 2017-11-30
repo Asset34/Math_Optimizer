@@ -14,6 +14,9 @@ namespace MathOptimizer.Parser.TokenFactories
     //
     // Summary:
     //     Represents a factory of a right bracket tokens
+    //
+    // Formal Grammar:
+    //     <RBracket> ::= ')'
     class RBracketFactory
     {
         public static bool Check(Position pos)

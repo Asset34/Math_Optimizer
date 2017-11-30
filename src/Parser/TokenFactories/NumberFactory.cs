@@ -14,6 +14,10 @@ namespace MathOptimizer.Parser.TokenFactories
     //
     // Summary:
     //     Represents a factory of a number tokens
+    //
+    // Formal Grammar:
+    //     <Number> ::= <Digit> | <Digit> ',' <Digit>
+    //     <Digit>  ::= '0' | ... | '9'
     class NumberFactory
     {
         public static bool Check(Position pos)

@@ -14,6 +14,9 @@ namespace MathOptimizer.Parser.TokenFactories
     //
     // Summary:
     //     Represents a factory of a left bracket tokens
+    //
+    // Formal Grammar:
+    //     <LBracket> ::= '('
     class LBracketFactory
     {
         public static bool Check(Position pos)

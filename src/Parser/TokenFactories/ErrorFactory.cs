@@ -15,11 +15,10 @@ namespace MathOptimizer.Parser.TokenFactories
     {
         public static bool Check(Position pos)
         {
-            return !(NumberFactory.Check(pos)       ||
-                     VariableFactory.Check(pos)     ||
-                     FunctionNameFactory.Check(pos) ||
-                     OperatorFactory.Check(pos)     ||
-                     LBracketFactory.Check(pos)     ||
+            return !(NumberFactory.Check(pos)     ||
+                     IdentifierFactory.Check(pos) ||
+                     OperatorFactory.Check(pos)   ||
+                     LBracketFactory.Check(pos)   ||
                      RBracketFactory.Check(pos));
         }
         public static IErrorToken TakeToken(Position pos)

@@ -15,6 +15,13 @@ namespace MathOptimizer.Parser.TokenFactories
     // Summary:
     //     Represents a factory of a identifier tokens
     //     (Variables and Function Names)
+    //
+    // Formal Grammar:
+    //     <Identifier> ::= <Variable> | <FunctionName>
+    //     <Variable>   ::= <Letter> { {<Letter>}* {<Underscore>}* {<Digit>}* }*
+    //     <Letter>     ::= 'a' | ... | 'Z'
+    //     <Underscore> ::= '_'
+    //     <Digit>      ::= '0' | ... | '9'
     class IdentifierFactory
     {
         static IdentifierFactory()
