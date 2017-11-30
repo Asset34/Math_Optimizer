@@ -50,12 +50,18 @@ namespace MathOptimizer.Parser.MathHandlers
 
             expTree.Push(functionTable[t.ToString()](operand));
         }
-        public override void Visit(IOperatorToken t)
+        public override void Visit(IBinaryOpToken t)
         {
             ExpNode operand2 = expTree.Pop();
             ExpNode operand1 = expTree.Pop();
 
             expTree.Push(binaryOperatorTable[t.Operator](operand1, operand2));
+        }
+        public override void Visit(IUnaryOpToken t)
+        {
+            ExpNode operand = expTree.Pop();
+
+            expTree.Push(unaryOperatorTable[t.Operator](operand));
         }
 
         private static MathFunctionCreator mathFunctionCreator ;
@@ -72,6 +78,14 @@ namespace MathOptimizer.Parser.MathHandlers
             {'*', (op1, op2) => (new MultyExp    (op1, op2))},
             {'/', (op1, op2) => (new DivisionExp (op1, op2))},
             {'^', (op1, op2) => (new PowerExp    (op1, op2))}
+        };
+
+        /* Unary operators table */
+        private delegate ExpNode UnaryOperation(ExpNode op);
+        private Dictionary<char, UnaryOperation> unaryOperatorTable = new Dictionary<char, UnaryOperation>()
+        {
+            {'+', (op) => (null)                 },
+            {'-', (op) => (new UnaryMinusExp(op))}
         };
 
         /* Functions table */

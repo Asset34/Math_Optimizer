@@ -62,12 +62,18 @@ namespace MathOptimizer.Parser.MathHandlers
                 resultTokens.Add(operators.Pop());
             }
         }
-        public override void Visit(IOperatorToken t)
+
+        public override void Visit(IBinaryOpToken t)
         {
             // Get operators with lower or equal priority
             List<IToken> lowOperators = Utills.MoveWhile(t, operators, comparePriorityPr);
             resultTokens.AddRange(lowOperators);
 
+            operators.Push(t);
+        }
+
+        public override void Visit(IUnaryOpToken t)
+        {
             operators.Push(t);
         }
 
@@ -102,7 +108,11 @@ namespace MathOptimizer.Parser.MathHandlers
                 }
             }
 
-            public override void Visit(IOperatorToken t)
+            public override void Visit(IBinaryOpToken t)
+            {
+                SetPriority(t);
+            }
+            public override void Visit(IUnaryOpToken t)
             {
                 SetPriority(t);
             }

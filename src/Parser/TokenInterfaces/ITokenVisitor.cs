@@ -16,6 +16,7 @@ namespace MathOptimizer.Parser.Interfaces
         void Visit(INumberToken       t);
         void Visit(ILBracketToken     t);
         void Visit(IRBracketToken     t);
-        void Visit(IOperatorToken     t);
+        void Visit(IUnaryOpToken      t);
+        void Visit(IBinaryOpToken     t);
     }
 }

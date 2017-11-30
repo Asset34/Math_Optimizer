@@ -39,9 +39,16 @@ namespace MathOptimizer.Parser.MathHandlers.TokenPredicates
             result = true;
         }
     }
-    class OperatorTokenPredicate : FalseTokenPredicate
+    class BinaryOpTokenPredicate : FalseTokenPredicate
     {
-        public override void Visit(IOperatorToken t)
+        public override void Visit(IBinaryOpToken t)
+        {
+            result = true;
+        }
+    }
+    class UnaryOpTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IUnaryOpToken t)
         {
             result = true;
         }

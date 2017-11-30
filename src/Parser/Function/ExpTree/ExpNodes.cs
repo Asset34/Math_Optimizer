@@ -84,6 +84,21 @@ namespace MathOptimizer.Parser.Func.Tree
     }
 
     /* Unary operations */
+    class UnaryMinusExp : ExpNode
+    {
+        public UnaryMinusExp(ExpNode operand)
+        {
+            this.operand = operand;
+        }
+        public override double Evaluate(Values values)
+        {
+            return -operand.Evaluate(values);
+        }
+
+        private ExpNode operand;
+    }
+
+    /* Functions */
     class SinExp : ExpNode
     {
         public SinExp(ExpNode operand)

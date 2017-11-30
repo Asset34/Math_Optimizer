@@ -38,7 +38,7 @@ namespace MathOptimizer.Parser.TokenFactories
         {
             return Utills.Check(pos, beginVariablePr);
         }
-        public static IToken TakeToken(Position pos)
+        public static IIdentifierToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -117,8 +117,12 @@ namespace MathOptimizer.Parser.TokenFactories
         /* Function names table */
         private static string[] functionNamesTable = new string[]
         {
-            "sin" , "cos", "tg",
-            "ctg" , "exp", "ln",
+            "sin",
+            "cos",
+            "tg" ,
+            "ctg",
+            "exp",
+            "ln" ,
             "sqrt"
         };
     }

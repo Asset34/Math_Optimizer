@@ -16,15 +16,6 @@ namespace MathOptimizer.Parser.TokenFactories
     //     Represents a factory of a operator tokens
     class OperatorFactory
     {
-        static OperatorFactory()
-        {
-            // Fill operators table
-            operatorsTable.Add('+', 1);
-            operatorsTable.Add('-', 1);
-            operatorsTable.Add('*', 2);
-            operatorsTable.Add('/', 2);
-            operatorsTable.Add('^', 3);
-        }
         public static bool Check(Position pos)
         {
             return Utills.Check(pos, operatorPr);
@@ -38,9 +29,20 @@ namespace MathOptimizer.Parser.TokenFactories
                 pos++;
 
                 string strToken = Position.MakeString(start, pos);
-                int priority = operatorsTable[char.Parse(strToken)];
 
-                return new OperatorToken(strToken, priority);
+                bool checkOp = CheckUnary(start, strToken);
+                if (checkOp)
+                {
+                    int priority = unaryOperatorsTable[char.Parse(strToken)];
+
+                    return new UnaryOpToken(strToken, priority);
+                }
+                else
+                {
+                    int priority = binaryOperatorsTable[char.Parse(strToken)];
+
+                    return new BinaryOpToken(strToken, priority);
+                }
             }   
             else
             {
@@ -53,10 +55,30 @@ namespace MathOptimizer.Parser.TokenFactories
             }    
         }
 
-        /* Produced token */
-        private class OperatorToken : IOperatorToken
+        private static bool CheckUnary(Position pos, string value)
         {
-            public OperatorToken(string str, int priority)
+            Position prevPos = pos - 1;
+
+            if (prevPos.Number >= 0)
+            {
+                if (unaryOperatorsTable.ContainsKey(char.Parse(value)) &&
+                Utills.Check(prevPos, new LBracket()))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /* Produced token */
+        private class BinaryOpToken : IBinaryOpToken
+        {
+            public BinaryOpToken(string str, int priority)
             {
                 this.value = str;
                 Priority = priority;
@@ -82,21 +104,60 @@ namespace MathOptimizer.Parser.TokenFactories
 
             private readonly string value;
         }
+        private class UnaryOpToken : IUnaryOpToken
+        {
+            public UnaryOpToken(string str, int priority)
+            {
+                this.value = str;
+                Priority = priority;
+            }
+            public void Accept(ITokenVisitor visitor)
+            {
+                visitor.Visit(this);
+            }
+            public override string ToString()
+            {
+                return value.ToString();
+            }
+
+            public char Operator
+            {
+                get
+                {
+                    return char.Parse(value);
+                }
+            }
+            public int Priority { get; }
+
+            private readonly string value;
+        }
 
         /* Local predicate classes */
-        public class Operator : ICharPredicate
+        private class Operator : ICharPredicate
         {
             public bool Execute(char ch)
             {
-                return operatorsTable.ContainsKey(ch);
+                return binaryOperatorsTable.ContainsKey(ch);
             }
         }
 
         /* Used predicates */
         private static readonly Operator operatorPr = new Operator();
 
-        /* Operators table */
-        private static Dictionary<char, int> operatorsTable = new Dictionary<char, int>();
+        /* Binary Operators table */
+        private static Dictionary<char, int> binaryOperatorsTable = new Dictionary<char, int>()
+        {
+            {'+', 1},
+            {'-', 1},
+            {'*', 2},
+            {'/', 2},
+            {'^', 3}
+        };
+        private static Dictionary<char, int> unaryOperatorsTable = new Dictionary<char, int>()
+        {
+            {'+', 4},
+            {'-', 4}
+        };
 
         private OperatorFactory() { }
     }

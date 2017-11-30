@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.MathHandlers.TokenPredicates;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
@@ -21,10 +20,17 @@ namespace MathOptimizer.Parser.MathHandlers
     {
         public static void Scann(List<IToken> tokens)
         {
+            /* Reset counters */
+            grammarScanner.counterLBracket = 0;
+            grammarScanner.counterRBracket = 0;
+
+            /* Handle tokens */
             foreach (IToken t in tokens)
             {
                 t.Accept(grammarScanner);
             }
+
+            grammarScanner.CompareCounters();
         }
 
         public MathGrammarScanner()
@@ -32,12 +38,13 @@ namespace MathOptimizer.Parser.MathHandlers
             /* Build Finite-state machine */
 
             // Terminal symbols
-            ITokenPredicate variable = new VariableTokenPredicate();
-            ITokenPredicate number = new NumberTokenPredicate();
-            ITokenPredicate op = new OperatorTokenPredicate();
+            ITokenPredicate variable     = new VariableTokenPredicate();
+            ITokenPredicate number       = new NumberTokenPredicate();
+            ITokenPredicate binaryOp     = new BinaryOpTokenPredicate();
+            ITokenPredicate unaryOp      = new UnaryOpTokenPredicate();
             ITokenPredicate functionName = new FunctionNameTokenPredicate();
-            ITokenPredicate lBracket = new LBracketrTokenPredicate();
-            ITokenPredicate rBracket = new RBracketTokenPredicate();
+            ITokenPredicate lBracket     = new LBracketrTokenPredicate();
+            ITokenPredicate rBracket     = new RBracketTokenPredicate();
 
             DisjunctionTokenPredicate disjunctionPr = new DisjunctionTokenPredicate();
 
@@ -46,29 +53,39 @@ namespace MathOptimizer.Parser.MathHandlers
             disjunctionPr.Predicates.Add(number);
             disjunctionPr.Predicates.Add(functionName);
             disjunctionPr.Predicates.Add(lBracket);
+            disjunctionPr.Predicates.Add(unaryOp);
 
             edgesMathExp = disjunctionPr;
             disjunctionPr = new DisjunctionTokenPredicate();
 
             // Variable
-            disjunctionPr.Predicates.Add(op);
+            disjunctionPr.Predicates.Add(binaryOp);
             disjunctionPr.Predicates.Add(rBracket);
 
             edgesVariable = disjunctionPr;
             disjunctionPr = new DisjunctionTokenPredicate();
 
             // RBracket
-            disjunctionPr.Predicates.Add(op);
+            disjunctionPr.Predicates.Add(binaryOp);
             disjunctionPr.Predicates.Add(rBracket);
 
             edgesRBracket = disjunctionPr;
             disjunctionPr = new DisjunctionTokenPredicate();
 
+            // Unary Operator
+            disjunctionPr.Predicates.Add(variable);
+            disjunctionPr.Predicates.Add(number);
+            disjunctionPr.Predicates.Add(functionName);
+            disjunctionPr.Predicates.Add(lBracket);
+
+            edgesUnaryOp = disjunctionPr;
+            disjunctionPr = new DisjunctionTokenPredicate();
+
             // Number
             edgesNumber = edgesVariable;
 
-            // Operator
-            edgesOperator = edgesMathExp;
+            // Binary Operator
+            edgesBinaryOp = edgesMathExp;
 
             // LBracket
             edgesLBracket = edgesMathExp;
@@ -118,6 +135,8 @@ namespace MathOptimizer.Parser.MathHandlers
             if (edgesCurrent.Execute(t))
             {
                 edgesCurrent = edgesLBracket;
+
+                counterLBracket++;
             }
             else
             {
@@ -129,26 +148,34 @@ namespace MathOptimizer.Parser.MathHandlers
             if (edgesCurrent.Execute(t))
             {
                 edgesCurrent = edgesRBracket;
+
+                counterRBracket++;
             }
             else
             {
                 throwException(t);
             }
         }
-        public override void Visit(IOperatorToken t)
+        public override void Visit(IBinaryOpToken t)
         {
             if (edgesCurrent.Execute(t))
             {
-                edgesCurrent = edgesOperator;
+                edgesCurrent = edgesBinaryOp;
             }
             else
             {
-                Exception ex = new Exception("Invalid expression");
-
-                ex.Source = "MathSyntaxScanner";
-                ex.Data.Add("Last token", t.ToString());
-
-                throw ex;
+                throwException(t);
+            }
+        }
+        public override void Visit(IUnaryOpToken t)
+        {
+            if (edgesCurrent.Execute(t))
+            {
+                edgesCurrent = edgesUnaryOp;
+            }
+            else
+            {
+                throwException(t);
             }
         }
 
@@ -163,17 +190,41 @@ namespace MathOptimizer.Parser.MathHandlers
 
             throw ex;
         }
+        private void CompareCounters()
+        {
+            if (counterLBracket > counterRBracket)
+            {
+                Exception ex = new Exception("Invalid expression - Missing ')'");
+
+                ex.Source = "MathSyntaxScanner";
+
+                throw ex;
+            }
+            if (counterLBracket < counterRBracket)
+            {
+                Exception ex = new Exception("Invalid expression - Missing '('");
+
+                ex.Source = "MathSyntaxScanner";
+
+                throw ex;
+            }
+        }
 
         /* Edges */
         private readonly ITokenPredicate edgesMathExp;
         private readonly ITokenPredicate edgesVariable;
         private readonly ITokenPredicate edgesNumber;
-        private readonly ITokenPredicate edgesOperator;
+        private readonly ITokenPredicate edgesBinaryOp;
+        private readonly ITokenPredicate edgesUnaryOp;
         private readonly ITokenPredicate edgesLBracket;
         private readonly ITokenPredicate edgesRBracket;
         private readonly ITokenPredicate edgesFunctionName;
 
         /* Current edge */
         private ITokenPredicate edgesCurrent;
+
+        /* Bracket counters */
+        private int counterLBracket;
+        private int counterRBracket;
     }
 }
