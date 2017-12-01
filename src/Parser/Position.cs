@@ -64,6 +64,10 @@ namespace MathOptimizer.Parser
                 }
             }
         }
+        public bool isBegin
+        {
+            get { return index == -1; }
+        }
         public bool IsEnd
         {
             get{ return index == data.Length; }
