@@ -16,31 +16,33 @@ namespace MathOptimizer.Parser
     {
         public static bool Check(Position pos, ICharPredicate pr)
         {
-            return pr.Execute(pos.Current);
+            return !pos.IsEnd   && 
+                   !pos.IsBegin && 
+                   pr.Execute(pos.Current);
         }
-        public static Position MoveWhile(Position pos, ICharPredicate pr)
+        public static bool Check(Stack<IToken> tokens, ITokenPredicate pr)
         {
-            while (!pos.IsEnd && Check(pos, pr))
+            return tokens.Count != 0 && pr.Execute(tokens.Peek());
+        }
+        public static bool Check(IToken t1, Stack<IToken> tokens, ITokenComparePredicate pr)
+        {
+            return tokens.Count != 0 && pr.Execute(t1, tokens.Peek());
+        }
+
+        public static Position     MoveWhile(Position pos, ICharPredicate pr)
+        {
+            while (Check(pos, pr))
             {
                 pos++;
             }
 
             return pos;
         } 
-
-        public static bool Check(IToken t, ITokenPredicate pr)
-        {
-            return pr.Execute(t);
-        }
-        public static bool Check(IToken t1, IToken t2, ITokenComparePredicate pr)
-        {
-            return pr.Execute(t1, t2);
-        }
         public static List<IToken> MoveWhile(Stack<IToken> tokens, ITokenPredicate pr)
         {
             List<IToken> result = new List<IToken>();
 
-            while (tokens.Count != 0 && Check(tokens.Peek(), pr))
+            while (Check(tokens, pr))
             {
                 result.Add(tokens.Pop());
             }
@@ -51,18 +53,19 @@ namespace MathOptimizer.Parser
         {
             List<IToken> result = new List<IToken>();
 
-            while (tokens.Count != 0 && Check(t, tokens.Peek(), pr))
+            while (Check(t, tokens, pr))
             {
                 result.Add(tokens.Pop());
             }
 
             return result;
         }
-        public static List<IToken> MoveUntill(Stack<IToken> tokens, ITokenPredicate pr)
+
+        public static List<IToken> MoveUntil(Stack<IToken> tokens, ITokenPredicate pr)
         {
             List<IToken> result = new List<IToken>();
 
-            while (tokens.Count != 0 && !Check(tokens.Peek(), pr))
+            while (!Check(tokens, pr))
             {
                 result.Add(tokens.Pop());
             }

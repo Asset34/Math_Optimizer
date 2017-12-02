@@ -64,7 +64,7 @@ namespace MathOptimizer.Parser
                 }
             }
         }
-        public bool isBegin
+        public bool IsBegin
         {
             get { return index == -1; }
         }

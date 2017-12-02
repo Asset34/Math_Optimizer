@@ -108,6 +108,22 @@ namespace MathOptimizer.Parser.TokenFactories
             private readonly string value;
         }
 
+        /* Local predicates */
+        private class Letter : ICharPredicate
+        {
+            public bool Execute(char ch)
+            {
+                return Char.IsLetter(ch);
+            }
+        }
+        private class Underscore : ICharPredicate
+        {
+            public bool Execute(char ch)
+            {
+                return ch == '_';
+            }
+        }
+
         /* Used predicates */
         private static DisjunctionCharPredicate beginVariablePr = new DisjunctionCharPredicate();
         private static DisjunctionCharPredicate variablePr = new DisjunctionCharPredicate();

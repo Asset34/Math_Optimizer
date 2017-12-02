@@ -28,18 +28,17 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 pos++;
 
-                string strToken = Position.MakeString(start, pos);
-
-                bool checkOp = CheckUnary(start, strToken);
-                if (checkOp)
+                string strToken = start.Current.ToString();
+                
+                if (CheckUnaryOp(start))
                 {
-                    int priority = unaryOperatorsTable[char.Parse(strToken)];
+                    int priority = unaryOperatorsTable[start.Current];
 
                     return new UnaryOpToken(strToken, priority);
                 }
                 else
                 {
-                    int priority = binaryOperatorsTable[char.Parse(strToken)];
+                    int priority = binaryOperatorsTable[start.Current];
 
                     return new BinaryOpToken(strToken, priority);
                 }
@@ -55,23 +54,25 @@ namespace MathOptimizer.Parser.TokenFactories
             }    
         }
 
-        private static bool CheckUnary(Position pos, string value)
+        private static bool CheckUnaryOp(Position pos)
         {
             Position prevPos = pos - 1;
 
-            if (prevPos.Number >= 0)
+            // If <UnaryOp> is a first character
+            if (prevPos.IsBegin)
             {
-                if (unaryOperatorsTable.ContainsKey(char.Parse(value)) &&
-                Utills.Check(prevPos, new LBracket()))
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                return false;
+            // If <UnaryOp> located after the left bracket ')'
+            if (Utills.Check(pos - 1, lbracketPr) &&
+                unaryOperatorsTable.ContainsKey(pos.Current))
+            {
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
@@ -143,6 +144,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
         /* Used predicates */
         private static readonly Operator operatorPr = new Operator();
+        private static readonly LBracket lbracketPr = new LBracket();
 
         /* Binary Operators table */
         private static Dictionary<char, int> binaryOperatorsTable = new Dictionary<char, int>()
@@ -153,6 +155,8 @@ namespace MathOptimizer.Parser.TokenFactories
             {'/', 2},
             {'^', 3}
         };
+
+        /* Unary Operators table */
         private static Dictionary<char, int> unaryOperatorsTable = new Dictionary<char, int>()
         {
             {'+', 4},

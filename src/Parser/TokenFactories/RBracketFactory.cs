@@ -31,7 +31,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 pos++;
 
-                return new RBracketToken(Position.MakeString(start, pos), 0);
+                return new RBracketToken(start.Current.ToString(), 0);
             }
             else
             {
@@ -63,6 +63,15 @@ namespace MathOptimizer.Parser.TokenFactories
             public int Priority { get; }
 
             private readonly string value;
+        }
+
+        /* Local predicates */
+        private class RBracket : ICharPredicate
+        {
+            public bool Execute(char ch)
+            {
+                return ch == ')';
+            }
         }
 
         /* Used predicates */

@@ -31,7 +31,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 pos++;
 
-                return new LBracketToken(Position.MakeString(start, pos), 0);
+                return new LBracketToken(start.Current.ToString(), 0);
             }
             else
             {

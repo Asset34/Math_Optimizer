@@ -15,15 +15,16 @@ namespace MathOptimizer.Parser.MathHandlers
     {
         public static Function Create(List<IToken> tokens)
         {
-            mathFunctionCreator = new MathFunctionCreator();
+            // Reset handler
+            mathFunctionCreator.Reset();
 
-            /* Handle tokens */
+            // Handle tokens
             foreach (IToken t in tokens)
             {
                 t.Accept(mathFunctionCreator);
             }
 
-            /* Create functuion */
+            // Create function
             ExpNode expTree = mathFunctionCreator.expTree.Pop();
             string[] variables = mathFunctionCreator.variables.ToArray();
 
@@ -59,12 +60,24 @@ namespace MathOptimizer.Parser.MathHandlers
         }
         public override void Visit(IUnaryOpToken t)
         {
-            ExpNode operand = expTree.Pop();
+            ExpNode operand = expTree.Peek();
+            ExpNode unaryOperator = unaryOperatorTable[t.Operator](operand);
 
-            expTree.Push(unaryOperatorTable[t.Operator](operand));
+            if (unaryOperator != null)
+            {
+                expTree.Pop();
+                expTree.Push(unaryOperator);
+            } 
         }
 
-        private static MathFunctionCreator mathFunctionCreator ;
+        private void Reset()
+        {
+            expTree.Clear();
+            variables.Clear();
+        }
+
+        /* Handler */
+        private static MathFunctionCreator mathFunctionCreator = new MathFunctionCreator();
 
         private Stack<ExpNode> expTree = new Stack<ExpNode>();
         private List<string> variables = new List<string>();
