@@ -12,23 +12,24 @@ namespace MathOptimizer
         {
             this.coords = new double[size];
         }
-        public Vector(double[] coords)
+        public Vector(params double[] coords)
         {
             this.coords = new double[coords.Length];
 
-            for (int i = 0; i < coords.Length; i++)
-            {
-                this.coords[i] = coords[i];
-            }
+            Array.Copy(coords, this.coords, coords.Length);
+        }
+        public Vector(Vector vec)
+            : this(vec.coords)
+        {
         }
         public static Vector operator+(Vector vec1, Vector vec2)
         {
-            Vector result = new Vector(vec1.Size);
-
             if (vec1.Size != vec2.Size)
             {
-                throw new Exception("Vector Error: Sum of unequal vectors");
+                throw new ArgumentException("Sum of unequal vectors");
             }
+
+            Vector result = new Vector(vec1.Size);
 
             for (int i = 0; i < result.Size; i++)
             {
@@ -39,12 +40,12 @@ namespace MathOptimizer
         }
         public static Vector operator-(Vector vec1, Vector vec2)
         {
-            Vector result = new Vector(vec1.Size);
-
             if (vec1.Size != vec2.Size)
             {
-                throw new Exception("Vector Error: Subtraction of unequal vectors");
+                throw new ArgumentException("Substraction of unequal vectors");
             }
+
+            Vector result = new Vector(vec1.Size);
 
             for (int i = 0; i < result.Size; i++)
             {
@@ -60,6 +61,21 @@ namespace MathOptimizer
             for (int i = 0; i < result.Size; i++)
             {
                 result[i] = vec[i] * scalar;
+            }
+
+            return result;
+        }
+        public static Vector operator*(Vector vec, double scalar)
+        {
+            return scalar * vec;
+        }
+        public static Vector operator/(Vector vec, double scalar)
+        {
+            Vector result = new Vector(vec.Size);
+
+            for (int i = 0; i < result.Size; i++)
+            {
+                result[i] = vec[i] / scalar;
             }
 
             return result;
