@@ -19,13 +19,34 @@ namespace MathOptimizer
             : this(0, 0)
         {
         }
+        public Interval(Interval interval)
+        {
+            LeftBorder = interval.LeftBorder;
+            RightBorder = interval.RightBorder;
+        }
         public override string ToString()
         {
-            return String.Format("[{0} ; {1}]", LeftBorder, RightBorder);
+            return String.Format("[{0}; {1}]", LeftBorder, RightBorder);
         }
 
-        public double LeftBorder { get; }
-        public double RightBorder { get; }
+        public double LeftBorder
+        {
+            get { return leftBorder; }
+            set
+            {
+                leftBorder = value;
+                checkBorders();
+            }
+        }
+        public double RightBorder
+        {
+            get { return rightBorder; }
+            set
+            {
+                rightBorder = value;
+                checkBorders();
+            }
+        }
         public double Length
         {
             get { return RightBorder - LeftBorder; }
@@ -42,5 +63,8 @@ namespace MathOptimizer
                 throw new ArgumentException();
             }
         }
+
+        private double leftBorder;
+        private double rightBorder;
     }
 }
