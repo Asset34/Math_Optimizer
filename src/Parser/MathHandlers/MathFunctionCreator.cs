@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Func.Tree;
 using MathOptimizer.Parser.Func;
