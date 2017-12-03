@@ -68,7 +68,7 @@ namespace MathOptimizer.Methods
         }
         public static Vector Gradient(Function f, Vector point, double eps)
         {
-            Vector gradient = new Vector(f.Variables.Length);
+            Vector gradient = new Vector(point);
 
             for (int i = 0; i < gradient.Size; i++)
             {
