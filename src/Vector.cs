@@ -8,10 +8,6 @@ namespace MathOptimizer
 {
     class Vector
     {
-        public Vector(int size)
-        {
-            this.coords = new double[size];
-        }
         public Vector(params double[] coords)
         {
             this.coords = new double[coords.Length];
@@ -29,7 +25,7 @@ namespace MathOptimizer
                 throw new ArgumentException("Sum of unequal vectors");
             }
 
-            Vector result = new Vector(vec1.Size);
+            Vector result = new Vector(vec1);
 
             for (int i = 0; i < result.Size; i++)
             {
@@ -45,7 +41,7 @@ namespace MathOptimizer
                 throw new ArgumentException("Substraction of unequal vectors");
             }
 
-            Vector result = new Vector(vec1.Size);
+            Vector result = new Vector(vec1);
 
             for (int i = 0; i < result.Size; i++)
             {
@@ -56,7 +52,7 @@ namespace MathOptimizer
         }
         public static Vector operator*(double scalar, Vector vec)
         {
-            Vector result = new Vector(vec.Size);
+            Vector result = new Vector(vec);
 
             for (int i = 0; i < result.Size; i++)
             {
@@ -71,7 +67,7 @@ namespace MathOptimizer
         }
         public static Vector operator/(Vector vec, double scalar)
         {
-            Vector result = new Vector(vec.Size);
+            Vector result = new Vector(vec);
 
             for (int i = 0; i < result.Size; i++)
             {
