@@ -15,10 +15,6 @@ namespace MathOptimizer
 
             checkBorders();
         }
-        public Interval()
-            : this(0, 0)
-        {
-        }
         public Interval(Interval interval)
         {
             LeftBorder = interval.LeftBorder;
@@ -64,7 +60,7 @@ namespace MathOptimizer
             }
         }
 
-        private double leftBorder;
-        private double rightBorder;
+        private double leftBorder = Double.MinValue;
+        private double rightBorder = double.MaxValue;
     }
 }
