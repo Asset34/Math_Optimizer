@@ -10,20 +10,28 @@
         {
             return values.GetValue(Name);
         }
+        public override ExpNode DeepClone()
+        {
+            return new VariableExp(Name);
+        }
 
         public string Name { get; }
     }
     class NumberExp : ExpNode
     {
-        public NumberExp(double number)
+        public NumberExp(double value)
         {
-            this.number = number;
+            Value = value;
         }
         public override double Evaluate(Values values)
         {
-            return number;
+            return Value;
+        }
+        public override ExpNode DeepClone()
+        {
+            return new NumberExp(Value);
         }
 
-        private double number;
+        public double Value { get; }
     }
 }

@@ -14,6 +14,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return operand1.Evaluate(values) + operand2.Evaluate(values);
         }
+        public override ExpNode DeepClone()
+        {
+            return new PlusExp(operand1.DeepClone(), operand2.DeepClone());
+        }
 
         private ExpNode operand1;
         private ExpNode operand2;
@@ -28,6 +32,10 @@ namespace MathOptimizer.Parser.Func.Tree
         public override double Evaluate(Values values)
         {
             return operand1.Evaluate(values) - operand2.Evaluate(values);
+        }
+        public override ExpNode DeepClone()
+        {
+            return new MinusExp(operand1.DeepClone(), operand2.DeepClone());
         }
 
         private ExpNode operand1;
@@ -44,6 +52,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return operand1.Evaluate(values) * operand2.Evaluate(values);
         }
+        public override ExpNode DeepClone()
+        {
+            return new MultyExp(operand1.DeepClone(), operand2.DeepClone());
+        }
 
         private ExpNode operand1;
         private ExpNode operand2;
@@ -59,6 +71,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return operand1.Evaluate(values) / operand2.Evaluate(values);
         }
+        public override ExpNode DeepClone()
+        {
+            return new DivisionExp(operand1.DeepClone(), operand2.DeepClone());
+        }
 
         private ExpNode operand1;
         private ExpNode operand2;
@@ -73,6 +89,10 @@ namespace MathOptimizer.Parser.Func.Tree
         public override double Evaluate(Values values)
         {
             return Math.Pow(operand1.Evaluate(values), operand2.Evaluate(values));
+        }
+        public override ExpNode DeepClone()
+        {
+            return new PowerExp(operand1.DeepClone(), operand2.DeepClone());
         }
 
         private ExpNode operand1;
@@ -90,6 +110,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return -operand.Evaluate(values);
         }
+        public override ExpNode DeepClone()
+        {
+            return new UnaryMinusExp(operand.DeepClone());
+        }
 
         private ExpNode operand;
     }
@@ -105,6 +129,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return Math.Sin(operand.Evaluate(values));
         }
+        public override ExpNode DeepClone()
+        {
+            return new SinExp(operand.DeepClone());
+        }
 
         private ExpNode operand;
     }
@@ -117,6 +145,10 @@ namespace MathOptimizer.Parser.Func.Tree
         public override double Evaluate(Values values)
         {
             return Math.Cos(operand.Evaluate(values));
+        }
+        public override ExpNode DeepClone()
+        {
+            return new CosExp(operand.DeepClone());
         }
 
         private ExpNode operand;
@@ -131,6 +163,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return Math.Tan(operand.Evaluate(values));
         }
+        public override ExpNode DeepClone()
+        {
+            return new TgExp(operand.DeepClone());
+        }
 
         private ExpNode operand;
     }
@@ -143,6 +179,10 @@ namespace MathOptimizer.Parser.Func.Tree
         public override double Evaluate(Values values)
         {
             return Math.Atan(operand.Evaluate(values));
+        }
+        public override ExpNode DeepClone()
+        {
+            return new CtgExp(operand.DeepClone());
         }
 
         private ExpNode operand;
@@ -157,6 +197,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return Math.Sqrt(operand.Evaluate(values));
         }
+        public override ExpNode DeepClone()
+        {
+            return new SqrtExp(operand.DeepClone());
+        }
 
         private ExpNode operand;
     }
@@ -170,6 +214,10 @@ namespace MathOptimizer.Parser.Func.Tree
         {
             return Math.Exp(operand.Evaluate(values));
         }
+        public override ExpNode DeepClone()
+        {
+            return new ExponentExp(operand.DeepClone());
+        }
 
         private ExpNode operand;
     }
@@ -182,6 +230,10 @@ namespace MathOptimizer.Parser.Func.Tree
         public override double Evaluate(Values values)
         {
             return Math.Log(operand.Evaluate(values));
+        }
+        public override ExpNode DeepClone()
+        {
+            return new LnExp(operand.DeepClone());
         }
 
         private ExpNode operand;
