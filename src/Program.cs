@@ -19,12 +19,13 @@ namespace MathOptimizer
     {
         static void Main(string[] args)
         {
+            StringBuilder str;
+
             try
             {
-                Function func = CreateFunction("x#(1)");
-                //double result = func.Evaluate(2);
+                Function func = CreateFunction("2 + sin(x1 + x2^(4 - 4,54)) * sqrt(8)");
 
-                //Console.WriteLine("{0}", result);
+                Console.WriteLine("{0}", func.Evaluate(3, 54.542));
             }
             catch (Exception e)
             {
@@ -35,7 +36,7 @@ namespace MathOptimizer
                     Console.WriteLine("---> {0}: {1}", obj, e.Data[obj]);
                 }
 
-                Console.WriteLine("{0}", e.StackTrace);
+                //Console.WriteLine("{0}", e.StackTrace);
             }
         }
 
@@ -61,37 +62,6 @@ namespace MathOptimizer
             method.run(function, mm, ref parameters);
 
             Console.WriteLine("Result: {0}", parameters.outParameters.ResultVecPoint);
-        }
-        static void TestTreeCLone()
-        {
-            ExpNode var1 = new VariableExp("x1");
-            IndexedVariableExp var2 = new IndexedVariableExp("x", 3);
-            ExpNode num = new NumberExp(2);
-
-            ExpNode op = new MultyExp(var1, var2);
-
-            Values values = new Values();
-            values.Assign("x1", 3);
-            values.Assign("x2", 2);
-            values.Assign("x3", 3);
-            values.Assign("x4", 4);
-            values.Assign("x5", 5);
-
-            int lowwer = 2;
-            int upper = 4;
-            IndexedVariableExp indVar = var2;
-            ExpNode[] nodes = new ExpNode[upper - lowwer + 1];
-
-            for (int i = 0; i < nodes.Length; i++)
-            {
-                indVar.Index = i + 2;
-                nodes[i] = op.DeepClone();
-            }
-
-            foreach (ExpNode node in nodes)
-            {
-                Console.WriteLine("{0}", node.Evaluate(values));
-            }
         }
 
         static Function CreateFunction(string exp)

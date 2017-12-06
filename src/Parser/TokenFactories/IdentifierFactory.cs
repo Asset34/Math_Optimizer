@@ -14,11 +14,13 @@ namespace MathOptimizer.Parser.TokenFactories
     //     (Variables and Function Names)
     //
     // Formal Grammar:
-    //     <Identifier> ::= <Variable> | <FunctionName>
-    //     <Variable>   ::= <Letter> { {<Letter>}* {<Underscore>}* {<Digit>}* }*
-    //     <Letter>     ::= 'a' | ... | 'Z'
-    //     <Underscore> ::= '_'
-    //     <Digit>      ::= '0' | ... | '9'
+    //     <Identifier>   ::= <Variable> | <FunctionName> | <Constant>
+    //     <Variable>     ::= <Letter> { {<Letter>}* {<Underscore>}* {<Digit>}* }*
+    //     <Letter>       ::= 'a' | ... | 'Z'
+    //     <Underscore>   ::= '_'
+    //     <Digit>        ::= '0' | ... | '9'
+    //     <FunctionName> ::= 'sin' | ... | 'log'
+    //     <Constant>     ::= 'PI' | ... | 'E'
     class IdentifierFactory
     {
         static IdentifierFactory()

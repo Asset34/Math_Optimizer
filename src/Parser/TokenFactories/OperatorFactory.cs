@@ -12,6 +12,10 @@ namespace MathOptimizer.Parser.TokenFactories
     //
     // Summary:
     //     Represents a factory of a operator tokens
+    //
+    // Formal Grammar:
+    //     <BinaryOp> ::= '+' | .. | '^'
+    //     <UnaryOp>  ::= '-' | '+'
     class OperatorFactory
     {
         public static bool Check(Position pos)

@@ -1,5 +1,9 @@
 ﻿namespace MathOptimizer.Methods.Params
 {
+    //
+    // Summary:
+    //     Represents a data of input parameters for 
+    //     optimization methods
     struct OutputParameters
     {
         public Interval ResultInterval { get; set; }

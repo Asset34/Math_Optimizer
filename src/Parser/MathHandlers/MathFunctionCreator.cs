@@ -6,6 +6,10 @@ using MathOptimizer.Parser.Func;
 
 namespace MathOptimizer.Parser.MathHandlers
 {
+    //
+    // Summary:
+    //     Represents a part of the Parser which build 
+    //     AST(abstract syntax tree)
     class MathFunctionCreator : EmptyTokenVisitor
     {
         public static Function Create(List<IToken> tokens)

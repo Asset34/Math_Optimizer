@@ -3,6 +3,11 @@ using System.Text;
 
 namespace MathOptimizer
 {
+    //
+    // Summary:
+    //     Represents a math vector: 
+    //                               t
+    //        Xn = (x1; x2; ... ; xn)
     class Vector
     {
         public Vector(params double[] coords)

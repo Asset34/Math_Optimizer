@@ -7,7 +7,7 @@ namespace MathOptimizer.Parser
 {
     //
     // Summary:
-    //     General utillity class
+    //     Represents a utility class for math parser
     static class Utills
     {
         public static bool Check(Position pos, ICharPredicate pr)
@@ -25,7 +25,7 @@ namespace MathOptimizer.Parser
             return tokens.Count != 0 && pr.Execute(t1, tokens.Peek());
         }
 
-        public static Position     MoveWhile(Position pos, ICharPredicate pr)
+        public static Position MoveWhile(Position pos, ICharPredicate pr)
         {
             while (Check(pos, pr))
             {

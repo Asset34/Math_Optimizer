@@ -1,5 +1,9 @@
 ﻿namespace MathOptimizer.Methods.Params
 {
+    //
+    // Summary:
+    //     Represents a data of all parameters for 
+    //     optimization methods
     struct Parameters
     {
         public InputParameters inParameters;

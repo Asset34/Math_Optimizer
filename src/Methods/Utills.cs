@@ -4,6 +4,9 @@ using MathOptimizer.Parser.Func;
 
 namespace MathOptimizer.Methods
 {
+    //
+    // Summary:
+    //     Represents a utility class for optimization methods   
     static class Utills
     {
         public static void Normalization(ref double a, ref double b)

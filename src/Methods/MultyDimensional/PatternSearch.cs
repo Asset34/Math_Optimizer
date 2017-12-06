@@ -4,6 +4,10 @@ using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods
 {
+    //
+    // Summary:
+    //     Represents a multy-demensional optimization method 
+    //     also called Hooke-Jeeves method.
     class PatternSearch
     {
         public void run(Function f, OneDimensionalMethod method, ref Parameters parameters)
@@ -14,6 +18,8 @@ namespace MathOptimizer.Methods
             double stepValue = parameters.inParameters.StepValue;
             double stepCoefficient = parameters.inParameters.StepCoefficient;
             int iterationLimit = parameters.inParameters.IterationLimit;
+
+            /* Optimization */
 
             // Set start step
             double startStep = stepValue;

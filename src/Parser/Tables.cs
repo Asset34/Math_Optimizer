@@ -8,6 +8,10 @@ using MathOptimizer.Parser.Func.Tree;
 
 namespace MathOptimizer.Parser
 {
+    //
+    // Summary:
+    //     Represents a complex of tables used by math handlers
+    //          
     static class Tables
     {
         public delegate IExpNode BinaryOperation(IExpNode op1, IExpNode op2);
@@ -90,7 +94,6 @@ namespace MathOptimizer.Parser
             {"exp" , 1},
             {"sqrt", 1}
         };
-
         private static Dictionary<string, UnaryOperation> functionsExpTable = new Dictionary<string, UnaryOperation>()
         {
             {"sin" , (op) => (new SinExp      (op))},

@@ -11,6 +11,12 @@ using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
+    //
+    // Summary:
+    //     Represents a factory of a function separator tokens
+    //
+    // Formal Grammar:
+    //     <FuncSeparator> ::= ';'
     class FunctionSeparatorFactory
     {
         public static bool Check(Position pos)

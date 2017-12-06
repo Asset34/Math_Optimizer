@@ -5,6 +5,9 @@ using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods.OneDimensional
 {
+    //
+    // Summary:
+    //     Represents a simple one-demensional optimizationb method called Swan - 1     
     class Swan1 : OneDimensionalMethod
     {
         public override void run(Function f, ref Parameters parameters)
@@ -14,6 +17,7 @@ namespace MathOptimizer.Methods.OneDimensional
             double stepValue = parameters.inParameters.StepValue;
 
             /* Optimization */
+
             double step;
 
             // Set step

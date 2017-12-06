@@ -5,6 +5,9 @@ using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods.OneDimensional
 {
+    //
+    // Summary:
+    //     Represents a one-demensional method called Golden Section - 1
     class GoldenSection1 : OneDimensionalMethod
     {
         public override void run(Function f, ref Parameters parameters)

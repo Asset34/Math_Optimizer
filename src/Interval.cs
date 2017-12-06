@@ -2,6 +2,10 @@
 
 namespace MathOptimizer
 {
+    //
+    // Summary:
+    //     Represents a math interval:
+    //          [ a ; b]  
     class Interval
     {
         public Interval(double leftBorder, double rightBorder)

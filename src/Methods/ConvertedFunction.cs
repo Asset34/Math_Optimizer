@@ -2,6 +2,11 @@
 
 namespace MathOptimizer.Methods
 {
+    //
+    // Summary:
+    //     Represents a wrapper class for functions. It is applied for possibility 
+    //     to use one-demensional methods for directional optimization
+    //     of vector functions
     class ConvertedFunction : Function
     {
         public ConvertedFunction(Function function, Vector startPoint, Vector direction)
