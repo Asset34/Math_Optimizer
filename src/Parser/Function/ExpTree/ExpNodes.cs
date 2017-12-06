@@ -138,7 +138,51 @@ namespace MathOptimizer.Parser.Func.Tree
         }
         public override double Evaluate(Values values)
         {
+            return 1.0 / Math.Tan(operand.Evaluate(values));
+        }
+    }
+    class ArcSinExp : UnaryOperation
+    {
+        public ArcSinExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Asin(operand.Evaluate(values));
+        }
+    }
+    class ArcCosExp : UnaryOperation
+    {
+        public ArcCosExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Acos(operand.Evaluate(values));
+        }
+    }
+    class ArcTgExp : UnaryOperation
+    {
+        public ArcTgExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
             return Math.Atan(operand.Evaluate(values));
+        }
+    }
+    class ArcCTgExp : UnaryOperation
+    {
+        public ArcCTgExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return 1.0 / Math.Atan(operand.Evaluate(values));
         }
     }
     class SqrtExp : UnaryOperation
@@ -174,6 +218,28 @@ namespace MathOptimizer.Parser.Func.Tree
             return Math.Log(operand.Evaluate(values));
         }
     }
+    class AbsExp : UnaryOperation
+    {
+        public AbsExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Abs(operand.Evaluate(values));
+        }
+    }
 
     /* Binary Functions */
+    class LogExp : BinaryOperation
+    {
+        public LogExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Log(operand1.Evaluate(values), operand2.Evaluate(values))
+        }
+    }
 }
