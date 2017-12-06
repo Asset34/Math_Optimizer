@@ -40,22 +40,16 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Produced token */
-        private class ErrorToken : IErrorToken
+        private class ErrorToken : Token, IErrorToken
         {
-            public ErrorToken(string str)
+            public ErrorToken(string strToken)
+                :base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value;
-            }
-
-            private readonly string value;
         }
 
         private ErrorFactory() { }

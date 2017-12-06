@@ -67,39 +67,27 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Produced tokens */
-        private class VariableToken : IVariableToken
+        private class VariableToken : Token, IVariableToken
         {
-            public VariableToken(string str)
+            public VariableToken(string strToken)
+                :base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value;
-            }
-
-            private readonly string value;
         }
-        private class FunctionNameToken : IFunctionNameToken
+        private class FunctionNameToken : Token, IFunctionNameToken
         {
-            public FunctionNameToken(string str)
+            public FunctionNameToken(string strToken)
+                : base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value;
-            }
-
-            private readonly string value;
         }
 
         /* Local predicates */

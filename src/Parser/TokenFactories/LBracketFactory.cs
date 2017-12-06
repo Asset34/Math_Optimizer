@@ -40,22 +40,16 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Produced token */
-        private class LBracketToken : ILBracketToken
+        private class LBracketToken : Token, ILBracketToken
         {
-            public LBracketToken(string str)
+            public LBracketToken(string strToken)
+                :base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value;
-            }
-
-            private readonly string value;
         }
 
         /* Used predicates */

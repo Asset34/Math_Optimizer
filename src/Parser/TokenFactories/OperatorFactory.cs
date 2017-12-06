@@ -71,39 +71,27 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Produced token */
-        private class BinaryOpToken : IBinaryOpToken
+        private class BinaryOpToken : Token, IBinaryOpToken
         {
-            public BinaryOpToken(string str)
+            public BinaryOpToken(string strToken)
+                :base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value.ToString();
-            }
-
-            private readonly string value;
         }
-        private class UnaryOpToken : IUnaryOpToken
+        private class UnaryOpToken : Token, IUnaryOpToken
         {
-            public UnaryOpToken(string str)
+            public UnaryOpToken(string strToken)
+                :base(strToken)
             {
-                this.value = str;
             }
-            public void Accept(ITokenVisitor visitor)
+            public override void Accept(ITokenVisitor visitor)
             {
                 visitor.Visit(this);
             }
-            public override string ToString()
-            {
-                return value.ToString();
-            }
-
-            private readonly string value;
         }
 
         /* Local predicate classes */
