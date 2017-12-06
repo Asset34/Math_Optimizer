@@ -17,7 +17,6 @@ namespace MathOptimizer.Parser.MathHandlers
             Preprocess(ref exp);
 
             /* Tokenization */
-
             List<IToken> tokens = new List<IToken>();
             List<IToken> errorTokens = new List<IToken>();
             bool errorFlag = false;
@@ -44,6 +43,10 @@ namespace MathOptimizer.Parser.MathHandlers
                 else if (RBracketFactory.Check(pos))
                 {
                     tokens.Add(RBracketFactory.TakeToken(pos));
+                }
+                else if (FunctionSeparatorFactory.Check(pos))
+                {
+                    tokens.Add(FunctionSeparatorFactory.TakeToken(pos));
                 }
                 // Error
                 else

@@ -50,7 +50,7 @@ namespace MathOptimizer.Parser.MathHandlers
         {
             ExpNode operand = expTree.Pop();
 
-            expTree.Push(Tables.FunctionsTable[t.ToString()](operand));
+            expTree.Push(Tables.FunctionsExpTable[t.ToString()](operand));
         }
         public override void Visit(IBinaryOpToken t)
         {

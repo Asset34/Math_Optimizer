@@ -67,6 +67,14 @@ namespace MathOptimizer.Parser.MathHandlers
                 resultTokens.Add(operators.Pop());
             }
         }
+        public override void Visit(IFuncSeparatorToken t)
+        {
+            // Get operators of subexpression
+            List<IToken> subExpOperators = Utills.MoveUntil(operators, lbracketPr);
+
+            // Add operators to the result(RPN) list
+            resultTokens.AddRange(subExpOperators);
+        }
         public override void Visit(IBinaryOpToken t)
         {
             // Get operators with lower or equal priority

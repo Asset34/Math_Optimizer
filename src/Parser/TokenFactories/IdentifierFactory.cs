@@ -72,7 +72,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
         private static bool FunctionCheck(string strToken)
         {
-            return Tables.FunctionsTable.ContainsKey(strToken);
+            return Tables.FunctionsArgsNumberTable.ContainsKey(strToken);
         }
         private static bool ConstantCheck(string strToken)
         {

@@ -12,6 +12,7 @@ namespace MathOptimizer.Parser
         public virtual void Visit(INumberToken       t) { }
         public virtual void Visit(ILBracketToken     t) { }
         public virtual void Visit(IRBracketToken     t) { }
+        public virtual void Visit(IFuncSeparatorToken t) { }
         public virtual void Visit(IUnaryOpToken      t) { }
         public virtual void Visit(IBinaryOpToken     t) { }
     }

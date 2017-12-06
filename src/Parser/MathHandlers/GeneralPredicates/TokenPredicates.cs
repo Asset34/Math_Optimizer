@@ -74,4 +74,11 @@ namespace MathOptimizer.Parser.MathHandlers.TokenPredicates
             result = true;
         }
     }
+    class FuncSeparatorPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IFuncSeparatorToken t)
+        {
+            result = true;
+        }
+    }
 }

@@ -33,9 +33,13 @@ namespace MathOptimizer.Parser
         {
             get { return unaryOperatorsExpTable; }
         }
-        public static Dictionary<string, UnaryOperation> FunctionsTable
+        public static Dictionary<string, int>            FunctionsArgsNumberTable
         {
-            get { return functionsTable; }
+            get { return functionsArgsNumberTable; }
+        }
+        public static Dictionary<string, UnaryOperation> FunctionsExpTable
+        {
+            get { return functionsExpTable; }
         }
 
         /* Constants table */
@@ -78,7 +82,18 @@ namespace MathOptimizer.Parser
         };
 
         /* Functions tables */
-        private static Dictionary<string, UnaryOperation> functionsTable = new Dictionary<string, UnaryOperation>()
+        private static Dictionary<string, int> functionsArgsNumberTable = new Dictionary<string, int>()
+        {
+            {"sin" , 1},
+            {"cos" , 1},
+            {"tg"  , 1},
+            {"ctg" , 1},
+            {"ln"  , 1},
+            {"exp" , 1},
+            {"sqrt", 1}
+        };
+
+        private static Dictionary<string, UnaryOperation> functionsExpTable = new Dictionary<string, UnaryOperation>()
         {
             {"sin" , (op) => (new SinExp      (op))},
             {"cos" , (op) => (new CosExp      (op))},
@@ -86,7 +101,7 @@ namespace MathOptimizer.Parser
             {"ctg" , (op) => (new CtgExp      (op))},
             {"ln"  , (op) => (new LnExp       (op))},
             {"exp" , (op) => (new ExponentExp (op))},
-            {"sqrt", (op) => (new SqrtExp     (op))},
+            {"sqrt", (op) => (new SqrtExp     (op))}
         };
     }
 }
