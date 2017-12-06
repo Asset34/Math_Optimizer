@@ -57,6 +57,6 @@ namespace MathOptimizer
         }
 
         private double leftBorder = Double.MinValue;
-        private double rightBorder = double.MaxValue;
+        private double rightBorder = Double.MaxValue;
     }
 }

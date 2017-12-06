@@ -61,14 +61,6 @@ namespace MathOptimizer.Parser.TokenFactories
                 return value.ToString();
             }
 
-            public double Number
-            {
-                get
-                {
-                    return double.Parse(value);
-                }
-            }
-
             private readonly string value;
         }
 

@@ -117,24 +117,26 @@ namespace MathOptimizer.Parser.MathHandlers
 
             public override void Visit(IBinaryOpToken t)
             {
-                SetPriority(t);
+                char op = char.Parse(t.ToString());
+                SetPriority(Tables.BinaryOperatorsPriorityTable[op]);
             }
             public override void Visit(IUnaryOpToken t)
             {
-                SetPriority(t);
+                char op = char.Parse(t.ToString());
+                SetPriority(Tables.UnaryOperatorsPriorityTable[op]);
             }
             public override void Visit(ILBracketToken t)
             {
-                SetPriority(t);
+                SetPriority(0);
             }
             public override void Visit(IRBracketToken t)
             {
-                SetPriority(t);
+                SetPriority(0);
             }
 
-            private void SetPriority(IPriority t)
+            private void SetPriority(int priority)
             {
-                value = t.Priority;
+                value = priority;
             }
 
             private int value;

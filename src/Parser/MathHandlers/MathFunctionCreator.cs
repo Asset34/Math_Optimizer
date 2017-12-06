@@ -28,7 +28,7 @@ namespace MathOptimizer.Parser.MathHandlers
 
         public override void Visit(INumberToken t)
         {
-            expTree.Push(new NumberExp(t.Number));
+            expTree.Push(new NumberExp(double.Parse(t.ToString())));
         }
         public override void Visit(IVariableToken t)
         {
@@ -44,19 +44,22 @@ namespace MathOptimizer.Parser.MathHandlers
         {
             ExpNode operand = expTree.Pop();
 
-            expTree.Push(functionTable[t.ToString()](operand));
+            expTree.Push(Tables.FunctionsTable[t.ToString()](operand));
         }
         public override void Visit(IBinaryOpToken t)
         {
             ExpNode operand2 = expTree.Pop();
             ExpNode operand1 = expTree.Pop();
 
-            expTree.Push(binaryOperatorTable[t.Operator](operand1, operand2));
+            char op = char.Parse(t.ToString());
+            expTree.Push(Tables.BinaryOperatorsExpTable[op](operand1, operand2));
         }
         public override void Visit(IUnaryOpToken t)
         {
             ExpNode operand = expTree.Peek();
-            ExpNode unaryOperator = unaryOperatorTable[t.Operator](operand);
+
+            char op = char.Parse(t.ToString());
+            ExpNode unaryOperator = Tables.UnaryOperatorsExpTable[op](operand);
 
             if (unaryOperator != null)
             {
@@ -76,37 +79,5 @@ namespace MathOptimizer.Parser.MathHandlers
 
         private Stack<ExpNode> expTree = new Stack<ExpNode>();
         private List<string> variables = new List<string>();
-
-        /* Binary operators table */
-        private delegate ExpNode BinaryOperation(ExpNode op1, ExpNode op2);
-        private Dictionary<char, BinaryOperation> binaryOperatorTable = new Dictionary<char, BinaryOperation>()
-        {
-            {'+', (op1, op2) => (new PlusExp     (op1, op2))},
-            {'-', (op1, op2) => (new MinusExp    (op1, op2))},
-            {'*', (op1, op2) => (new MultyExp    (op1, op2))},
-            {'/', (op1, op2) => (new DivisionExp (op1, op2))},
-            {'^', (op1, op2) => (new PowerExp    (op1, op2))}
-        };
-
-        /* Unary operators table */
-        private delegate ExpNode UnaryOperation(ExpNode op);
-        private Dictionary<char, UnaryOperation> unaryOperatorTable = new Dictionary<char, UnaryOperation>()
-        {
-            {'+', (op) => (null)                 },
-            {'-', (op) => (new UnaryMinusExp(op))}
-        };
-
-        /* Functions table */
-        private delegate ExpNode FunctionOperation(ExpNode op);
-        private Dictionary<string, FunctionOperation> functionTable = new Dictionary<string, FunctionOperation>()
-        {
-            {"sin" , (op) => (new SinExp      (op))},
-            {"cos" , (op) => (new CosExp      (op))},
-            {"tg"  , (op) => (new TgExp       (op))},
-            {"ctg" , (op) => (new CtgExp      (op))},
-            {"ln"  , (op) => (new LnExp       (op))},
-            {"exp" , (op) => (new ExponentExp (op))},
-            {"sqrt", (op) => (new SqrtExp     (op))},
-        };
     }
 }

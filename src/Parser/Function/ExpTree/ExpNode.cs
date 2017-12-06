@@ -1,6 +1,4 @@
-﻿using MathOptimizer;
-
-namespace MathOptimizer.Parser.Func.Tree
+﻿namespace MathOptimizer.Parser.Func.Tree
 {
     abstract class ExpNode : IDeepCloneable<ExpNode>
     {

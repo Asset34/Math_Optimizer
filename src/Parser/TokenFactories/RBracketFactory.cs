@@ -26,7 +26,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 pos++;
 
-                return new RBracketToken(start.Current.ToString(), 0);
+                return new RBracketToken(start.Current.ToString());
             }
             else
             {
@@ -42,7 +42,7 @@ namespace MathOptimizer.Parser.TokenFactories
         /* Produced token */
         private class RBracketToken : IRBracketToken
         {
-            public RBracketToken(string str, int priority)
+            public RBracketToken(string str)
             {
                 this.value = str;
             }
@@ -54,8 +54,6 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 return value;
             }
-
-            public int Priority { get; }
 
             private readonly string value;
         }

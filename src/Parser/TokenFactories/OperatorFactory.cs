@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using MathOptimizer.Parser;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
@@ -29,15 +30,11 @@ namespace MathOptimizer.Parser.TokenFactories
                 
                 if (CheckUnaryOp(start))
                 {
-                    int priority = unaryOperatorsTable[start.Current];
-
-                    return new UnaryOpToken(strToken, priority);
+                    return new UnaryOpToken(strToken);
                 }
                 else
                 {
-                    int priority = binaryOperatorsTable[start.Current];
-
-                    return new BinaryOpToken(strToken, priority);
+                    return new BinaryOpToken(strToken);
                 }
             }   
             else
@@ -63,7 +60,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
             // If <UnaryOp> located after the left bracket ')'
             if (Utills.Check(pos - 1, lbracketPr) &&
-                unaryOperatorsTable.ContainsKey(pos.Current))
+                Tables.UnaryOperatorsPriorityTable.ContainsKey(pos.Current))
             {
                 return true;
             }
@@ -76,10 +73,9 @@ namespace MathOptimizer.Parser.TokenFactories
         /* Produced token */
         private class BinaryOpToken : IBinaryOpToken
         {
-            public BinaryOpToken(string str, int priority)
+            public BinaryOpToken(string str)
             {
                 this.value = str;
-                Priority = priority;
             }
             public void Accept(ITokenVisitor visitor)
             {
@@ -89,25 +85,14 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 return value.ToString();
             }
-
-            public char Operator
-            {
-                get
-                {
-                    return char.Parse(value);
-                }
-            }
-            public int Priority { get; }
-
 
             private readonly string value;
         }
         private class UnaryOpToken : IUnaryOpToken
         {
-            public UnaryOpToken(string str, int priority)
+            public UnaryOpToken(string str)
             {
                 this.value = str;
-                Priority = priority;
             }
             public void Accept(ITokenVisitor visitor)
             {
@@ -117,15 +102,6 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 return value.ToString();
             }
-
-            public char Operator
-            {
-                get
-                {
-                    return char.Parse(value);
-                }
-            }
-            public int Priority { get; }
 
             private readonly string value;
         }
@@ -135,30 +111,13 @@ namespace MathOptimizer.Parser.TokenFactories
         {
             public bool Execute(char ch)
             {
-                return binaryOperatorsTable.ContainsKey(ch);
+                return Tables.BinaryOperatorsPriorityTable.ContainsKey(ch);
             }
         }
 
         /* Used predicates */
         private static readonly Operator operatorPr = new Operator();
         private static readonly LBracket lbracketPr = new LBracket();
-
-        /* Binary Operators table */
-        private static Dictionary<char, int> binaryOperatorsTable = new Dictionary<char, int>()
-        {
-            {'+', 1},
-            {'-', 1},
-            {'*', 2},
-            {'/', 2},
-            {'^', 3}
-        };
-
-        /* Unary Operators table */
-        private static Dictionary<char, int> unaryOperatorsTable = new Dictionary<char, int>()
-        {
-            {'+', 4},
-            {'-', 4}
-        };
 
         private OperatorFactory() { }
     }

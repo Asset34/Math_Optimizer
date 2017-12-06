@@ -46,9 +46,9 @@ namespace MathOptimizer.Parser.TokenFactories
                 string strToken = Position.MakeString(start, pos);
 
                 /* Specificate indentificator */
-                if (functionNamesTable.Contains(strToken))
+                if (Tables.FunctionsTable.ContainsKey(strToken)) 
                 {
-                    return new FunctionNameToken(strToken, 0);
+                    return new FunctionNameToken(strToken);
                 }
                 else
                 {
@@ -86,10 +86,9 @@ namespace MathOptimizer.Parser.TokenFactories
         }
         private class FunctionNameToken : IFunctionNameToken
         {
-            public FunctionNameToken(string str, int priority)
+            public FunctionNameToken(string str)
             {
                 this.value = str;
-                Priority = priority;
             }
             public void Accept(ITokenVisitor visitor)
             {
@@ -99,8 +98,6 @@ namespace MathOptimizer.Parser.TokenFactories
             {
                 return value;
             }
-
-            public int Priority { get; }
 
             private readonly string value;
         }
@@ -126,17 +123,5 @@ namespace MathOptimizer.Parser.TokenFactories
         private static DisjunctionCharPredicate variablePr = new DisjunctionCharPredicate();
 
         private IdentifierFactory() { }
-
-        /* Function names table */
-        private static string[] functionNamesTable = new string[]
-        {
-            "sin",
-            "cos",
-            "tg" ,
-            "ctg",
-            "exp",
-            "ln" ,
-            "sqrt"
-        };
     }
 }
