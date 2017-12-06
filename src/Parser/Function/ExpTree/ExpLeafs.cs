@@ -1,35 +1,27 @@
 ﻿namespace MathOptimizer.Parser.Func.Tree
 {
-    class VariableExp : ExpNode
+    class VariableExp : IExpNode
     {
         public VariableExp(string name)
         {
             Name = name;
         }
-        public override double Evaluate(Values values)
+        public double Evaluate(Values values)
         {
             return values.GetValue(Name);
-        }
-        public override ExpNode DeepClone()
-        {
-            return new VariableExp(Name);
         }
 
         public string Name { get; }
     }
-    class NumberExp : ExpNode
+    class NumberExp : IExpNode
     {
         public NumberExp(double value)
         {
             Value = value;
         }
-        public override double Evaluate(Values values)
+        public double Evaluate(Values values)
         {
             return Value;
-        }
-        public override ExpNode DeepClone()
-        {
-            return new NumberExp(Value);
         }
 
         public double Value { get; }

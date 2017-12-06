@@ -2,279 +2,178 @@
 
 namespace MathOptimizer.Parser.Func.Tree
 {
-    /* Binary operations */
-    class PlusExp : ExpNode
+    /* Abstract operations */
+    abstract class UnaryOperation : IExpNode
     {
-        public PlusExp(ExpNode operand1, ExpNode operand2)
+        public UnaryOperation(IExpNode operand)
+        {
+            this.operand = operand;
+        }
+        public abstract double Evaluate(Values values);
+
+        protected IExpNode operand;
+    }
+    abstract class BinaryOperation : IExpNode
+    {
+        public BinaryOperation(IExpNode operand1, IExpNode operand2)
         {
             this.operand1 = operand1;
             this.operand2 = operand2;
+        }
+        public abstract double Evaluate(Values values);
+
+        protected IExpNode operand1;
+        protected IExpNode operand2;
+    }
+
+    /* Binary operations */
+    class PlusExp : BinaryOperation
+    {
+        public PlusExp(IExpNode operand1, IExpNode operand2)
+            :base(operand1, operand2)
+        {
         }
         public override double Evaluate(Values values)
         {
             return operand1.Evaluate(values) + operand2.Evaluate(values);
         }
-        public override ExpNode DeepClone()
-        {
-            return new PlusExp(operand1.DeepClone(), operand2.DeepClone());
-        }
-
-        private ExpNode operand1;
-        private ExpNode operand2;
     }
-    class MinusExp : ExpNode
+    class MinusExp : BinaryOperation
     {
-        public MinusExp(ExpNode operand1, ExpNode operand2)
+        public MinusExp(IExpNode operand1, IExpNode operand2)
+            :base(operand1, operand2)
         {
-            this.operand1 = operand1;
-            this.operand2 = operand2;
         }
         public override double Evaluate(Values values)
         {
             return operand1.Evaluate(values) - operand2.Evaluate(values);
         }
-        public override ExpNode DeepClone()
-        {
-            return new MinusExp(operand1.DeepClone(), operand2.DeepClone());
-        }
-
-        private ExpNode operand1;
-        private ExpNode operand2;
     }
-    class MultyExp : ExpNode
+    class MultyExp : BinaryOperation
     {
-        public MultyExp(ExpNode operand1, ExpNode operand2)
+        public MultyExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
         {
-            this.operand1 = operand1;
-            this.operand2 = operand2;
         }
         public override double Evaluate(Values values)
         {
             return operand1.Evaluate(values) * operand2.Evaluate(values);
         }
-        public override ExpNode DeepClone()
-        {
-            return new MultyExp(operand1.DeepClone(), operand2.DeepClone());
-        }
-
-        private ExpNode operand1;
-        private ExpNode operand2;
     }
-    class DivisionExp : ExpNode
+    class DivisionExp : BinaryOperation
     {
-        public DivisionExp(ExpNode operand1, ExpNode operand2)
+        public DivisionExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
         {
-            this.operand1 = operand1;
-            this.operand2 = operand2;
         }
         public override double Evaluate(Values values)
         {
             return operand1.Evaluate(values) / operand2.Evaluate(values);
         }
-        public override ExpNode DeepClone()
-        {
-            return new DivisionExp(operand1.DeepClone(), operand2.DeepClone());
-        }
-
-        private ExpNode operand1;
-        private ExpNode operand2;
     }
-    class PowerExp : ExpNode
+    class PowerExp : BinaryOperation
     {
-        public PowerExp(ExpNode operand1, ExpNode operand2)
+        public PowerExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
         {
-            this.operand1 = operand1;
-            this.operand2 = operand2;
         }
         public override double Evaluate(Values values)
         {
             return Math.Pow(operand1.Evaluate(values), operand2.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new PowerExp(operand1.DeepClone(), operand2.DeepClone());
-        }
-
-        private ExpNode operand1;
-        private ExpNode operand2;
-    }
-    class IndexingExp : ExpNode
-    {
-        public IndexingExp(ExpNode operand1, ExpNode operand2)
-        {
-            VariableExp temp = operand1 as VariableExp;
-
-            if (temp == null)
-            {
-                throw new ArgumentException("Indexing of non-variable token");
-            }
-
-            this.variable = temp;
-            this.indexExp = operand2;
-        }
-        public override double Evaluate(Values values)
-        {
-            // Integer check of index
-            double value = indexExp.Evaluate(values);
-            int index;
-
-            bool testInt = int.TryParse(value.ToString(), out index);
-            if (!testInt)
-            {
-                throw new ArgumentException("Non-integer index");
-            }
-
-            // Variable creation
-            VariableExp newVariable = new VariableExp(variable.Name + index.ToString());
-
-            return newVariable.Evaluate(values);
-        }
-        public override ExpNode DeepClone()
-        {
-            return new IndexingExp(variable.DeepClone(), indexExp.DeepClone());
-        }
-
-        private VariableExp variable;
-        private ExpNode indexExp;
     }
 
     /* Unary operations */
-    class UnaryMinusExp : ExpNode
+    class UnaryMinusExp : UnaryOperation
     {
-        public UnaryMinusExp(ExpNode operand)
+        public UnaryMinusExp(IExpNode operand)
+            :base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return -operand.Evaluate(values);
         }
-        public override ExpNode DeepClone()
-        {
-            return new UnaryMinusExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
 
-    /* Functions */
-    class SinExp : ExpNode
+    /* Unary Functions */
+    class SinExp : UnaryOperation
     {
-        public SinExp(ExpNode operand)
+        public SinExp(IExpNode operand)
+            :base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Sin(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new SinExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class CosExp : ExpNode
+    class CosExp : UnaryOperation
     {
-        public CosExp(ExpNode operand)
+        public CosExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Cos(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new CosExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class TgExp : ExpNode
+    class TgExp : UnaryOperation
     {
-        public TgExp(ExpNode operand)
+        public TgExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Tan(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new TgExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class CtgExp : ExpNode
+    class CtgExp : UnaryOperation
     {
-        public CtgExp(ExpNode operand)
+        public CtgExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Atan(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new CtgExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class SqrtExp : ExpNode
+    class SqrtExp : UnaryOperation
     {
-        public SqrtExp(ExpNode operand)
+        public SqrtExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Sqrt(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new SqrtExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class ExponentExp : ExpNode
+    class ExponentExp : UnaryOperation
     {
-        public ExponentExp(ExpNode operand)
+        public ExponentExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Exp(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new ExponentExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
-    class LnExp : ExpNode
+    class LnExp : UnaryOperation
     {
-        public LnExp(ExpNode operand)
+        public LnExp(IExpNode operand)
+            : base(operand)
         {
-            this.operand = operand;
         }
         public override double Evaluate(Values values)
         {
             return Math.Log(operand.Evaluate(values));
         }
-        public override ExpNode DeepClone()
-        {
-            return new LnExp(operand.DeepClone());
-        }
-
-        private ExpNode operand;
     }
+
+    /* Binary Functions */
 }

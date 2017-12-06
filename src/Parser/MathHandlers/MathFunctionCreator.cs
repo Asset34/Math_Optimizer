@@ -20,7 +20,7 @@ namespace MathOptimizer.Parser.MathHandlers
             }
 
             // Create function
-            ExpNode expTree = mathFunctionCreator.expTree.Pop();
+            IExpNode expTree = mathFunctionCreator.expTree.Pop();
             string[] variables = mathFunctionCreator.variables.ToArray();
 
             return new Function(expTree, variables);
@@ -48,24 +48,24 @@ namespace MathOptimizer.Parser.MathHandlers
         }
         public override void Visit(IFunctionNameToken t)
         {
-            ExpNode operand = expTree.Pop();
+            IExpNode operand = expTree.Pop();
 
             expTree.Push(Tables.FunctionsExpTable[t.ToString()](operand));
         }
         public override void Visit(IBinaryOpToken t)
         {
-            ExpNode operand2 = expTree.Pop();
-            ExpNode operand1 = expTree.Pop();
+            IExpNode operand2 = expTree.Pop();
+            IExpNode operand1 = expTree.Pop();
 
             char op = char.Parse(t.ToString());
             expTree.Push(Tables.BinaryOperatorsExpTable[op](operand1, operand2));
         }
         public override void Visit(IUnaryOpToken t)
         {
-            ExpNode operand = expTree.Peek();
+            IExpNode operand = expTree.Peek();
 
             char op = char.Parse(t.ToString());
-            ExpNode unaryOperator = Tables.UnaryOperatorsExpTable[op](operand);
+            IExpNode unaryOperator = Tables.UnaryOperatorsExpTable[op](operand);
 
             if (unaryOperator != null)
             {
@@ -83,7 +83,7 @@ namespace MathOptimizer.Parser.MathHandlers
         /* Handler */
         private static MathFunctionCreator mathFunctionCreator = new MathFunctionCreator();
 
-        private Stack<ExpNode> expTree = new Stack<ExpNode>();
+        private Stack<IExpNode> expTree = new Stack<IExpNode>();
         private List<string> variables = new List<string>();
     }
 }

@@ -6,7 +6,7 @@ namespace MathOptimizer.Parser.Func
 {
     class Function
     {
-        public Function(ExpNode expTree, string[] variables)
+        public Function(IExpNode expTree, string[] variables)
         {
             this.expTree = expTree;
             Variables = variables;
@@ -38,6 +38,6 @@ namespace MathOptimizer.Parser.Func
 
         public string[] Variables { get; }
 
-        private ExpNode expTree;
+        private IExpNode expTree;
     }
 }

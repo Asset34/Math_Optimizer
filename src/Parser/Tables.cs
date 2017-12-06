@@ -10,8 +10,8 @@ namespace MathOptimizer.Parser
 {
     static class Tables
     {
-        public delegate ExpNode BinaryOperation(ExpNode op1, ExpNode op2);
-        public delegate ExpNode UnaryOperation(ExpNode op);
+        public delegate IExpNode BinaryOperation(IExpNode op1, IExpNode op2);
+        public delegate IExpNode UnaryOperation(IExpNode op);
 
         public static Dictionary<string, double>         ConstantsTable
         {
@@ -56,8 +56,7 @@ namespace MathOptimizer.Parser
             {'-', 1},
             {'*', 2},
             {'/', 2},
-            {'^', 3},
-            {'#', 4}
+            {'^', 3}
         };
         private static Dictionary<char, BinaryOperation> binaryOperatorsExpTable = new Dictionary<char, BinaryOperation>()
         {
@@ -65,8 +64,7 @@ namespace MathOptimizer.Parser
             {'-', (op1, op2) => (new MinusExp    (op1, op2))},
             {'*', (op1, op2) => (new MultyExp    (op1, op2))},
             {'/', (op1, op2) => (new DivisionExp (op1, op2))},
-            {'^', (op1, op2) => (new PowerExp    (op1, op2))},
-            {'#', (op1, op2) => (new IndexingExp (op1, op2))}
+            {'^', (op1, op2) => (new PowerExp    (op1, op2))}
         };
 
         /* Unary Operators tables */
