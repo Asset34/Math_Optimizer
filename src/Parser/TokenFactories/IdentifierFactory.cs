@@ -46,9 +46,13 @@ namespace MathOptimizer.Parser.TokenFactories
                 string strToken = Position.MakeString(start, pos);
 
                 /* Specificate indentificator */
-                if (Tables.FunctionsTable.ContainsKey(strToken)) 
+                if (FunctionCheck(strToken)) 
                 {
                     return new FunctionNameToken(strToken);
+                }
+                else if (ConstantCheck(strToken))
+                {
+                    return new ConstantToken(strToken);
                 }
                 else
                 {
@@ -66,10 +70,30 @@ namespace MathOptimizer.Parser.TokenFactories
             }
         }
 
+        private static bool FunctionCheck(string strToken)
+        {
+            return Tables.FunctionsTable.ContainsKey(strToken);
+        }
+        private static bool ConstantCheck(string strToken)
+        {
+            return Tables.ConstantsTable.ContainsKey(strToken);
+        }
+
         /* Produced tokens */
         private class VariableToken : Token, IVariableToken
         {
             public VariableToken(string strToken)
+                :base(strToken)
+            {
+            }
+            public override void Accept(ITokenVisitor visitor)
+            {
+                visitor.Visit(this);
+            }
+        }
+        private class ConstantToken : Token, IConstantToken
+        {
+            public ConstantToken(string strToken)
                 :base(strToken)
             {
             }

@@ -7,7 +7,7 @@ namespace MathOptimizer.Parser
     {
         public virtual void Visit(IVariableToken     t) { }
         public virtual void Visit(IFunctionNameToken t) { }
-        public virtual void Visit(IConstant          t) { }
+        public virtual void Visit(IConstantToken     t) { }
         public virtual void Visit(IErrorToken        t) { }
         public virtual void Visit(INumberToken       t) { }
         public virtual void Visit(ILBracketToken     t) { }

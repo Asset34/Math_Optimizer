@@ -6,7 +6,7 @@ namespace MathOptimizer.Parser.Interfaces
     {
         void Visit(IVariableToken     t);
         void Visit(IFunctionNameToken t);
-        void Visit(IConstant          t);
+        void Visit(IConstantToken          t);
         void Visit(IErrorToken        t);
         void Visit(INumberToken       t);
         void Visit(ILBracketToken     t);

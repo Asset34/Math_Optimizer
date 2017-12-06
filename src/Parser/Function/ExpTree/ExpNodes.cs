@@ -98,6 +98,45 @@ namespace MathOptimizer.Parser.Func.Tree
         private ExpNode operand1;
         private ExpNode operand2;
     }
+    class IndexingExp : ExpNode
+    {
+        public IndexingExp(ExpNode operand1, ExpNode operand2)
+        {
+            VariableExp temp = operand1 as VariableExp;
+
+            if (temp == null)
+            {
+                throw new ArgumentException("Indexing of non-variable token");
+            }
+
+            this.variable = temp;
+            this.indexExp = operand2;
+        }
+        public override double Evaluate(Values values)
+        {
+            // Integer check of index
+            double value = indexExp.Evaluate(values);
+            int index;
+
+            bool testInt = int.TryParse(value.ToString(), out index);
+            if (!testInt)
+            {
+                throw new ArgumentException("Non-integer index");
+            }
+
+            // Variable creation
+            VariableExp newVariable = new VariableExp(variable.Name + index.ToString());
+
+            return newVariable.Evaluate(values);
+        }
+        public override ExpNode DeepClone()
+        {
+            return new IndexingExp(variable.DeepClone(), indexExp.DeepClone());
+        }
+
+        private VariableExp variable;
+        private ExpNode indexExp;
+    }
 
     /* Unary operations */
     class UnaryMinusExp : ExpNode

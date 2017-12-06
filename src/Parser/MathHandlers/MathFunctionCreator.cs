@@ -28,7 +28,8 @@ namespace MathOptimizer.Parser.MathHandlers
 
         public override void Visit(INumberToken t)
         {
-            expTree.Push(new NumberExp(double.Parse(t.ToString())));
+            double number = double.Parse(t.ToString());
+            expTree.Push(new NumberExp(number));
         }
         public override void Visit(IVariableToken t)
         {
@@ -39,6 +40,11 @@ namespace MathOptimizer.Parser.MathHandlers
             }
 
             expTree.Push(new VariableExp(t.ToString()));
+        }
+        public override void Visit(IConstantToken t)
+        {
+            double number = Tables.ConstantsTable[t.ToString()];
+            expTree.Push(new NumberExp(number));
         }
         public override void Visit(IFunctionNameToken t)
         {

@@ -32,6 +32,13 @@ namespace MathOptimizer.Parser.MathHandlers.TokenPredicates
             result = true;
         }
     }
+    class ConstantTokenPredicate : FalseTokenPredicate
+    {
+        public override void Visit(IConstantToken t)
+        {
+            result = true;
+        }
+    }
     class BinaryOpTokenPredicate : FalseTokenPredicate
     {
         public override void Visit(IBinaryOpToken t)

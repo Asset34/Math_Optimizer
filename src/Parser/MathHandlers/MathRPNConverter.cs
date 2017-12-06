@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 using MathOptimizer.Parser.MathHandlers.TokenPredicates;
@@ -36,6 +35,10 @@ namespace MathOptimizer.Parser.MathHandlers
             resultTokens.Add(t);
         }
         public override void Visit(IVariableToken t)
+        {
+            resultTokens.Add(t);
+        }
+        public override void Visit(IConstantToken t)
         {
             resultTokens.Add(t);
         }

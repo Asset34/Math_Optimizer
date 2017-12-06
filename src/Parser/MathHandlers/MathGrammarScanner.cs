@@ -43,6 +43,17 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
+        public override void Visit(IConstantToken t)
+        {
+            if (edgesCurrent.Execute(t))
+            {
+                edgesCurrent = edgesConstant;
+            }
+            else
+            {
+                throwException(t);
+            }
+        }
         public override void Visit(IFunctionNameToken t)
         {
             if (edgesCurrent.Execute(t))
@@ -120,6 +131,7 @@ namespace MathOptimizer.Parser.MathHandlers
 
             // Terminal symbols
             ITokenPredicate variable = new VariableTokenPredicate();
+            ITokenPredicate constant = new ConstantTokenPredicate();
             ITokenPredicate number = new NumberTokenPredicate();
             ITokenPredicate binaryOp = new BinaryOpTokenPredicate();
             ITokenPredicate unaryOp = new UnaryOpTokenPredicate();
@@ -131,6 +143,7 @@ namespace MathOptimizer.Parser.MathHandlers
 
             // MathExp
             disjunctionPr.Predicates.Add(variable);
+            disjunctionPr.Predicates.Add(constant);
             disjunctionPr.Predicates.Add(number);
             disjunctionPr.Predicates.Add(functionName);
             disjunctionPr.Predicates.Add(lbracket);
@@ -156,6 +169,7 @@ namespace MathOptimizer.Parser.MathHandlers
             // UnaryOp
             disjunctionPr.Predicates.Add(variable);
             disjunctionPr.Predicates.Add(number);
+            disjunctionPr.Predicates.Add(constant);
             disjunctionPr.Predicates.Add(functionName);
             disjunctionPr.Predicates.Add(lbracket);
 
@@ -164,6 +178,9 @@ namespace MathOptimizer.Parser.MathHandlers
 
             // Number
             edgesNumber = edgesVariable;
+
+            // Constant
+            edgesConstant = edgesVariable;
 
             // BinaryOp
             edgesBinaryOp = edgesMathExp;
@@ -221,6 +238,7 @@ namespace MathOptimizer.Parser.MathHandlers
         /* Edges */
         private readonly ITokenPredicate edgesMathExp;
         private readonly ITokenPredicate edgesVariable;
+        private readonly ITokenPredicate edgesConstant;
         private readonly ITokenPredicate edgesNumber;
         private readonly ITokenPredicate edgesBinaryOp;
         private readonly ITokenPredicate edgesUnaryOp;

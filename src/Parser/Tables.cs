@@ -52,7 +52,8 @@ namespace MathOptimizer.Parser
             {'-', 1},
             {'*', 2},
             {'/', 2},
-            {'^', 3}
+            {'^', 3},
+            {'#', 4}
         };
         private static Dictionary<char, BinaryOperation> binaryOperatorsExpTable = new Dictionary<char, BinaryOperation>()
         {
@@ -60,7 +61,8 @@ namespace MathOptimizer.Parser
             {'-', (op1, op2) => (new MinusExp    (op1, op2))},
             {'*', (op1, op2) => (new MultyExp    (op1, op2))},
             {'/', (op1, op2) => (new DivisionExp (op1, op2))},
-            {'^', (op1, op2) => (new PowerExp    (op1, op2))}
+            {'^', (op1, op2) => (new PowerExp    (op1, op2))},
+            {'#', (op1, op2) => (new IndexingExp (op1, op2))}
         };
 
         /* Unary Operators tables */

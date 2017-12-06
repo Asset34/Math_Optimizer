@@ -14,7 +14,7 @@
     public interface ILBracketToken     : IToken           { }
     public interface IRBracketToken     : IToken           { }
     public interface IVariableToken     : IIdentifierToken { }
-    public interface IConstant          : IIdentifierToken { }
+    public interface IConstantToken     : IIdentifierToken { }
     public interface IFunctionNameToken : IIdentifierToken { }
     public interface IUnaryOpToken      : IOperatorToken   { }
     public interface IBinaryOpToken     : IOperatorToken   { }
