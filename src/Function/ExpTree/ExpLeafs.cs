@@ -1,4 +1,4 @@
-﻿namespace MathOptimizer.Parser.Func.Tree
+﻿namespace MathOptimizer.Func.Tree
 {
     class VariableExp : IExpNode
     {

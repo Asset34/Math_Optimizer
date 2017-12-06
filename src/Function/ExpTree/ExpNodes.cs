@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathOptimizer.Parser.Func.Tree
+namespace MathOptimizer.Func.Tree
 {
     /* Abstract operations */
     abstract class UnaryOperation : IExpNode
@@ -174,9 +174,9 @@ namespace MathOptimizer.Parser.Func.Tree
             return Math.Atan(operand.Evaluate(values));
         }
     }
-    class ArcCTgExp : UnaryOperation
+    class ArcCtgExp : UnaryOperation
     {
-        public ArcCTgExp(IExpNode operand)
+        public ArcCtgExp(IExpNode operand)
             : base(operand)
         {
         }
@@ -239,7 +239,7 @@ namespace MathOptimizer.Parser.Func.Tree
         }
         public override double Evaluate(Values values)
         {
-            return Math.Log(operand1.Evaluate(values), operand2.Evaluate(values))
+            return Math.Log(operand1.Evaluate(values), operand2.Evaluate(values));
         }
     }
 }

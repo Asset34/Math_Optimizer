@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MathOptimizer.Parser.Func;
+using MathOptimizer.Func;
 
 namespace MathOptimizer.Methods
 {

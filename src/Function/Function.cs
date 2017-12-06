@@ -1,8 +1,8 @@
 ﻿using System;
 
-using MathOptimizer.Parser.Func.Tree;
+using MathOptimizer.Func.Tree;
 
-namespace MathOptimizer.Parser.Func
+namespace MathOptimizer.Func
 {
     class Function
     {

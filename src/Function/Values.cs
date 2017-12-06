@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MathOptimizer.Parser.Func
+namespace MathOptimizer.Func
 {
     class Values
     {

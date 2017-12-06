@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathOptimizer.Parser.Func.Tree;
+using MathOptimizer.Func.Tree;
 
 namespace MathOptimizer.Parser
 {
@@ -86,23 +86,33 @@ namespace MathOptimizer.Parser
         /* Functions tables */
         private static Dictionary<string, int> functionsArgsNumberTable = new Dictionary<string, int>()
         {
-            {"sin" , 1},
-            {"cos" , 1},
-            {"tg"  , 1},
-            {"ctg" , 1},
-            {"ln"  , 1},
-            {"exp" , 1},
-            {"sqrt", 1}
+            {"sin"    , 1},
+            {"cos"    , 1},
+            {"tg"     , 1},
+            {"ctg"    , 1},
+            {"arcsin" , 1},
+            {"arccos" , 1},
+            {"arctg"  , 1},
+            {"arcctg" , 1},
+            {"ln"     , 1},
+            {"exp"    , 1},
+            {"sqrt"   , 1},
+            {"abs"    , 1}
         };
         private static Dictionary<string, UnaryOperation> functionsExpTable = new Dictionary<string, UnaryOperation>()
         {
-            {"sin" , (op) => (new SinExp      (op))},
-            {"cos" , (op) => (new CosExp      (op))},
-            {"tg"  , (op) => (new TgExp       (op))},
-            {"ctg" , (op) => (new CtgExp      (op))},
-            {"ln"  , (op) => (new LnExp       (op))},
-            {"exp" , (op) => (new ExponentExp (op))},
-            {"sqrt", (op) => (new SqrtExp     (op))}
+            {"sin"    , (op) => (new SinExp      (op))},
+            {"cos"    , (op) => (new CosExp      (op))},
+            {"tg"     , (op) => (new TgExp       (op))},
+            {"ctg"    , (op) => (new CtgExp      (op))},
+            {"arcsin" , (op) => (new ArcSinExp   (op))},
+            {"arccos" , (op) => (new ArcCosExp   (op))},
+            {"arctg"  , (op) => (new ArcTgExp    (op))},
+            {"arcctg" , (op) => (new ArcCtgExp   (op))},
+            {"ln"     , (op) => (new LnExp       (op))},
+            {"exp"    , (op) => (new ExponentExp (op))},
+            {"sqrt"   , (op) => (new SqrtExp     (op))},
+            {"abs"    , (op) => (new AbsExp      (op))}
         };
     }
 }

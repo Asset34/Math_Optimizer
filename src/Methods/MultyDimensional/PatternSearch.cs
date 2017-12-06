@@ -1,23 +1,24 @@
-﻿using MathOptimizer.Parser.Func;
+﻿using MathOptimizer.Func;
 using MathOptimizer.Methods.OneDimensional;
 using MathOptimizer.Methods.Params;
+using System;
 
-namespace MathOptimizer.Methods
+namespace MathOptimizer.Methods.MultyDimensional
 {
     //
     // Summary:
-    //     Represents a multy-demensional optimization method 
+    //     Represents a multy-dimensional optimization method 
     //     also called Hooke-Jeeves method.
-    class PatternSearch
+    class PatternSearch : MultyDimensionalMethod
     {
-        public void run(Function f, OneDimensionalMethod method, ref Parameters parameters)
+        public override void run(Function f, OneDimensionalMethod method, ref Parameters parameters)
         {
             /* Get input parameters */
-            Vector startPoint = parameters.inParameters.StartVecPoint;
-            double eps = parameters.inParameters.Eps;
-            double stepValue = parameters.inParameters.StepValue;
-            double stepCoefficient = parameters.inParameters.StepCoefficient;
-            int iterationLimit = parameters.inParameters.IterationLimit;
+            Vector startPoint = parameters.InParameters.StartVecPoint;
+            double eps = parameters.InParameters.Eps;
+            double stepValue = parameters.InParameters.StepValue;
+            double stepCoefficient = parameters.InParameters.StepCoefficient;
+            int iterationLimit = parameters.InParameters.IterationLimit;
 
             /* Optimization */
 
@@ -88,11 +89,11 @@ namespace MathOptimizer.Methods
                     // Accelerated Search
                     direction = x2 - x1;
                     ConvertedFunction cf = new ConvertedFunction(f, x2, direction);
-                    parameters.inParameters.StartPoint = 0;
+                    parameters.InParameters.StartPoint = 0;
 
                     method.run(cf, ref parameters);
 
-                    x3 = x2 + parameters.outParameters.ResultPoint * direction;
+                    x3 = x2 + parameters.OutParameters.ResultPoint * direction;
 
                     // Exploratory Search - 2
                     minPoint = x2;
@@ -133,8 +134,8 @@ namespace MathOptimizer.Methods
             while (counter < iterationLimit);
 
             /* Set output parameters */
-            parameters.outParameters.ResultVecPoint = x1;
-            parameters.outParameters.Iterations = counter;
+            parameters.OutParameters.ResultVecPoint = x1;
+            parameters.OutParameters.Iterations = counter;
         }
     }
 }

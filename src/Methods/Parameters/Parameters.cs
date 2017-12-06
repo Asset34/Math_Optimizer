@@ -6,13 +6,13 @@
     //     optimization methods
     struct Parameters
     {
-        public InputParameters inParameters;
-        public OutputParameters outParameters;
+        public InputParameters InParameters;
+        public OutputParameters OutParameters;
 
         public void SwapParameters()
         {
-            inParameters.StartInterval = outParameters.ResultInterval;
-            inParameters.StartPoint = outParameters.ResultPoint;
+            InParameters.StartInterval = OutParameters.ResultInterval;
+            InParameters.StartPoint = OutParameters.ResultPoint;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using MathOptimizer.Parser.Func;
+using MathOptimizer.Func;
 using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods.OneDimensional

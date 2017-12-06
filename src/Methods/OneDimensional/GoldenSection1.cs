@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MathOptimizer.Parser.Func;
+using MathOptimizer.Func;
 using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods.OneDimensional
@@ -13,9 +13,9 @@ namespace MathOptimizer.Methods.OneDimensional
         public override void run(Function f, ref Parameters parameters)
         {
             /* Get input parameters */
-            Interval inputInterval = parameters.inParameters.StartInterval;
-            double eps = parameters.inParameters.Eps;
-            double iterationLimit = parameters.inParameters.IterationLimit;
+            Interval inputInterval = parameters.InParameters.StartInterval;
+            double eps = parameters.InParameters.Eps;
+            double iterationLimit = parameters.InParameters.IterationLimit;
 
             /* Optimization */
             Interval outputInterval = new Interval(inputInterval);
@@ -47,9 +47,9 @@ namespace MathOptimizer.Methods.OneDimensional
             }
 
             /* Set output parameters */
-            parameters.outParameters.ResultInterval = outputInterval;
-            parameters.outParameters.ResultPoint = outputInterval.Center;
-            parameters.outParameters.Iterations = counter;
+            parameters.OutParameters.ResultInterval = outputInterval;
+            parameters.OutParameters.ResultPoint = outputInterval.Center;
+            parameters.OutParameters.Iterations = counter;
         }
     }
 }

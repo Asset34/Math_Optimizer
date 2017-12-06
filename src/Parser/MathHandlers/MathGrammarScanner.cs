@@ -99,7 +99,7 @@ namespace MathOptimizer.Parser.MathHandlers
 
                 bracketCounter--;
 
-                if (bracketCounter == bracketValues.Peek())
+                if (bracketValues.Count !=0 && bracketCounter == bracketValues.Peek())
                 {
                     functionLeave();
                 }  
