@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MathOptimizer.Func.Tree;
+using MathOptimizer.Parser.ExpTree;
 
 namespace MathOptimizer.Func
 {

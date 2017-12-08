@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Func.Tree;
+using MathOptimizer.Parser.ExpTree;
 using MathOptimizer.Func;
 
 namespace MathOptimizer.Parser.MathHandlers

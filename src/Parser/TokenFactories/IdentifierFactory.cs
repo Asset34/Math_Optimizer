@@ -23,21 +23,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <Constant>     ::= 'PI' | ... | 'E'
     class IdentifierFactory
     {
-        static IdentifierFactory()
-        {
-            // Build a predicate for start of the identifier
-            beginVariablePr.Predicates.Add(new Underscore());
-            beginVariablePr.Predicates.Add(new Letter());
-
-            // Build a predicate for other part of the identifier
-            variablePr.Predicates.Add(beginVariablePr);
-            variablePr.Predicates.Add(new Digit());
-        }
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, beginVariablePr);
         }
-        public static IIdentifierToken TakeToken(Position pos)
+        public IIdentifierToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -72,11 +62,11 @@ namespace MathOptimizer.Parser.TokenFactories
             }
         }
 
-        private static bool FunctionCheck(string strToken)
+        private bool FunctionCheck(string strToken)
         {
             return Tables.FunctionsArgsNumberTable.ContainsKey(strToken);
         }
-        private static bool ConstantCheck(string strToken)
+        private bool ConstantCheck(string strToken)
         {
             return Tables.ConstantsTable.ContainsKey(strToken);
         }
@@ -133,9 +123,22 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static DisjunctionCharPredicate beginVariablePr = new DisjunctionCharPredicate();
-        private static DisjunctionCharPredicate variablePr = new DisjunctionCharPredicate();
-
-        private IdentifierFactory() { }
+        private readonly DisjunctionCharPredicate beginVariablePr = new DisjunctionCharPredicate()
+        {
+            Predicates =
+            {
+                new Underscore(),
+                new Letter()
+            }
+        };
+        private readonly DisjunctionCharPredicate variablePr = new DisjunctionCharPredicate()
+        {
+            Predicates =
+            {
+                new Underscore(),
+                new Letter(),
+                new Digit()
+            }
+        };
     }
 }

@@ -19,11 +19,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <FuncSeparator> ::= ';'
     class FunctionSeparatorFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, semicolonPr);
         }
-        public static IFuncSeparatorToken TakeToken(Position pos)
+        public IFuncSeparatorToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -67,8 +67,6 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly Semicolon semicolonPr = new Semicolon();
-
-        private FunctionSeparatorFactory() { }
+        private readonly Semicolon semicolonPr = new Semicolon();
     }
 }

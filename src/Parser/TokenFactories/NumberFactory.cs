@@ -16,11 +16,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <Digit>  ::= '0' | ... | '9'
     class NumberFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, digitPr);
         }
-        public static INumberToken TakeToken(Position pos)
+        public INumberToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -68,9 +68,7 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly Digit digitPr = new Digit();
-        private static readonly NumberSeparator numSeparatorPr = new NumberSeparator();
-        
-        private NumberFactory() {}
+        private readonly Digit digitPr = new Digit();
+        private readonly NumberSeparator numSeparatorPr = new NumberSeparator();
     }
 }

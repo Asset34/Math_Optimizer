@@ -14,11 +14,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <RBracket> ::= ')'
     class RBracketFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, rbracketPr);
         }
-        public static IRBracketToken TakeToken(Position pos)
+        public IRBracketToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -62,8 +62,6 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly RBracket rbracketPr = new RBracket();
-
-        private RBracketFactory() { }
+        private readonly RBracket rbracketPr = new RBracket();
     }
 }

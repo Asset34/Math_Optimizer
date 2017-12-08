@@ -14,11 +14,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <LBracket> ::= '('
     class LBracketFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, lbracketPr);
         }
-        public static ILBracketToken TakeToken(Position pos)
+        public ILBracketToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -53,8 +53,6 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly LBracket lbracketPr = new LBracket();
-
-        private LBracketFactory() { }
+        private readonly LBracket lbracketPr = new LBracket();
     }
 }

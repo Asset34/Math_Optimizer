@@ -13,7 +13,7 @@ using MathOptimizer.Parser;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.MathHandlers;
 using MathOptimizer.Methods;
-using MathOptimizer.Func.Tree;
+using MathOptimizer.Parser.ExpTree;
 
 namespace MathOptimizer
 {

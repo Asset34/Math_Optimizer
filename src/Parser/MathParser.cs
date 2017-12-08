@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MathOptimizer.Func;
 using MathOptimizer.Parser.MathHandlers;
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Func.Tree;
+using MathOptimizer.Parser.ExpTree;
 
 namespace MathOptimizer.Parser
 {

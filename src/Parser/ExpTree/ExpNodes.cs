@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathOptimizer.Func.Tree
+namespace MathOptimizer.Parser.ExpTree
 {
     /* Abstract operations */
     abstract class UnaryOperation : IExpNode

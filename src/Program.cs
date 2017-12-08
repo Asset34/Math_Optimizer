@@ -11,7 +11,7 @@ using MathOptimizer.Func;
 using MathOptimizer.Methods;
 using MathOptimizer.Methods.OneDimensional;
 using MathOptimizer.Methods.Params;
-using MathOptimizer.Func.Tree;
+using MathOptimizer.Parser.ExpTree;
 
 namespace MathOptimizer
 {

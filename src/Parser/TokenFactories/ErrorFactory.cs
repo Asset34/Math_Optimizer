@@ -7,15 +7,18 @@ namespace MathOptimizer.Parser.TokenFactories
 {
     class ErrorFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
-            return !(NumberFactory.Check(pos)     ||
-                     IdentifierFactory.Check(pos) ||
-                     OperatorFactory.Check(pos)   ||
-                     LBracketFactory.Check(pos)   ||
-                     RBracketFactory.Check(pos));
+            //return !(NumberFactory.Check(pos)     ||
+            //         IdentifierFactory.Check(pos) ||
+            //         OperatorFactory.Check(pos)   ||
+            //         LBracketFactory.Check(pos)   ||
+            //         RBracketFactory.Check(pos));
+
+            /*TEMP*/
+            return false;
         }
-        public static IErrorToken TakeToken(Position pos)
+        public IErrorToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -51,7 +54,5 @@ namespace MathOptimizer.Parser.TokenFactories
                 visitor.Visit(this);
             }
         }
-
-        private ErrorFactory() { }
     }
 }

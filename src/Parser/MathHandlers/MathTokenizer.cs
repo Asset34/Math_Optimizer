@@ -24,35 +24,35 @@ namespace MathOptimizer.Parser.MathHandlers
             Position pos = new Position(exp);
             while (!pos.IsEnd)
             {
-                if (NumberFactory.Check(pos))
+                if (numberFactory.Check(pos))
                 {
-                    tokens.Add(NumberFactory.TakeToken(pos));
+                    tokens.Add(numberFactory.TakeToken(pos));
                 }
-                else if(IdentifierFactory.Check(pos))
+                else if(identifierFactory.Check(pos))
                 {
-                    tokens.Add(IdentifierFactory.TakeToken(pos));
+                    tokens.Add(identifierFactory.TakeToken(pos));
                 }
-                else if (OperatorFactory.Check(pos))
+                else if (operatorFactory.Check(pos))
                 {
-                    tokens.Add(OperatorFactory.TakeToken(pos));
+                    tokens.Add(operatorFactory.TakeToken(pos));
                 }
-                else if (LBracketFactory.Check(pos))
+                else if (lbracketFactory.Check(pos))
                 {
-                    tokens.Add(LBracketFactory.TakeToken(pos));
+                    tokens.Add(lbracketFactory.TakeToken(pos));
                 }
-                else if (RBracketFactory.Check(pos))
+                else if (rbracketFactory.Check(pos))
                 {
-                    tokens.Add(RBracketFactory.TakeToken(pos));
+                    tokens.Add(rbracketFactory.TakeToken(pos));
                 }
-                else if (FunctionSeparatorFactory.Check(pos))
+                else if (funcSeparatorFactory.Check(pos))
                 {
-                    tokens.Add(FunctionSeparatorFactory.TakeToken(pos));
+                    tokens.Add(funcSeparatorFactory.TakeToken(pos));
                 }
                 // Error
                 else
                 {
                     errorFlag = true;
-                    errorTokens.Add(ErrorFactory.TakeToken(pos));
+                    errorTokens.Add(errorFactory.TakeToken(pos));
                 }
             }
 
@@ -75,15 +75,20 @@ namespace MathOptimizer.Parser.MathHandlers
 
             return tokens;
         }
-
-        //
-        // Summary:
-        //     Performs preprocessing the string of the expression:
-        //      - Remove all whitespace(' ') characters
+        
         private void Preprocess(ref string exp)
         {
             //Remove whitespace characters
             exp = exp.Replace(" ", String.Empty);
         }
+
+        /* Token factories */
+        private readonly NumberFactory numberFactory = new NumberFactory();
+        private readonly IdentifierFactory identifierFactory = new IdentifierFactory();
+        private readonly OperatorFactory operatorFactory = new OperatorFactory();
+        private readonly FunctionSeparatorFactory funcSeparatorFactory = new FunctionSeparatorFactory();
+        private readonly LBracketFactory lbracketFactory = new LBracketFactory();
+        private readonly RBracketFactory rbracketFactory = new RBracketFactory();
+        private readonly ErrorFactory errorFactory = new ErrorFactory();
     }
 }

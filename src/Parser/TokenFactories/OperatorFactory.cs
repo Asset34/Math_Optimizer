@@ -18,11 +18,11 @@ namespace MathOptimizer.Parser.TokenFactories
     //     <UnaryOp>  ::= '-' | '+'
     class OperatorFactory
     {
-        public static bool Check(Position pos)
+        public bool Check(Position pos)
         {
             return Utills.Check(pos, operatorPr);
         }
-        public static IOperatorToken TakeToken(Position pos)
+        public IOperatorToken TakeToken(Position pos)
         {
             if (Check(pos))
             {
@@ -52,7 +52,7 @@ namespace MathOptimizer.Parser.TokenFactories
             }    
         }
 
-        private static bool CheckUnaryOp(Position pos)
+        private bool CheckUnaryOp(Position pos)
         {
             Position prevPos = pos - 1;
 
@@ -108,9 +108,7 @@ namespace MathOptimizer.Parser.TokenFactories
         }
 
         /* Used predicates */
-        private static readonly Operator operatorPr = new Operator();
-        private static readonly LBracket lbracketPr = new LBracket();
-
-        private OperatorFactory() { }
+        private readonly Operator operatorPr = new Operator();
+        private readonly LBracket lbracketPr = new LBracket();
     }
 }
