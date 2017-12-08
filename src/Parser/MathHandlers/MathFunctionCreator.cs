@@ -52,9 +52,17 @@ namespace MathOptimizer.Parser.MathHandlers
         }
         public override void Visit(IFunctionNameToken t)
         {
-            IExpNode operand = expTree.Pop();
+            // Get number of nessessary arguments
+            int n = Tables.FunctionsArgsNumberTable[t.ToString()];
 
-            expTree.Push(Tables.FunctionsExpTable[t.ToString()](operand));
+            // Pop arguments
+            IExpNode[] arguments = new IExpNode[n];
+            for (int i = 0; i < n; i++)
+            {
+                arguments[i] = expTree.Pop();
+            }
+            
+            expTree.Push(Tables.FunctionsExpTable[t.ToString()](arguments));
         }
         public override void Visit(IBinaryOpToken t)
         {

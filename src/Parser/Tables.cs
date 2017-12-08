@@ -16,32 +16,33 @@ namespace MathOptimizer.Parser
     {
         public delegate IExpNode BinaryOperation(IExpNode op1, IExpNode op2);
         public delegate IExpNode UnaryOperation(IExpNode op);
+        public delegate IExpNode FunctionOperation(params IExpNode[] ops);
 
-        public static Dictionary<string, double>         ConstantsTable
+        public static Dictionary<string, double> ConstantsTable
         {
             get { return constantsTable; }
         }
-        public static Dictionary<char, int>              BinaryOperatorsPriorityTable
+        public static Dictionary<char, int> BinaryOperatorsPriorityTable
         {
             get { return binaryOperatorsPriorityTable; }
         }
-        public static Dictionary<char, BinaryOperation>  BinaryOperatorsExpTable
+        public static Dictionary<char, BinaryOperation> BinaryOperatorsExpTable
         {
             get { return binaryOperatorsExpTable; }
         }
-        public static Dictionary<char, int>              UnaryOperatorsPriorityTable
+        public static Dictionary<char, int> UnaryOperatorsPriorityTable
         {
             get { return unaryOperatorsPriorityTable; }
         }
-        public static Dictionary<char, UnaryOperation>   UnaryOperatorsExpTable
+        public static Dictionary<char, UnaryOperation> UnaryOperatorsExpTable
         {
             get { return unaryOperatorsExpTable; }
         }
-        public static Dictionary<string, int>            FunctionsArgsNumberTable
+        public static Dictionary<string, int> FunctionsArgsNumberTable
         {
             get { return functionsArgsNumberTable; }
         }
-        public static Dictionary<string, UnaryOperation> FunctionsExpTable
+        public static Dictionary<string, FunctionOperation> FunctionsExpTable
         {
             get { return functionsExpTable; }
         }
@@ -97,22 +98,24 @@ namespace MathOptimizer.Parser
             {"ln"     , 1},
             {"exp"    , 1},
             {"sqrt"   , 1},
-            {"abs"    , 1}
+            {"abs"    , 1},
+            {"log"    , 2}
         };
-        private static Dictionary<string, UnaryOperation> functionsExpTable = new Dictionary<string, UnaryOperation>()
+        private static Dictionary<string, FunctionOperation> functionsExpTable = new Dictionary<string, FunctionOperation>()
         {
-            {"sin"    , (op) => (new SinExp      (op))},
-            {"cos"    , (op) => (new CosExp      (op))},
-            {"tg"     , (op) => (new TgExp       (op))},
-            {"ctg"    , (op) => (new CtgExp      (op))},
-            {"arcsin" , (op) => (new ArcSinExp   (op))},
-            {"arccos" , (op) => (new ArcCosExp   (op))},
-            {"arctg"  , (op) => (new ArcTgExp    (op))},
-            {"arcctg" , (op) => (new ArcCtgExp   (op))},
-            {"ln"     , (op) => (new LnExp       (op))},
-            {"exp"    , (op) => (new ExponentExp (op))},
-            {"sqrt"   , (op) => (new SqrtExp     (op))},
-            {"abs"    , (op) => (new AbsExp      (op))}
+            {"sin"    , (ops) => (new SinExp      (ops[0]))},
+            {"cos"    , (ops) => (new CosExp      (ops[0]))},
+            {"tg"     , (ops) => (new TgExp       (ops[0]))},
+            {"ctg"    , (ops) => (new CtgExp      (ops[0]))},
+            {"arcsin" , (ops) => (new ArcSinExp   (ops[0]))},
+            {"arccos" , (ops) => (new ArcCosExp   (ops[0]))},
+            {"arctg"  , (ops) => (new ArcTgExp    (ops[0]))},
+            {"arcctg" , (ops) => (new ArcCtgExp   (ops[0]))},
+            {"ln"     , (ops) => (new LnExp       (ops[0]))},
+            {"exp"    , (ops) => (new ExponentExp (ops[0]))},
+            {"sqrt"   , (ops) => (new SqrtExp     (ops[0]))},
+            {"abs"    , (ops) => (new AbsExp      (ops[0]))},
+            {"log"    , (ops) => (new LogExp      (ops[0], ops[1]))}
         };
     }
 }
