@@ -31,7 +31,7 @@ namespace MathOptimizer.Func
 
             return expTree.Evaluate(values);
         }
-        public virtual double Evaluate(params double[] values)
+        public virtual double Evaluate(params double[] values)  
         {
             return Evaluate(new Vector(values));
         }

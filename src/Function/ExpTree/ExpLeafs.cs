@@ -4,26 +4,26 @@
     {
         public VariableExp(string name)
         {
-            Name = name;
+            this.name = name;
         }
         public double Evaluate(Values values)
         {
-            return values.GetValue(Name);
+            return values.GetValue(name);
         }
 
-        public string Name { get; }
+        private string name;
     }
     class NumberExp : IExpNode
     {
         public NumberExp(double value)
         {
-            Value = value;
+            this.value = value;
         }
         public double Evaluate(Values values)
         {
-            return Value;
+            return value;
         }
 
-        public double Value { get; }
+        private double value;
     }
 }

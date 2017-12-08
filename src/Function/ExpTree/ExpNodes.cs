@@ -68,7 +68,14 @@ namespace MathOptimizer.Func.Tree
         }
         public override double Evaluate(Values values)
         {
-            return operand1.Evaluate(values) / operand2.Evaluate(values);
+            double denominator = operand2.Evaluate(values);
+
+            if (denominator == 0)
+            {
+                throw new DivideByZeroException();
+            }
+            
+            return operand1.Evaluate(values) / denominator;
         }
     }
     class PowerExp : BinaryOperation
@@ -193,7 +200,14 @@ namespace MathOptimizer.Func.Tree
         }
         public override double Evaluate(Values values)
         {
-            return Math.Sqrt(operand.Evaluate(values));
+            double redicand = operand.Evaluate(values);
+
+            if (redicand < 0)
+            {
+                throw new ArgumentException("Negative redicand");
+            }
+
+            return Math.Sqrt(redicand);
         }
     }
     class ExponentExp : UnaryOperation
@@ -215,7 +229,14 @@ namespace MathOptimizer.Func.Tree
         }
         public override double Evaluate(Values values)
         {
-            return Math.Log(operand.Evaluate(values));
+            double exp = operand.Evaluate(values);
+
+            if (exp == 0)
+            {
+                throw new ArgumentException("Null logarithm argument");
+            }
+
+            return Math.Log(exp);
         }
     }
     class AbsExp : UnaryOperation
@@ -239,7 +260,14 @@ namespace MathOptimizer.Func.Tree
         }
         public override double Evaluate(Values values)
         {
-            return Math.Log(operand1.Evaluate(values), operand2.Evaluate(values));
+            double exp = operand2.Evaluate(values);
+
+            if (exp == 0)
+            {
+                throw new ArgumentException("Null logarithm argument");
+            }
+
+            return Math.Log(operand1.Evaluate(values), exp);
         }
     }
 }
