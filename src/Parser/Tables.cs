@@ -16,7 +16,7 @@ namespace MathOptimizer.Parser
     {
         public delegate IExpNode BinaryOperation(IExpNode op1, IExpNode op2);
         public delegate IExpNode UnaryOperation(IExpNode op);
-        public delegate IExpNode FunctionOperation(params IExpNode[] ops);
+        public delegate IExpNode FunctionOperation(params IExpNode[] args);
 
         public static Dictionary<string, double> ConstantsTable
         {
@@ -99,23 +99,29 @@ namespace MathOptimizer.Parser
             {"exp"    , 1},
             {"sqrt"   , 1},
             {"abs"    , 1},
-            {"log"    , 2}
+            {"sign"   , 1},
+            { "log"   , 2},
+            { "min"   , 2},
+            { "max"   , 2}
         };
         private static Dictionary<string, FunctionOperation> functionsExpTable = new Dictionary<string, FunctionOperation>()
         {
-            {"sin"    , (ops) => (new SinExp      (ops[0]))},
-            {"cos"    , (ops) => (new CosExp      (ops[0]))},
-            {"tg"     , (ops) => (new TgExp       (ops[0]))},
-            {"ctg"    , (ops) => (new CtgExp      (ops[0]))},
-            {"arcsin" , (ops) => (new ArcSinExp   (ops[0]))},
-            {"arccos" , (ops) => (new ArcCosExp   (ops[0]))},
-            {"arctg"  , (ops) => (new ArcTgExp    (ops[0]))},
-            {"arcctg" , (ops) => (new ArcCtgExp   (ops[0]))},
-            {"ln"     , (ops) => (new LnExp       (ops[0]))},
-            {"exp"    , (ops) => (new ExponentExp (ops[0]))},
-            {"sqrt"   , (ops) => (new SqrtExp     (ops[0]))},
-            {"abs"    , (ops) => (new AbsExp      (ops[0]))},
-            {"log"    , (ops) => (new LogExp      (ops[0], ops[1]))}
+            {"sin"    , (args) => (new SinExp      (args[0]))},
+            {"cos"    , (args) => (new CosExp      (args[0]))},
+            {"tg"     , (args) => (new TgExp       (args[0]))},
+            {"ctg"    , (args) => (new CtgExp      (args[0]))},
+            {"arcsin" , (args) => (new ArcSinExp   (args[0]))},
+            {"arccos" , (args) => (new ArcCosExp   (args[0]))},
+            {"arctg"  , (args) => (new ArcTgExp    (args[0]))},
+            {"arcctg" , (args) => (new ArcCtgExp   (args[0]))},
+            {"ln"     , (args) => (new LnExp       (args[0]))},
+            {"exp"    , (args) => (new ExponentExp (args[0]))},
+            {"sqrt"   , (args) => (new SqrtExp     (args[0]))},
+            {"abs"    , (args) => (new AbsExp      (args[0]))},
+            {"sign"   , (args) => (new SignExp     (args[0]))},
+            { "log"   , (args) => (new LogExp      (args[0], args[1]))},
+            { "min"   , (args) => (new MinExp      (args[0], args[1]))},
+            { "max"   , (args) => (new MaxExp      (args[0], args[1]))}
         };
     }
 }

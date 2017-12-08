@@ -250,6 +250,17 @@ namespace MathOptimizer.Func.Tree
             return Math.Abs(operand.Evaluate(values));
         }
     }
+    class SignExp : UnaryOperation
+    {
+        public SignExp(IExpNode operand)
+            : base(operand)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Sign(operand.Evaluate(values));
+        }
+    }
 
     /* Binary Functions */
     class LogExp : BinaryOperation
@@ -268,6 +279,28 @@ namespace MathOptimizer.Func.Tree
             }
 
             return Math.Log(operand1.Evaluate(values), exp);
+        }
+    }
+    class MinExp : BinaryOperation
+    {
+        public MinExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Min(operand1.Evaluate(values), operand2.Evaluate(values));
+        }
+    }
+    class MaxExp : BinaryOperation
+    {
+        public MaxExp(IExpNode operand1, IExpNode operand2)
+            : base(operand1, operand2)
+        {
+        }
+        public override double Evaluate(Values values)
+        {
+            return Math.Max(operand1.Evaluate(values), operand2.Evaluate(values));
         }
     }
 }
