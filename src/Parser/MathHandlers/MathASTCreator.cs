@@ -10,24 +10,20 @@ namespace MathOptimizer.Parser.MathHandlers
     // Summary:
     //     Represents a part of the Parser which build 
     //     AST(abstract syntax tree)
-    class MathFunctionCreator : EmptyTokenVisitor
+    class MathASTCreator : EmptyTokenVisitor
     {
-        public static Function Create(List<IToken> tokens)
+        public IExpNode Create(List<IToken> tokens)
         {
             // Reset handler
-            mathFunctionCreator.Reset();
+            Reset();
 
             // Handle tokens
             foreach (IToken t in tokens)
             {
-                t.Accept(mathFunctionCreator);
+                t.Accept(this);
             }
-
-            // Create function
-            IExpNode expTree = mathFunctionCreator.expTree.Pop();
-            string[] variables = mathFunctionCreator.variables.ToArray();
-
-            return new Function(expTree, variables);
+            
+            return expTree.Pop();
         }
 
         public override void Visit(INumberToken t)
@@ -86,15 +82,17 @@ namespace MathOptimizer.Parser.MathHandlers
             } 
         }
 
+        public string[] Variables
+        {
+            get { return variables.ToArray(); }
+        }
+
         private void Reset()
         {
             expTree.Clear();
             variables.Clear();
         }
-
-        /* Handler */
-        private static MathFunctionCreator mathFunctionCreator = new MathFunctionCreator();
-
+        
         private Stack<IExpNode> expTree = new Stack<IExpNode>();
         private List<string> variables = new List<string>();
     }

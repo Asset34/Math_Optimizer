@@ -26,16 +26,7 @@ namespace MathOptimizer
         }
         public static string[] Parser(string expression)
         {
-            List<IToken> tokens = MathTokenizer.Tokenize(expression);
-            MathGrammarScanner.Scann(tokens);
-            tokens = MathRPNConverter.Convert(tokens);
-            function = MathFunctionCreator.Create(tokens);
-
-            // Remove all constants
-            foreach (string constant in tempConstants)
-            {
-                Tables.ConstantsTable.Remove(constant);
-            }
+            function = MathParser.Parse(expression);
 
             return function.Variables;
         }

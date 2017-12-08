@@ -13,21 +13,21 @@ namespace MathOptimizer.Parser.MathHandlers
     //     of the input list of tokens to RPN(Reverse Polish notation)
     class MathRPNConverter : EmptyTokenVisitor
     {
-        public static List<IToken> Convert(List<IToken> tokens)
+        public List<IToken> Convert(List<IToken> tokens)
         {
             // Reset handler
-            mathRPNConverter.Reset();
+            Reset();
 
             // Handle tokens
             foreach (IToken t in tokens)
             {
-                t.Accept(mathRPNConverter);
+                t.Accept(this);
             }
 
             // Pop the rest of the operators in stack
-            mathRPNConverter.PopRemainOperators();
+            PopRemainOperators();
 
-            return mathRPNConverter.resultTokens;
+            return resultTokens;
         }
 
         public override void Visit(INumberToken t)
@@ -154,13 +154,10 @@ namespace MathOptimizer.Parser.MathHandlers
         }
 
         /* Used predicates */
-        private static readonly FunctionNameTokenPredicate functionNamePr = new FunctionNameTokenPredicate();
-        private static readonly LBracketrTokenPredicate lbracketPr = new LBracketrTokenPredicate();
-        private static readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
-
-        /* Handler */
-        private static MathRPNConverter mathRPNConverter = new MathRPNConverter();
-
+        private readonly FunctionNameTokenPredicate functionNamePr = new FunctionNameTokenPredicate();
+        private readonly LBracketrTokenPredicate lbracketPr = new LBracketrTokenPredicate();
+        private readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
+        
         private Stack<IToken> operators = new Stack<IToken>();
         private List<IToken> resultTokens = new List<IToken>();
     }

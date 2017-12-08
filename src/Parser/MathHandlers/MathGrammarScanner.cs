@@ -18,18 +18,88 @@ namespace MathOptimizer.Parser.MathHandlers
     //     <Function> ::= <FunctionName> '(' <MathExp> ')'
     class MathGrammarScanner : EmptyTokenVisitor
     {
-        public static void Scann(List<IToken> tokens)
+        public MathGrammarScanner()
+        {
+            /* Build edges of FSM */
+
+            // Terminal symbols
+            ITokenPredicate variable      = new VariableTokenPredicate();
+            ITokenPredicate constant      = new ConstantTokenPredicate();
+            ITokenPredicate number        = new NumberTokenPredicate();
+            ITokenPredicate binaryOp      = new BinaryOpTokenPredicate();
+            ITokenPredicate unaryOp       = new UnaryOpTokenPredicate();
+            ITokenPredicate functionName  = new FunctionNameTokenPredicate();
+            ITokenPredicate lbracket      = new LBracketrTokenPredicate();
+            ITokenPredicate rbracket      = new RBracketTokenPredicate();
+            ITokenPredicate funcSeparator = new FuncSeparatorPredicate();
+
+            DisjunctionTokenPredicate disjunctionPr = new DisjunctionTokenPredicate();
+
+            // MathExp
+            disjunctionPr.Predicates.Add(variable);
+            disjunctionPr.Predicates.Add(constant);
+            disjunctionPr.Predicates.Add(number);
+            disjunctionPr.Predicates.Add(functionName);
+            disjunctionPr.Predicates.Add(lbracket);
+            disjunctionPr.Predicates.Add(unaryOp);
+
+            edgesMathExp = disjunctionPr;
+            disjunctionPr = new DisjunctionTokenPredicate();
+
+            // Variable
+            disjunctionPr.Predicates.Add(binaryOp);
+            disjunctionPr.Predicates.Add(rbracket);
+            disjunctionPr.Predicates.Add(funcSeparator);
+
+            edgesVariable = disjunctionPr;
+            disjunctionPr = new DisjunctionTokenPredicate();
+
+            // UnaryOp
+            disjunctionPr.Predicates.Add(variable);
+            disjunctionPr.Predicates.Add(number);
+            disjunctionPr.Predicates.Add(constant);
+            disjunctionPr.Predicates.Add(functionName);
+            disjunctionPr.Predicates.Add(lbracket);
+
+            edgesUnaryOp = disjunctionPr;
+            disjunctionPr = new DisjunctionTokenPredicate();
+
+            // RBracket
+            edgesrbracket = edgesVariable;
+
+            // Number
+            edgesNumber = edgesVariable;
+
+            // Constant
+            edgesConstant = edgesVariable;
+
+            // BinaryOp
+            edgesBinaryOp = edgesMathExp;
+
+            // LBracket
+            edgeslbracket = edgesMathExp;
+
+            // FuncSeparator
+            edgesFuncSeparator = edgesMathExp;
+
+            // FunctionName
+            edgesFunctionName = lbracket;
+
+            /* Set start edges */
+            edgesCurrent = edgesMathExp;
+        }
+        public void Scann(List<IToken> tokens)
         {
             // Reset handler
-            grammarScanner.Reset();
+            Reset();
 
             // Handle tokens
             foreach (IToken t in tokens)
             {
-                t.Accept(grammarScanner);
+                t.Accept(this);
             }
 
-            grammarScanner.CompareBracketCounters();
+            CompareBracketCounters();
         }
         
         public override void Visit(IVariableToken t)
@@ -144,77 +214,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throwException(t);
             }
         }
-
-        private MathGrammarScanner()
-        {
-            /* Build FSM */
-
-            // Terminal symbols
-            ITokenPredicate variable = new VariableTokenPredicate();
-            ITokenPredicate constant = new ConstantTokenPredicate();
-            ITokenPredicate number = new NumberTokenPredicate();
-            ITokenPredicate binaryOp = new BinaryOpTokenPredicate();
-            ITokenPredicate unaryOp = new UnaryOpTokenPredicate();
-            ITokenPredicate functionName = new FunctionNameTokenPredicate();
-            ITokenPredicate lbracket = new LBracketrTokenPredicate();
-            ITokenPredicate rbracket = new RBracketTokenPredicate();
-            ITokenPredicate funcSeparator = new FuncSeparatorPredicate();
-
-            DisjunctionTokenPredicate disjunctionPr = new DisjunctionTokenPredicate();
-
-            // MathExp
-            disjunctionPr.Predicates.Add(variable);
-            disjunctionPr.Predicates.Add(constant);
-            disjunctionPr.Predicates.Add(number);
-            disjunctionPr.Predicates.Add(functionName);
-            disjunctionPr.Predicates.Add(lbracket);
-            disjunctionPr.Predicates.Add(unaryOp);
-
-            edgesMathExp = disjunctionPr;
-            disjunctionPr = new DisjunctionTokenPredicate();
-
-            // Variable
-            disjunctionPr.Predicates.Add(binaryOp);
-            disjunctionPr.Predicates.Add(rbracket);
-            disjunctionPr.Predicates.Add(funcSeparator);
-
-            edgesVariable = disjunctionPr;
-            disjunctionPr = new DisjunctionTokenPredicate();
-
-            // UnaryOp
-            disjunctionPr.Predicates.Add(variable);
-            disjunctionPr.Predicates.Add(number);
-            disjunctionPr.Predicates.Add(constant);
-            disjunctionPr.Predicates.Add(functionName);
-            disjunctionPr.Predicates.Add(lbracket);
-
-            edgesUnaryOp = disjunctionPr;
-            disjunctionPr = new DisjunctionTokenPredicate();
-
-            // RBracket
-            edgesrbracket = edgesVariable;
-
-            // Number
-            edgesNumber = edgesVariable;
-
-            // Constant
-            edgesConstant = edgesVariable;
-
-            // BinaryOp
-            edgesBinaryOp = edgesMathExp;
-
-            // LBracket
-            edgeslbracket = edgesMathExp;
-
-            // FuncSeparator
-            edgesFuncSeparator = edgesMathExp;
-
-            // FunctionName
-            edgesFunctionName = lbracket;
-
-            /* Set start edges */
-            edgesCurrent = edgesMathExp;
-        }
+        
         private void Reset()
         {
             // Reset function stack
@@ -234,13 +234,29 @@ namespace MathOptimizer.Parser.MathHandlers
             Exception ex = new Exception("Invalid expression");
 
             ex.Source = "MathSyntaxScanner";
-            ex.Data.Add(lastToken.GetType().ToString(), lastToken.ToString());
+            ex.Data.Add("Token", lastToken.ToString());
 
             throw ex;
         }
         private void CompareBracketCounters()
         {
-            /* TODO */
+            if (bracketCounter != 0)
+            {
+                Exception ex = new Exception("Invalid expression");
+
+                ex.Source = "MathSyntaxScanner";
+
+                if (bracketCounter < 0)
+                {
+                    ex.Data.Add("Missing", "(");
+                }
+                else
+                {
+                    ex.Data.Add("Missing", ")");
+                }
+
+                throw ex;
+            }
         }
 
         private void functionEnter(IFunctionNameToken t)
@@ -282,10 +298,7 @@ namespace MathOptimizer.Parser.MathHandlers
                 throw ex;
             }
         }
-
-        /* Handler */
-        private static MathGrammarScanner grammarScanner = new MathGrammarScanner();
-
+        
         /* Edges */
         private readonly ITokenPredicate edgesMathExp;
         private readonly ITokenPredicate edgesVariable;
@@ -306,8 +319,8 @@ namespace MathOptimizer.Parser.MathHandlers
 
         /* Counters */
         private Stack<int> argumentsCounters = new Stack<int>();
-        private Stack<int> maxAruments =       new Stack<int>();
-        private Stack<int> bracketValues =     new Stack<int>();
+        private Stack<int> maxAruments = new Stack<int>();
+        private Stack<int> bracketValues = new Stack<int>();
         private int bracketCounter;
     }
 }

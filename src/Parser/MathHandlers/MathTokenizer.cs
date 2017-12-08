@@ -12,7 +12,7 @@ namespace MathOptimizer.Parser.MathHandlers
     //     of the input math expression
     class MathTokenizer
     {
-        public static List<IToken> Tokenize(string exp)
+        public List<IToken> Tokenize(string exp)
         {
             Preprocess(ref exp);
 
@@ -80,7 +80,7 @@ namespace MathOptimizer.Parser.MathHandlers
         // Summary:
         //     Performs preprocessing the string of the expression:
         //      - Remove all whitespace(' ') characters
-        private static void Preprocess(ref string exp)
+        private void Preprocess(ref string exp)
         {
             //Remove whitespace characters
             exp = exp.Replace(" ", String.Empty);
