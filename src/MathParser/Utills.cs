@@ -68,5 +68,20 @@ namespace MathOptimizer.Parser
 
             return result;
         }
+
+        public static List<string> CheckContent(Dictionary<string, double> table, string[] keys)
+        {
+            List<string> missingKeys = new List<string>();
+
+            foreach (string key in keys)
+            {
+                if (!table.ContainsKey(key))
+                {
+                    missingKeys.Add(key);
+                }
+            }
+
+            return missingKeys;
+        }
     }
 }
