@@ -1,4 +1,4 @@
-﻿using MathOptimizer.Func;
+﻿using MathOptimizer;
 using MathOptimizer.Methods.Params;
 using MathOptimizer.Methods.OneDimensional;
 

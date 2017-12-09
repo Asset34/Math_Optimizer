@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MathOptimizer.Func;
+using MathOptimizer;
 using MathOptimizer.Methods.Params;
 
 namespace MathOptimizer.Methods.OneDimensional

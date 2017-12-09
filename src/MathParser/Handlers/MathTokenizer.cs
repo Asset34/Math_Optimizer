@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.TokenFactories;
 
-namespace MathOptimizer.Parser.MathHandlers
+namespace MathOptimizer.Parser.Handlers
 {
     //
     // Summary:

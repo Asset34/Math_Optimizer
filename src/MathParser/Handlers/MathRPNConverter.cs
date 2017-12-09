@@ -3,9 +3,9 @@ using System.Linq;
 
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
-using MathOptimizer.Parser.MathHandlers.TokenPredicates;
+using MathOptimizer.Parser.Handlers.TokenPredicates;
 
-namespace MathOptimizer.Parser.MathHandlers
+namespace MathOptimizer.Parser.Handlers
 {
     //
     // Summary:

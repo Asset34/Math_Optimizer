@@ -25,7 +25,7 @@ namespace MathOptimizer.Parser
             return tokens.Count != 0 && pr.Execute(t1, tokens.Peek());
         }
 
-        public static Position MoveWhile(Position pos, ICharPredicate pr)
+        public static Position     MoveWhile(Position pos, ICharPredicate pr)
         {
             while (Check(pos, pr))
             {

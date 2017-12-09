@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using MathOptimizer.Parser.MathHandlers.TokenPredicates;
+using MathOptimizer.Parser.Handlers.TokenPredicates;
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 
-namespace MathOptimizer.Parser.MathHandlers
+namespace MathOptimizer.Parser.Handlers
 {
     //
     // Summary:
@@ -319,8 +319,9 @@ namespace MathOptimizer.Parser.MathHandlers
 
         /* Counters */
         private Stack<int> argumentsCounters = new Stack<int>();
-        private Stack<int> maxAruments = new Stack<int>();
-        private Stack<int> bracketValues = new Stack<int>();
+        private Stack<int> maxAruments       = new Stack<int>();
+        private Stack<int> bracketValues     = new Stack<int>();
+
         private int bracketCounter;
     }
 }

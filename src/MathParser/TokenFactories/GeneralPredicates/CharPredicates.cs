@@ -2,9 +2,6 @@
 
 using MathOptimizer.Parser.Interfaces.Predicates;
 
-//
-// Summary:
-//     Contains the general predicate classes for token factories
 namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
 {
     public class Digit : ICharPredicate

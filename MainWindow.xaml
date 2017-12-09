@@ -51,7 +51,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="txtVariables" Grid.Row="0" Grid.Column="0" Margin="5,5,5,-285" TextWrapping="Wrap" 
+            <TextBox x:Name="txtVariables" Grid.Row="0" Grid.Column="0" Margin="5,5,5,-327" TextWrapping="Wrap" 
                      AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                      FontSize="15"/>
             <TextBox x:Name="txtLog" Grid.Row="0" Grid.Column="1" Margin="0,5,5,-327" TextWrapping="Wrap" 

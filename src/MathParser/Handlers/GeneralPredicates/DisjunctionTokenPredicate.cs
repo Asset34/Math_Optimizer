@@ -3,7 +3,7 @@
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.Interfaces.Predicates;
 
-namespace MathOptimizer.Parser.MathHandlers.TokenPredicates
+namespace MathOptimizer.Parser.Handlers.TokenPredicates
 {
     class DisjunctionTokenPredicate : ITokenPredicate
     {

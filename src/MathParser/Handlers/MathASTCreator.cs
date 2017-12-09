@@ -2,9 +2,9 @@
 
 using MathOptimizer.Parser.Interfaces.Tokens;
 using MathOptimizer.Parser.ExpTree;
-using MathOptimizer.Func;
+using MathOptimizer;
 
-namespace MathOptimizer.Parser.MathHandlers
+namespace MathOptimizer.Parser.Handlers
 {
     //
     // Summary:

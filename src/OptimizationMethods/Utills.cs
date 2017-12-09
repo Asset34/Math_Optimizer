@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MathOptimizer.Func;
+using MathOptimizer;
 
 namespace MathOptimizer.Methods
 {

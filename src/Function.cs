@@ -2,7 +2,7 @@
 
 using MathOptimizer.Parser.ExpTree;
 
-namespace MathOptimizer.Func
+namespace MathOptimizer
 {
     class Function
     {
