@@ -44,7 +44,7 @@
             <Setter Property="Width" Value="Auto" />
             <Setter Property="FontFamily" Value="Verdana" />
             <Setter Property="FontSize" Value="15" />
-            <Setter Property="Background" Value="White" />
+            <Setter Property="Background" Value="GhostWhite" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="BorderBrush" Value="LightGray" />
         </Style>
@@ -74,12 +74,12 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Expression:"/>
-                <TextBox x:Name="txtExp" Grid.Row="0" Grid.Column="1"/>
-
+                <TextBox x:Name="txtExp" Grid.Row="0" Grid.Column="1"
+                         Text="{Binding Expression}" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Constants:"/>
-                <TextBox x:Name="txtConstants" Grid.Row="1" Grid.Column="1" />
+                <TextBox x:Name="txtConstants" Grid.Row="1" Grid.Column="1"
+                         Text="{Binding ConstExpression}" />
             </Grid>
         </GroupBox>
         <Grid>
@@ -97,7 +97,7 @@
                 </GroupBox.Header>
 
                 <StackPanel>
-                    <Button Content="Parse"/>
+                    <Button Content="Parse" Command="{Binding ParseCommand}" />
                     <Button Content="Evaluate"/>
                     <Button Content="Optimize"/>
                 </StackPanel>
@@ -109,7 +109,8 @@
                 <TextBox Grid.Row="0" Grid.Column="0" 
                          Height="Auto" Width="Auto"
                          MinWidth="100" MaxWidth="100"
-                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
+                         Text="{Binding VarExpression}" />
             </GroupBox>
             <GroupBox Grid.Column="2">
                 <GroupBox.Header>
@@ -117,7 +118,8 @@
                 </GroupBox.Header>
                 <TextBox Grid.Row="0" Grid.Column="0" 
                          Height="Auto" Width="Auto"
-                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                         Text="{Binding Log, Mode=OneWay}" />
             </GroupBox>
         </Grid>
     </DockPanel>

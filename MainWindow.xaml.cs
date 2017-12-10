@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using MathOptimizer.Parser;
 using MathOptimizer;
 
+using MathOptimizer.MVVM;
+
 namespace MathOptimizer
 {
     /// <summary>
@@ -26,44 +28,7 @@ namespace MathOptimizer
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void btnParse_Clicked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-        private void btnEvaluate_Clicked(object sender, RoutedEventArgs e)
-        {
-
-            //Function f = MathExpressionParser.Parse(txtExp.Text);
-
-            //try
-            //{
-            //    Vector vec = MathExpressionParser.ParseVariables(f, txtVariables.Text);
-
-            //    Log(vec.ToString());
-            //}
-            //catch (Exception exc)
-            //{
-            //    StringBuilder text = new StringBuilder();
-
-            //    text.Append(String.Format("Error *{0}*: {1}", exc.Source, exc.Message));
-
-            //    foreach (object obj in exc.Data.Keys)
-            //    {
-            //        text.Append(String.Format("\n---> {0}: \"{1}\"", exc.Data[obj], obj));
-            //    }
-
-            //    Log(text.ToString());
-            //}
-        }
-        private void btnOptimize_Clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Log(string text)
-        {
+            DataContext = new ViewModel();
         }
     }
 }

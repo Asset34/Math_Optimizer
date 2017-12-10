@@ -62,6 +62,9 @@
     <Compile Include="src\MathParser\ExpTree\Values.cs" />
     <Compile Include="src\Interval.cs" />
     <Compile Include="src\MathParser\Handlers\GeneralPredicates\EmptyTokenPredicate.cs" />
+    <Compile Include="src\MVVM\Command.cs" />
+    <Compile Include="src\MVVM\Model.cs" />
+    <Compile Include="src\MVVM\ViewModel.cs" />
     <Compile Include="src\OptimizationMethods\ConvertedFunction.cs" />
     <Compile Include="src\OptimizationMethods\MultyDimensional\MultyDimensionalMethod.cs" />
     <Compile Include="src\OptimizationMethods\MultyDimensional\PatternSearch.cs" />
@@ -139,6 +142,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
