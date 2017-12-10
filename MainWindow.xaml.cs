@@ -64,7 +64,6 @@ namespace MathOptimizer
 
         private void Log(string text)
         {
-            txtLog.AppendText(DateTime.Now + "   " + text + "\n");
         }
     }
 }

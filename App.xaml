@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:MathOptimizer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="WindowStyle">
+            <Setter Property="Window.Margin" Value="5" />
+            <Setter Property="Window.Padding" Value="5" />
+            <Setter Property="Window.FontFamily" Value="Verdana" />
+            <Setter Property="Window.Background" Value="LightSkyBlue" />
+            <Setter Property="Window.Foreground" Value="DarkBlue" />
+        </Style>
     </Application.Resources>
 </Application>
