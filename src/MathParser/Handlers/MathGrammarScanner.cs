@@ -233,8 +233,8 @@ namespace MathOptimizer.Parser.Handlers
         {
             Exception ex = new Exception("Invalid expression");
 
-            ex.Source = "MathSyntaxScanner";
-            ex.Data.Add("Token", lastToken.ToString());
+            ex.Source = "MathExpParser(SyntaxScanner)";
+            ex.Data.Add(lastToken.ToString(), "Token");
 
             throw ex;
         }

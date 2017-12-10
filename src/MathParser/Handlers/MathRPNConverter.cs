@@ -154,8 +154,8 @@ namespace MathOptimizer.Parser.Handlers
         }
 
         /* Used predicates */
-        private readonly FunctionNameTokenPredicate functionNamePr = new FunctionNameTokenPredicate();
-        private readonly LBracketrTokenPredicate lbracketPr = new LBracketrTokenPredicate();
+        private readonly FunctionNameTokenPredicate    functionNamePr    = new FunctionNameTokenPredicate();
+        private readonly LBracketrTokenPredicate       lbracketPr        = new LBracketrTokenPredicate();
         private readonly ComparePriorityTokenPredicate comparePriorityPr = new ComparePriorityTokenPredicate();
         
         private Stack<IToken> operators = new Stack<IToken>();

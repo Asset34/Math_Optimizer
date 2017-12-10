@@ -68,7 +68,8 @@ namespace MathOptimizer.Parser.TokenFactories
         }
         private bool ConstantCheck(string strToken)
         {
-            return Tables.ConstantsTable.ContainsKey(strToken);
+            return Tables.ConstantsTable.ContainsKey(strToken) ||
+                   Tables.TempConstantsTable.ContainsKey(strToken);
         }
 
         /* Produced tokens */

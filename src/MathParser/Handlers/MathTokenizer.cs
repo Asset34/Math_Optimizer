@@ -14,12 +14,12 @@ namespace MathOptimizer.Parser.Handlers
     {
         public List<IToken> Tokenize(string exp)
         {
+            // Preprocessing
             Preprocess(ref exp);
 
-            /* Tokenization */
+            // Tokenization
             List<IToken> tokens = new List<IToken>();
             List<IToken> errorTokens = new List<IToken>();
-            bool errorFlag = false;
 
             Position pos = new Position(exp);
             while (!pos.IsEnd)
@@ -48,47 +48,46 @@ namespace MathOptimizer.Parser.Handlers
                 {
                     tokens.Add(funcSeparatorFactory.TakeToken(pos));
                 }
-                // Error
                 else
                 {
-                    errorFlag = true;
                     errorTokens.Add(errorFactory.TakeToken(pos));
                 }
             }
 
-            /* Handle errors */
-            if (errorFlag)
-            {
-                Exception ex = new Exception("Cannot identify the lexemes");
-
-                ex.Source = "MathTokenizer";
-
-                int i = 1;
-                foreach (IToken t in errorTokens)
-                {
-                    ex.Data.Add(i, t.ToString());
-                    i++;
-                }
-
-                throw ex;
-            }
+            // Handle errors
+            HandleErrors(errorTokens);
 
             return tokens;
         }
         
         private void Preprocess(ref string exp)
         {
-            //Remove whitespace characters
             exp = exp.Replace(" ", String.Empty);
+        }
+        private void HandleErrors(List<IToken> errorTokens)
+        {
+            if (errorTokens.Count > 0)
+            {
+                Exception ex = new Exception("Invalid expression");
+
+                ex.Source = "MathExpParser(Tokenizer)";
+
+                foreach (IToken t in errorTokens)
+                {
+                    ex.Data.Add(t.ToString(), "Undefined token");
+                }
+
+                throw ex;
+            }
         }
 
         /* Token factories */
-        private readonly NumberFactory numberFactory = new NumberFactory();
-        private readonly IdentifierFactory identifierFactory = new IdentifierFactory();
-        private readonly OperatorFactory operatorFactory = new OperatorFactory();
+        private readonly NumberFactory            numberFactory        = new NumberFactory();
+        private readonly IdentifierFactory        identifierFactory    = new IdentifierFactory();
+        private readonly OperatorFactory          operatorFactory      = new OperatorFactory();
         private readonly FunctionSeparatorFactory funcSeparatorFactory = new FunctionSeparatorFactory();
-        private readonly LBracketFactory lbracketFactory = new LBracketFactory();
-        private readonly RBracketFactory rbracketFactory = new RBracketFactory();
-        private readonly ErrorFactory errorFactory = new ErrorFactory();
+        private readonly LBracketFactory          lbracketFactory      = new LBracketFactory();
+        private readonly RBracketFactory          rbracketFactory      = new RBracketFactory();
+        private readonly ErrorFactory             errorFactory         = new ErrorFactory();
     }
 }

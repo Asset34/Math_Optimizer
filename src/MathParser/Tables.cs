@@ -18,6 +18,7 @@ namespace MathOptimizer.Parser
         public static Dictionary<string, double> TempConstantsTable
         {
             get { return tempConstantsTable; }
+            set { tempConstantsTable = value; }
         }
 
         public static Dictionary<string, double> ConstantsTable
