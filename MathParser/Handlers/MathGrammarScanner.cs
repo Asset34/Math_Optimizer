@@ -248,11 +248,11 @@ namespace MathOptimizer.Parser.Handlers
 
                 if (bracketCounter < 0)
                 {
-                    ex.Data.Add("Missing", "(");
+                    ex.Data.Add("(", "Missing");
                 }
                 else
                 {
-                    ex.Data.Add("Missing", ")");
+                    ex.Data.Add(")", "Missing");
                 }
 
                 throw ex;
