@@ -15,7 +15,7 @@ namespace MathOptimizer.Parser.Handlers
         public List<IToken> Tokenize(string exp)
         {
             // Preprocessing
-            Preprocess(ref exp);
+            exp = Preprocess(exp);
 
             // Tokenization
             List<IToken> tokens = new List<IToken>();
@@ -60,9 +60,9 @@ namespace MathOptimizer.Parser.Handlers
             return tokens;
         }
         
-        private void Preprocess(ref string exp)
+        private string Preprocess(string exp)
         {
-            exp = exp.Replace(" ", String.Empty);
+            return exp.Replace(" ", String.Empty);
         }
         private void HandleErrors(List<IToken> errorTokens)
         {

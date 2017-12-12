@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MathOptimizer"
         mc:Ignorable="d"
         Title="Math Optimizer" 
-        Height="500" Width="700"
+        Height="600" Width="1000"
         MinHeight="300" MinWidth="500">
     <!--Style="{StaticResource WindowStyle}">-->
     <Window.Resources>
@@ -18,7 +18,7 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="TextBlock.Width" Value="120" />
-            <Setter Property="TextBlock.Height" Value="30" />
+            <Setter Property="TextBlock.Height" Value="25" />
             <Setter Property="TextBlock.FontFamily" Value="Verdana" />
             <Setter Property="TextBlock.FontSize" Value="13" />
             <Setter Property="TextBlock.Background" Value="White" />
@@ -40,7 +40,7 @@
             <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Height" Value="30" />
+            <Setter Property="Height" Value="25" />
             <Setter Property="Width" Value="Auto" />
             <Setter Property="FontFamily" Value="Verdana" />
             <Setter Property="FontSize" Value="15" />
@@ -63,7 +63,7 @@
     <DockPanel>
         <GroupBox DockPanel.Dock="Top">
             <GroupBox.Header>
-                <TextBlock Text="Input" Style="{StaticResource GroupBoxHeaderStyle}"/>
+                <TextBlock Text="Input" Style="{StaticResource GroupBoxHeaderStyle}" />
             </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
@@ -98,8 +98,8 @@
 
                 <StackPanel>
                     <Button Content="Parse" Command="{Binding ParseCommand}" />
-                    <Button Content="Evaluate"/>
-                    <Button Content="Optimize"/>
+                    <Button Content="Evaluate" Command="{Binding EvaluateCommand}"/>
+                    <Button Content="Optimize" Command="{Binding OptimizeCommand}"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Column="1">
@@ -108,7 +108,7 @@
                 </GroupBox.Header>
                 <TextBox Grid.Row="0" Grid.Column="0" 
                          Height="Auto" Width="Auto"
-                         MinWidth="100" MaxWidth="100"
+                         MinWidth="150" MaxWidth="150"
                          TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                          Text="{Binding VarExpression}" />
             </GroupBox>
@@ -116,10 +116,12 @@
                 <GroupBox.Header>
                     <TextBlock Text="Log" Style="{StaticResource GroupBoxHeaderStyle}"/>
                 </GroupBox.Header>
-                <TextBox Grid.Row="0" Grid.Column="0" 
+                <!--<TextBox Grid.Row="0" Grid.Column="0" 
                          Height="Auto" Width="Auto"
                          TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                         Text="{Binding Log, Mode=OneWay}" />
+                         Text="{Binding Log, Mode=OneWay}" />-->
+                <ListView Grid.Row="0" ItemsSource="{Binding Log}"
+                          FontSize="14"/>
             </GroupBox>
         </Grid>
     </DockPanel>

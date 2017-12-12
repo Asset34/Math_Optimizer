@@ -51,7 +51,7 @@ namespace MathOptimizer.Parser
         }
 
         /* Dynamic tables */
-        private static Dictionary<string, double> tempConstantsTable = new Dictionary<string, double>();
+        private static Dictionary<string, double> tempConstantsTable;
 
         /* Constants tabls */
         private static readonly Dictionary<string, double> constantsTable = new Dictionary<string, double>()

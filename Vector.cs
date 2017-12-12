@@ -78,6 +78,12 @@ namespace MathOptimizer
 
             return result;
         }
+        public static Vector CreateNullVector(int size)
+        {
+            double[] coords = new double[size];
+
+            return new Vector(coords);
+        }
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();

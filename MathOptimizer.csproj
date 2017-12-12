@@ -55,53 +55,54 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="src\MathParser\ExpTree\ExpNodes\ExpLeafs.cs" />
-    <Compile Include="src\MathParser\ExpTree\ExpNodes\ExpNodes.cs" />
-    <Compile Include="src\MathParser\ExpTree\ExpNodes\IExpNode.cs" />
-    <Compile Include="src\Function.cs" />
-    <Compile Include="src\MathParser\ExpTree\Values.cs" />
-    <Compile Include="src\Interval.cs" />
-    <Compile Include="src\MathParser\Handlers\GeneralPredicates\EmptyTokenPredicate.cs" />
-    <Compile Include="src\MVVM\Command.cs" />
-    <Compile Include="src\MVVM\Model.cs" />
-    <Compile Include="src\MVVM\ViewModel.cs" />
-    <Compile Include="src\OptimizationMethods\ConvertedFunction.cs" />
-    <Compile Include="src\OptimizationMethods\MultyDimensional\MultyDimensionalMethod.cs" />
-    <Compile Include="src\OptimizationMethods\MultyDimensional\PatternSearch.cs" />
-    <Compile Include="src\OptimizationMethods\OneDimensional\CompositeOneDemensionalMethod.cs" />
-    <Compile Include="src\OptimizationMethods\OneDimensional\GoldenSection1.cs" />
-    <Compile Include="src\OptimizationMethods\OneDimensional\OneDemensionalMethod.cs" />
-    <Compile Include="src\OptimizationMethods\OneDimensional\Swan1.cs" />
-    <Compile Include="src\OptimizationMethods\Parameters\InputParameters.cs" />
-    <Compile Include="src\OptimizationMethods\Parameters\OutputParameters.cs" />
-    <Compile Include="src\OptimizationMethods\Parameters\Parameters.cs" />
-    <Compile Include="src\OptimizationMethods\Utills.cs" />
-    <Compile Include="src\MathParser\EmptyTokenVisitor.cs" />
-    <Compile Include="src\MathParser\MathAssignmentParser.cs" />
-    <Compile Include="src\MathParser\Handlers\GeneralPredicates\DisjunctionTokenPredicate.cs" />
-    <Compile Include="src\MathParser\Handlers\GeneralPredicates\TokenPredicates.cs" />
-    <Compile Include="src\MathParser\Handlers\MathASTCreator.cs" />
-    <Compile Include="src\MathParser\Handlers\MathGrammarScanner.cs" />
-    <Compile Include="src\MathParser\Handlers\MathRPNConverter.cs" />
-    <Compile Include="src\MathParser\Handlers\MathTokenizer.cs" />
-    <Compile Include="src\MathParser\MathExpressionParser.cs" />
-    <Compile Include="src\MathParser\Tables.cs" />
-    <Compile Include="src\MathParser\TokenFactories\ErrorFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\FunctionSeparatorFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\GeneralPredicates\CharPredicates.cs" />
-    <Compile Include="src\MathParser\TokenFactories\GeneralPredicates\DisjunctionPredicate.cs" />
-    <Compile Include="src\MathParser\TokenFactories\IdentifierFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\LBracketFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\NumberFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\OperatorFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\RBracketFactory.cs" />
-    <Compile Include="src\MathParser\TokenFactories\Token.cs" />
-    <Compile Include="src\MathParser\TokenInterfaces\IPredicates.cs" />
-    <Compile Include="src\MathParser\TokenInterfaces\ITokens.cs" />
-    <Compile Include="src\MathParser\TokenInterfaces\ITokenVisitor.cs" />
-    <Compile Include="src\MathParser\Utills.cs" />
-    <Compile Include="src\Position.cs" />
-    <Compile Include="src\Vector.cs" />
+    <Compile Include="MathParser\ExpTree\ExpNodes\ExpLeafs.cs" />
+    <Compile Include="MathParser\ExpTree\ExpNodes\ExpNodes.cs" />
+    <Compile Include="MathParser\ExpTree\ExpNodes\IExpNode.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="MathParser\ExpTree\Values.cs" />
+    <Compile Include="Interval.cs" />
+    <Compile Include="MathParser\Handlers\GeneralPredicates\EmptyTokenPredicate.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="Models\MathOptimizerModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelMainWindow.cs" />
+    <Compile Include="OptimizationMethods\ConvertedFunction.cs" />
+    <Compile Include="OptimizationMethods\MultyDimensional\MultyDimensionalMethod.cs" />
+    <Compile Include="OptimizationMethods\MultyDimensional\PatternSearch.cs" />
+    <Compile Include="OptimizationMethods\OneDimensional\CompositeOneDemensionalMethod.cs" />
+    <Compile Include="OptimizationMethods\OneDimensional\GoldenSection1.cs" />
+    <Compile Include="OptimizationMethods\OneDimensional\OneDemensionalMethod.cs" />
+    <Compile Include="OptimizationMethods\OneDimensional\Swan1.cs" />
+    <Compile Include="OptimizationMethods\Parameters\InputParameters.cs" />
+    <Compile Include="OptimizationMethods\Parameters\OutputParameters.cs" />
+    <Compile Include="OptimizationMethods\Parameters\Parameters.cs" />
+    <Compile Include="OptimizationMethods\Utills.cs" />
+    <Compile Include="MathParser\EmptyTokenVisitor.cs" />
+    <Compile Include="MathParser\MathAssignmentParser.cs" />
+    <Compile Include="MathParser\Handlers\GeneralPredicates\DisjunctionTokenPredicate.cs" />
+    <Compile Include="MathParser\Handlers\GeneralPredicates\TokenPredicates.cs" />
+    <Compile Include="MathParser\Handlers\MathASTCreator.cs" />
+    <Compile Include="MathParser\Handlers\MathGrammarScanner.cs" />
+    <Compile Include="MathParser\Handlers\MathRPNConverter.cs" />
+    <Compile Include="MathParser\Handlers\MathTokenizer.cs" />
+    <Compile Include="MathParser\MathExpressionParser.cs" />
+    <Compile Include="MathParser\Tables.cs" />
+    <Compile Include="MathParser\TokenFactories\ErrorFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\FunctionSeparatorFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\GeneralPredicates\CharPredicates.cs" />
+    <Compile Include="MathParser\TokenFactories\GeneralPredicates\DisjunctionPredicate.cs" />
+    <Compile Include="MathParser\TokenFactories\IdentifierFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\LBracketFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\NumberFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\OperatorFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\RBracketFactory.cs" />
+    <Compile Include="MathParser\TokenFactories\Token.cs" />
+    <Compile Include="MathParser\TokenInterfaces\IPredicates.cs" />
+    <Compile Include="MathParser\TokenInterfaces\ITokens.cs" />
+    <Compile Include="MathParser\TokenInterfaces\ITokenVisitor.cs" />
+    <Compile Include="MathParser\Utills.cs" />
+    <Compile Include="Position.cs" />
+    <Compile Include="Vector.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,7 +143,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

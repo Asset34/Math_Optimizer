@@ -43,7 +43,7 @@ namespace MathOptimizer.Parser.Handlers
         }
         public override void Visit(IConstantToken t)
         {
-            double number = Tables.ConstantsTable[t.ToString()];
+            double number = Tables.TempConstantsTable[t.ToString()];
             expTree.Push(new NumberExp(number));
         }
         public override void Visit(IFunctionNameToken t)
