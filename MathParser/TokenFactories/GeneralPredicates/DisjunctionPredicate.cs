@@ -8,7 +8,7 @@ namespace MathOptimizer.Parser.TokenFactories.GeneralPredicates
     // Summary:
     //     Represents a composite of char predicates:
     //          a1 || a2 || ... || an
-    public class DisjunctionCharPredicate : ICharPredicate
+    class DisjunctionCharPredicate : ICharPredicate
     {
         public bool Execute(char ch)
         {

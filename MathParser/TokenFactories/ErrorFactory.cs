@@ -2,6 +2,7 @@
 
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
+using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -9,14 +10,7 @@ namespace MathOptimizer.Parser.TokenFactories
     {
         public bool Check(Position pos)
         {
-            //return !(NumberFactory.Check(pos)     ||
-            //         IdentifierFactory.Check(pos) ||
-            //         OperatorFactory.Check(pos)   ||
-            //         LBracketFactory.Check(pos)   ||
-            //         RBracketFactory.Check(pos));
-
-            /*TEMP*/
-            return false;
+            return !(Utills.Check(pos, notErrorPr));
         }
         public IErrorToken TakeToken(Position pos)
         {
@@ -54,5 +48,21 @@ namespace MathOptimizer.Parser.TokenFactories
                 visitor.Visit(this);
             }
         }
+
+        /* Used predicates */
+        private readonly DisjunctionCharPredicate notErrorPr = new DisjunctionCharPredicate()
+        {
+            Predicates =
+            {
+                new Letter(),
+                new Digit(),
+                new Operator(),
+                new LBracket(),
+                new RBracket(),
+                new Comma(),
+                new Semicolon(),
+                new Underscore()
+            }
+        };
     }
 }

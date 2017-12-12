@@ -2,7 +2,7 @@
 
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Parser.Interfaces.Predicates;
+using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
 {
@@ -51,16 +51,7 @@ namespace MathOptimizer.Parser.TokenFactories
                 visitor.Visit(this);
             }
         }
-
-        /* Local predicates */
-        private class RBracket : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return ch == ')';
-            }
-        }
-
+        
         /* Used predicates */
         private readonly RBracket rbracketPr = new RBracket();
     }

@@ -2,7 +2,6 @@
 
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Parser.Interfaces.Predicates;
 using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
@@ -28,6 +27,7 @@ namespace MathOptimizer.Parser.TokenFactories
 
                 // Main part of the number
                 Utills.MoveWhile(pos, digitPr);
+
                 // Fraction part of the number
                 Utills.MoveWhile(pos, numSeparatorPr);
                 Utills.MoveWhile(pos, digitPr);
@@ -58,17 +58,8 @@ namespace MathOptimizer.Parser.TokenFactories
             }
         }
 
-        /* Local predicate classes */       
-        private class NumberSeparator : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return ch == ',';
-            }
-        }
-
         /* Used predicates */
         private readonly Digit digitPr = new Digit();
-        private readonly NumberSeparator numSeparatorPr = new NumberSeparator();
+        private readonly Comma numSeparatorPr = new Comma();
     }
 }

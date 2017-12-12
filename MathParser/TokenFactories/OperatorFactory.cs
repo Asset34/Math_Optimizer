@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
-using MathOptimizer.Parser;
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Parser.Interfaces.Predicates;
 using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
@@ -97,16 +94,7 @@ namespace MathOptimizer.Parser.TokenFactories
                 visitor.Visit(this);
             }
         }
-
-        /* Local predicate classes */
-        private class Operator : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return Tables.BinaryOperatorsPriorityTable.ContainsKey(ch);
-            }
-        }
-
+        
         /* Used predicates */
         private readonly Operator operatorPr = new Operator();
         private readonly LBracket lbracketPr = new LBracket();

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 
 using MathOptimizer.Parser.Interfaces;
 using MathOptimizer.Parser.Interfaces.Tokens;
-using MathOptimizer.Parser.Interfaces.Predicates;
 using MathOptimizer.Parser.TokenFactories.GeneralPredicates;
 
 namespace MathOptimizer.Parser.TokenFactories
@@ -106,23 +104,7 @@ namespace MathOptimizer.Parser.TokenFactories
                 visitor.Visit(this);
             }
         }
-
-        /* Local predicates */
-        private class Letter : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return Char.IsLetter(ch);
-            }
-        }
-        private class Underscore : ICharPredicate
-        {
-            public bool Execute(char ch)
-            {
-                return ch == '_';
-            }
-        }
-
+        
         /* Used predicates */
         private readonly DisjunctionCharPredicate beginVariablePr = new DisjunctionCharPredicate()
         {
