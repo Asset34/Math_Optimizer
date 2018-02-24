@@ -28,6 +28,11 @@ namespace MathOptimizer.WPF.ViewModel
             get { return m_variables; }
             set { m_variables = value;  OnPropertyChanged("Variables"); }
         }
+        public bool IsParsed
+        {
+            get { return m_isparsed; }
+            set { m_isparsed = value; OnPropertyChanged("IsParsed"); }
+        }
         public ObservableCollection<string> Log
         {
             get { return m_log; }
@@ -43,6 +48,7 @@ namespace MathOptimizer.WPF.ViewModel
         public ViewModelMainWindow()
         {
             Log = new ObservableCollection<string>();
+            IsParsed = false;
 
             ParseCommand = new RelayCommand(arg => ParseMethod());
             EvaluateCommand = new RelayCommand(arg => EvaluateMethod());
@@ -65,10 +71,12 @@ namespace MathOptimizer.WPF.ViewModel
                 }
                 Variables = sb.ToString();
 
+                IsParsed = true;
                 AddLog("The parsing was successful");
             }
             catch (Exception ex)
             {
+                IsParsed = false;
                 AddExceptionLog(ex);
             }
         }
@@ -134,6 +142,7 @@ namespace MathOptimizer.WPF.ViewModel
         private string m_expression;
         private string m_constants;
         private string m_variables;
+        private bool m_isparsed;
         private ObservableCollection<string> m_log;
 
         private readonly ExpHandler m_model = new ExpHandler();

@@ -14,6 +14,11 @@ namespace MathOptimizer.Parser
     {
         public Function Parse(string exp)
         {
+            if (string.IsNullOrEmpty(exp))
+            {
+                throw new ArgumentException("Empty expression");
+            }
+
             // Handle
             List<IToken> tokens = m_tokenizer.Tokenize(exp);
             m_grammarScanner.Scann(tokens);

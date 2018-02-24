@@ -49,9 +49,9 @@
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
             <Button Content="Parse" Command="{Binding ParseCommand}" />
-            <Button Content="Evauate" Command="{Binding EvaluateCommand}"/>
-            <Button Content="Optimize" Command="{Binding OptimizeCommand}" />
-            <Button Content="Clear log" Command="{Binding CLearLogCommand}" />
+            <Button Content="Evauate" IsEnabled="{Binding IsParsed}" Command="{Binding EvaluateCommand}"/>
+            <Button Content="Optimize" IsEnabled="{Binding IsParsed}" Command="{Binding OptimizeCommand}" />
+            <Button Content="Clear log" Command="{Binding ClearLogCommand}" />
         </StackPanel>
         <Rectangle DockPanel.Dock="Left" VerticalAlignment="Stretch" Width="1" Margin="2" Stroke="Gray" />
         <Grid DockPanel.Dock="Top" >
@@ -73,7 +73,7 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
                 <TextBlock Text="Variables" />
-                <TextBox Text="{Binding Variables}" />
+                <TextBox IsEnabled="{Binding IsParsed}" Text="{Binding Variables}" />
             </StackPanel>
         </Grid>
         <ListView Margin="10" ItemsSource="{Binding Log}">
