@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,73 +52,70 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="WPF\App.xaml">
+    <ApplicationDefinition Include="src\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Parser\ExpTree\ExpNodes\BinaryOpNodes.cs" />
-    <Compile Include="Parser\ExpTree\ExpNodes\ExpLeafs.cs" />
-    <Compile Include="Parser\ExpTree\ExpNodes\ExpNode.cs" />
-    <Compile Include="Entities\Functions\Function.cs" />
-    <Compile Include="Parser\ExpTree\ExpNodes\UnaryOpNodes.cs" />
-    <Compile Include="Parser\ExpTree\Values.cs" />
-    <Compile Include="Entities\Interval.cs" />
-    <Compile Include="Parser\Handlers\RPNConverter\TokenPriorityPr.cs" />
-    <Compile Include="Parser\Predicates\Disjunctions.cs" />
-    <Compile Include="Parser\Predicates\IPredicates.cs" />
-    <Compile Include="Parser\Predicates\SymbolPredicates.cs" />
-    <Compile Include="Parser\Predicates\TokenPredicates.cs" />
-    <Compile Include="Parser\TokenReaders\TokenReader.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\BinaryOpToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\ConstantToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\ErrorToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\FuncNameToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\FuncSeparatorToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\LBracketToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\NumberToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\RBracketToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\UnaryOpToken.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\VariableToken.cs" />
-    <Compile Include="Utills.cs" />
-    <Compile Include="WPF\Commands\RelayCommand.cs" />
-    <Compile Include="WPF\Model\ExpHandler.cs" />
-    <Compile Include="WPF\ViewModel\ViewModelBase.cs" />
-    <Compile Include="WPF\ViewModel\ViewModelMainWindow.cs" />
-    <Compile Include="Entities\Functions\ConvertedFunction.cs" />
-    <Compile Include="OptMethods\MultyDimensionalMethod.cs" />
-    <Compile Include="OptMethods\PatternSearch.cs" />
-    <Compile Include="OptMethods\Parameters\InputParameters.cs" />
-    <Compile Include="OptMethods\Parameters\OutputParameters.cs" />
-    <Compile Include="OptMethods\Parameters\Parameters.cs" />
-    <Compile Include="Parser\EmptyTokenVisitor.cs" />
-    <Compile Include="Parser\VauesParser.cs" />
-    <Compile Include="Parser\Handlers\ASTCreator.cs" />
-    <Compile Include="Parser\Handlers\GrammarScanner.cs" />
-    <Compile Include="Parser\Handlers\RPNConverter\RPNConverter.cs" />
-    <Compile Include="Parser\Handlers\Tokenizer.cs" />
-    <Compile Include="Parser\ExpParser.cs" />
-    <Compile Include="Parser\Tables.cs" />
-    <Compile Include="Parser\TokenReaders\ErrorReader.cs" />
-    <Compile Include="Parser\TokenReaders\FuncSeparatorReader.cs" />
-    <Compile Include="Parser\TokenReaders\IdentifierReader.cs" />
-    <Compile Include="Parser\TokenReaders\LBracketReader.cs" />
-    <Compile Include="Parser\TokenReaders\NumberReader.cs" />
-    <Compile Include="Parser\TokenReaders\OperatorReader.cs" />
-    <Compile Include="Parser\TokenReaders\RBracketReader.cs" />
-    <Compile Include="Parser\TokenReaders\Tokens\Token.cs" />
-    <Compile Include="Parser\ITokens.cs" />
-    <Compile Include="Parser\ITokenVisitor.cs" />
-    <Compile Include="Entities\Position.cs" />
-    <Compile Include="Entities\Vector.cs" />
-    <Page Include="WPF\View\MainWindow.xaml">
+    <Compile Include="src\Model\Parser\ExpTree\ExpNodes\BinaryOpNodes.cs" />
+    <Compile Include="src\Model\Parser\ExpTree\ExpNodes\ExpLeafs.cs" />
+    <Compile Include="src\Model\Parser\ExpTree\ExpNodes\ExpNode.cs" />
+    <Compile Include="src\Model\Entities\Function.cs" />
+    <Compile Include="src\Model\Parser\ExpTree\ExpNodes\UnaryOpNodes.cs" />
+    <Compile Include="src\Model\Parser\ExpTree\Values.cs" />
+    <Compile Include="src\Model\Parser\Handlers\RPNConverter\TokenPriorityPr.cs" />
+    <Compile Include="src\Model\Parser\Predicates\Disjunctions.cs" />
+    <Compile Include="src\Model\Parser\Predicates\IPredicates.cs" />
+    <Compile Include="src\Model\Parser\Predicates\SymbolPredicates.cs" />
+    <Compile Include="src\Model\Parser\Predicates\TokenPredicates.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\TokenReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\BinaryOpToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\ConstantToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\ErrorToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\FuncNameToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\FuncSeparatorToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\LBracketToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\NumberToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\RBracketToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\UnaryOpToken.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\VariableToken.cs" />
+    <Compile Include="src\Model\Utills.cs" />
+    <Compile Include="src\Commands\RelayCommand.cs" />
+    <Compile Include="src\Model\ExpHandler.cs" />
+    <Compile Include="src\ViewModel\ViewModelMainWindow.cs" />
+    <Compile Include="src\Model\OptMethods\OptMethod.cs" />
+    <Compile Include="src\Model\OptMethods\PatternSearch.cs" />
+    <Compile Include="src\Model\OptMethods\Parameters\InputParameters.cs" />
+    <Compile Include="src\Model\OptMethods\Parameters\OutputParameters.cs" />
+    <Compile Include="src\Model\OptMethods\Parameters\Parameters.cs" />
+    <Compile Include="src\Model\Parser\EmptyTokenVisitor.cs" />
+    <Compile Include="src\Model\Parser\VauesParser.cs" />
+    <Compile Include="src\Model\Parser\Handlers\ASTCreator.cs" />
+    <Compile Include="src\Model\Parser\Handlers\GrammarScanner.cs" />
+    <Compile Include="src\Model\Parser\Handlers\RPNConverter\RPNConverter.cs" />
+    <Compile Include="src\Model\Parser\Handlers\Tokenizer.cs" />
+    <Compile Include="src\Model\Parser\ExpParser.cs" />
+    <Compile Include="src\Model\Parser\Tables.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\ErrorReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\FuncSeparatorReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\IdentifierReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\LBracketReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\NumberReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\OperatorReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\RBracketReader.cs" />
+    <Compile Include="src\Model\Parser\TokenReaders\Tokens\Token.cs" />
+    <Compile Include="src\Model\Parser\ITokens.cs" />
+    <Compile Include="src\Model\Parser\ITokenVisitor.cs" />
+    <Compile Include="src\Model\Entities\Position.cs" />
+    <Compile Include="src\Model\Entities\Vector.cs" />
+    <Page Include="src\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="WPF\App.xaml.cs">
+    <Compile Include="src\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WPF\View\MainWindow.xaml.cs">
+    <Compile Include="src\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -147,7 +145,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="WPF\App.config" />
+    <None Include="src\App.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

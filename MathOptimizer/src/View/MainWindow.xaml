@@ -1,0 +1,82 @@
+﻿<Window x:Class="MathOptimizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathOptimizer"
+        xmlns:local2="clr-namespace:MathOptimizer.ViewModel"
+        mc:Ignorable="d"
+        Title="Math Optimizer" 
+        Height="600" Width="839.5"
+        MinHeight="300" MinWidth="500">
+    <Window.DataContext>
+        <local2:ViewModelMainWindow />
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextBlock.Width" Value="120" />
+            <Setter Property="TextBlock.Height" Value="25" />
+            <Setter Property="TextBlock.Margin" Value="10,5,10,0" />
+            <Setter Property="TextBlock.FontFamily" Value="Verdana" />
+            <Setter Property="TextBlock.FontSize" Value="14" />
+            <Setter Property="TextBlock.Background" Value="White" />
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Margin" Value="10,0,10,0" />
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Background" Value="GhostWhite" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="Gray" />
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
+            <Button Content="Parse" Command="{Binding ParseCommand}" />
+            <Button Content="Evauate" IsEnabled="{Binding IsParsed}" Command="{Binding EvaluateCommand}"/>
+            <Button Content="Optimize" IsEnabled="{Binding IsParsed}" Command="{Binding OptimizeCommand}" />
+            <Button Content="Clear log" Command="{Binding ClearLogCommand}" />
+        </StackPanel>
+        <Rectangle DockPanel.Dock="Left" VerticalAlignment="Stretch" Width="1" Margin="2" Stroke="Gray" />
+        <Grid DockPanel.Dock="Top" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <TextBlock Text="Expression" />
+                <TextBox Text="{Binding Expression}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <TextBlock Text="Constants" />
+                <TextBox Text="{Binding Constants}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <TextBlock Text="Variables" />
+                <TextBox IsEnabled="{Binding IsParsed}" Text="{Binding Variables}" />
+            </StackPanel>
+        </Grid>
+        <ListView Margin="10" ItemsSource="{Binding Log}">
+        </ListView>
+    </DockPanel>
+</Window>
